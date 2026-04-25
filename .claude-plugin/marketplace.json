@@ -1,0 +1,24 @@
+{
+  "name": "bm-skills",
+  "owner": {
+    "name": "Brian Casel",
+    "email": "brian@buildermethods.com"
+  },
+  "metadata": {
+    "description": "A collection of public open-source tools for builders, by Brian Casel @ Builder Methods (buildermethods.com)."
+  },
+  "plugins": [
+    {
+      "name": "bm-prd-creator",
+      "source": "./plugins/prd-creator",
+      "description": "Guides you through creating a Product Requirements Document (PRD) for a new app or feature.",
+      "author": {
+        "name": "Brian Casel",
+        "email": "brian@buildermethods.com"
+      },
+      "homepage": "https://buildermethods.com",
+      "category": "planning",
+      "tags": ["prd", "planning", "product"]
+    }
+  ]
+}

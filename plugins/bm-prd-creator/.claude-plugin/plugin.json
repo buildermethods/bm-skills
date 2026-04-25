@@ -1,0 +1,10 @@
+{
+  "name": "bm-prd-creator",
+  "description": "Guides you through creating a Product Requirements Document (PRD) for a new app or feature.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Brian Casel",
+    "email": "brian@buildermethods.com"
+  },
+  "homepage": "https://buildermethods.com"
+}
