@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "bm-prd-creator",
-      "source": "./plugins/prd-creator",
+      "source": "./plugins/bm-prd-creator",
       "description": "Guides you through creating a Product Requirements Document (PRD) for a new app or feature.",
       "author": {
         "name": "Brian Casel",
