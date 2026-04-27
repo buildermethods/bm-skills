@@ -31,7 +31,7 @@ Then install any plugin from the marketplace:
 
 ## Documentation
 
-Full documentation and usage guides for each skill: [**buildermethods.com/tools**](https://buildermethods.com/tools)
+Full documentation and usage guides for each skill: [**buildermethods.com/bm-skills**](https://buildermethods.com/bm-skills)
 
 ## License
 
