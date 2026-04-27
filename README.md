@@ -2,6 +2,11 @@
 
 A collection of public, open-source skills for builders — by [Brian Casel](https://buildermethods.com) at Builder Methods.
 
+## Stay in the loop
+
+- [**Builder Methods Pro**](https://buildermethods.com/pro) — Training, community, and direct support from Brian and fellow builders.
+- [**Builder Briefing**](https://buildermethods.com) — Brian's free weekly newsletter with updates and notes on building with AI.
+
 ## What's inside
 
 This repo is a Claude Code plugin marketplace. Each plugin is a self-contained area of work containing one or more related skills. The collection grows over time as new skills are released.
@@ -27,11 +32,6 @@ Then install any plugin from the marketplace:
 ## Documentation
 
 Full documentation and usage guides for each skill: [**buildermethods.com/tools**](https://buildermethods.com/tools)
-
-## Stay in the loop
-
-- [**Builder Briefing**](https://buildermethods.com) — Brian's free weekly newsletter with updates and notes on building with AI.
-- [**Builder Methods Pro**](https://buildermethods.com/pro) — Training, community, and direct support from Brian and fellow builders.
 
 ## License
 
