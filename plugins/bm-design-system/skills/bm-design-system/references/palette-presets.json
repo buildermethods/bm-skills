@@ -1,17 +1,40 @@
 {
-  "accent": [
-    { "label": "Indigo",   "hex": "#4f46e5" },
-    { "label": "Violet",   "hex": "#7c3aed" },
-    { "label": "Sky",      "hex": "#0284c7" },
-    { "label": "Emerald",  "hex": "#059669" },
-    { "label": "Rose",     "hex": "#e11d48" }
-  ],
-  "signal": [
-    { "label": "Amber",    "hex": "#d97706" },
-    { "label": "Lime",     "hex": "#65a30d" },
-    { "label": "Cyan",     "hex": "#0891b2" },
-    { "label": "Fuchsia",  "hex": "#c026d3" },
-    { "label": "Orange",   "hex": "#ea580c" }
+  "combos": [
+    {
+      "label": "Modern Tech",
+      "description": "Indigo accent + amber signal on a cool slate neutral. Confident, professional, default-safe.",
+      "accent": { "label": "Indigo",  "hex": "#4f46e5" },
+      "signal": { "label": "Amber",   "hex": "#d97706" },
+      "neutral": "Slate"
+    },
+    {
+      "label": "Minimal",
+      "description": "Violet accent + cyan signal on a true-neutral zinc. Clean, modern, software-y.",
+      "accent": { "label": "Violet",  "hex": "#7c3aed" },
+      "signal": { "label": "Cyan",    "hex": "#0891b2" },
+      "neutral": "Zinc"
+    },
+    {
+      "label": "Editorial",
+      "description": "Emerald accent + orange signal on a warm stone neutral. Paper-like, magazine feel.",
+      "accent": { "label": "Emerald", "hex": "#059669" },
+      "signal": { "label": "Orange",  "hex": "#ea580c" },
+      "neutral": "Stone"
+    },
+    {
+      "label": "Vibrant",
+      "description": "Sky-blue accent + fuchsia signal on a balanced gray. Playful, energetic, consumer-friendly.",
+      "accent": { "label": "Sky",     "hex": "#0284c7" },
+      "signal": { "label": "Fuchsia", "hex": "#c026d3" },
+      "neutral": "Gray"
+    },
+    {
+      "label": "Bold",
+      "description": "Rose accent + lime signal on a true neutral. High contrast, opinionated, brand-forward.",
+      "accent": { "label": "Rose",    "hex": "#e11d48" },
+      "signal": { "label": "Lime",    "hex": "#65a30d" },
+      "neutral": "Neutral"
+    }
   ],
   "neutral": [
     {

@@ -18,8 +18,9 @@ export function ColorsSection() {
       description={
         <>
           Ten semantic tokens, each defined for light and dark mode. Use the
-          token names — never raw hex. Each swatch shows the light value on
-          the left, dark on the right.
+          token names — never raw hex. Each swatch shows the value for the
+          mode you're currently viewing; both hex codes are listed below the
+          swatch and click-to-copy.
         </>
       }
       whenToUse={

@@ -28,7 +28,7 @@ export function DesignSystem() {
           <button
             type="button"
             onClick={() => setNavOpen(true)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-hairline bg-surface text-ink-body lg:hidden"
+            className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-hairline bg-surface text-ink-body lg:hidden"
             aria-label="Open navigation"
           >
             <Menu className="h-4 w-4" />
@@ -61,7 +61,7 @@ export function DesignSystem() {
                 <button
                   type="button"
                   onClick={() => setNavOpen(false)}
-                  className="inline-flex h-8 w-8 items-center justify-center rounded-md text-ink-muted hover:text-ink-display"
+                  className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-md text-ink-muted hover:text-ink-display"
                   aria-label="Close navigation"
                 >
                   <X className="h-4 w-4" />
@@ -91,13 +91,13 @@ export function DesignSystem() {
           <PageHeadersSection />
           <BodyContentSection />
           <FootersSection />
-          <BaseStylesSection />
           <IconographySection />
           <ButtonsSection />
           <FormsSection />
           <LabelsSection />
           <ListingsSection />
           <ModalSection />
+          <BaseStylesSection />
         </main>
       </div>
     </div>

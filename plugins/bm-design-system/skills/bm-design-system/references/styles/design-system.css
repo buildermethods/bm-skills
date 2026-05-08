@@ -37,6 +37,7 @@
     background-color: var(--color-page);
     color: var(--color-ink-body);
     font-family: var(--font-sans);
+    font-size: 106.25%; /* 17px base — scales every rem-based size */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -65,9 +66,7 @@
 
   a {
     color: var(--color-accent);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    text-decoration-thickness: 1px;
+    text-decoration: none;
     transition: color 120ms ease;
   }
   a:hover { color: color-mix(in oklab, var(--color-accent), black 15%); }
@@ -78,13 +77,12 @@
 
   ul, ol {
     color: var(--color-ink-body);
-    padding-left: 1.5rem;
+    list-style: none;
+    padding-left: 0;
   }
-  ul { list-style: disc; }
-  ol { list-style: decimal; }
 
-  li { padding-left: 0.25rem; }
-  li + li { margin-top: 0.25rem; }
+  li { padding-left: 0; }
+  li + li { margin-top: 0; }
 
   blockquote {
     border-left: 3px solid var(--color-accent);
@@ -113,6 +111,15 @@
 .body-content > h4:not(:first-child) {
   padding-top: 1rem;
 }
+
+.body-content ul,
+.body-content ol {
+  padding-left: 1.5rem;
+}
+.body-content ul { list-style: disc; }
+.body-content ol { list-style: decimal; }
+.body-content li { padding-left: 0.25rem; }
+.body-content li + li { margin-top: 0.25rem; }
 
 html {
   scroll-behavior: smooth;

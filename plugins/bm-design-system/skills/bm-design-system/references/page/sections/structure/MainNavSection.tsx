@@ -11,7 +11,7 @@ const code = `<header className="sticky top-0 z-30 flex h-14 items-center justif
       <a href="/settings" className="text-sm text-ink-body no-underline hover:text-ink-display">Settings</a>
     </nav>
   </div>
-  <button className="h-9 w-9 rounded-full bg-accent-faded" aria-label="Account" />
+  <button className="h-9 w-9 cursor-pointer rounded-full bg-accent-faded" aria-label="Account" />
 </header>`;
 
 export function MainNavSection() {

@@ -36,7 +36,7 @@ export function SectionShell({
         )}
       </header>
 
-      <div className="rounded-lg border border-hairline bg-surface p-6">
+      <div className="rounded-lg border border-hairline bg-transparent p-6">
         {preview}
       </div>
 

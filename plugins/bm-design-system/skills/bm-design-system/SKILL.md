@@ -81,21 +81,25 @@ Save the chosen route as `routePath` for downstream phases.
 
 ## Phase 2 — Color palette
 
-Explain in one short paragraph: "We define ten color tokens. You pick three — accent, signal, and a base neutral — and I derive the rest with sensible defaults for both light and dark mode. You'll see the full palette before we lock it."
+Explain in one short paragraph: "We define ten color tokens built from three inputs — an accent, a signal, and a base neutral. I'll suggest a few balanced combos to pick from, or you can define your own. You'll see the full derived palette before we lock it."
 
-### 2a. Accent
+### 2a. Pick a combo
 
-Use AskUserQuestion. Pull options + hex previews from `references/palette-presets.json` (`accent` array). Show the swatch name; the user picks. If they pick custom, ask for a hex via free-form chat.
+Use AskUserQuestion. Pull options from `references/palette-presets.json` (`combos` array) — each combo bundles an accent + signal + neutral that have been chosen to work well together. Show the combo `label` as the option title and the `description` as the option description. Add one final option: `Custom — I'll define my own colors`.
 
-### 2b. Signal
+If the user picks a curated combo, take its `accent.hex`, `signal.hex`, and `neutral` (named family) directly and skip 2b.
 
-Same pattern, `signal` array.
+### 2b. Custom path (only if user picked Custom)
 
-### 2c. Base neutral
+Do **not** ask for accent and signal as separate questions. Instead, ask for both at once via free-form chat:
 
-Same pattern, `neutral` array (slate / zinc / stone / gray / neutral — Tailwind's built-in neutral families, used to derive `page` / `surface` / `hairline` / `ink-*`).
+> "Paste your accent and signal hex codes. The accent is your primary brand color (used for buttons, links, focused states). The signal is a secondary highlight color (used sparingly for badges, callouts, status). Example: `accent: #4f46e5, signal: #d97706`."
 
-### 2d. Derive + confirm
+Parse both hex codes from the response. If only one is provided, re-prompt for the missing one in the same chat exchange — do not split into a new picklist question.
+
+Then use AskUserQuestion to pick the base neutral from `references/palette-presets.json` (`neutral` array — slate / zinc / stone / gray / neutral, Tailwind's built-in families used to derive `page` / `surface` / `hairline` / `ink-*`).
+
+### 2c. Derive + confirm
 
 Apply the derivation rules in `references/derive-palette.md` to produce the full token table:
 
@@ -123,15 +127,26 @@ Save as `palette` for Phase 5.
 
 ## Phase 3 — Fonts
 
-Explain: "Two fonts: one for headlines, one for body. Both load from Google Fonts via `@import` in the CSS — no build config needed."
+Explain: "Two fonts: one for headlines, one for body. Both load from Google Fonts via `@import` in the CSS — no build config needed. I'll suggest a few balanced pairings to pick from, or you can define your own."
 
-### 3a. Headline font
+### 3a. Pick a font pairing
 
-Use AskUserQuestion with options from `references/font-presets.json` (`headline` array). Custom: ask for a Google Fonts family name verbatim.
+Use AskUserQuestion. Pull options from `references/font-presets.json` (`combos` array) — each combo bundles a headline + body that have been chosen to work well together. Show the combo `label` as the option title and the `description` as the option description. Add one final option: `Custom — I'll define my own fonts`.
 
-### 3b. Body font
+If the user picks a curated combo, take its `headline` and `body` objects directly and skip 3b.
 
-Same pattern, `body` array.
+### 3b. Custom path (only if user picked Custom)
+
+Do **not** ask for headline and body fonts as separate questions. Instead, ask for both at once via free-form chat:
+
+> "Paste the Google Fonts family names for your headline and body fonts. Example: `headline: Bricolage Grotesque, body: Inter`. (You can use the same font for both if you prefer.)"
+
+Parse both family names from the response. If only one is provided, re-prompt for the missing one in the same chat exchange — do not split into a new picklist question. Then construct each font's `import` URL and `stack` using the `customDefaults` block in `font-presets.json`:
+
+- `import` — `https://fonts.googleapis.com/css2?family=<URL-encoded family>:wght@<headlineWeights or bodyWeights>&display=swap`
+- `stack` — `'<family>', <sansFallback>` (use `serifFallback` instead if the family is clearly a serif — e.g. Fraunces, Lora, Source Serif, Playfair, etc.)
+
+### 3c. Confirm
 
 Show the chosen pair in a single-line preview. Ask:
 
@@ -197,7 +212,7 @@ Files to write (sources under `references/`, plus their substitution behavior):
 - `page/{SidebarNav,ThemeToggle,SectionShell,CodeBlock,ColorSwatch}.tsx` → `components/design-system/`
 - `page/palette.ts` → `components/design-system/palette.ts` — **substitute color + font tokens** here
 - `page/sections/**/*.tsx` → `components/design-system/sections/`. Note: all 14 base-styles sub-sections live in a single `BaseStylesSection.tsx` (returns a fragment of 14 anchored `SectionShell`s); the canonical section list maps to anchors, not files.
-- `components-ui/{button,input,label,dialog}.tsx` → `components/ui/` (skip a file if it already exists and the existing one already comes from this skill — check for a `bm-design-system` marker comment; otherwise ask the user before overwriting)
+- `components-ui/{button,input,label,dialog,checkbox,radio,select,rich-text-field}.tsx` → `components/ui/` (skip a file if it already exists and the existing one already comes from this skill — check for a `bm-design-system` marker comment; otherwise ask the user before overwriting). Note: `rich-text-field.tsx` imports `@milkdown/crepe` — make sure the milkdown deps in 5e are installed before the user navigates to the form section, or the page will fail to render.
 - `styles/design-system.css` → target stylesheet path; **substitute color + font tokens** here
 - `lib/utils.ts` → `lib/utils.ts` only if missing
 - A small route-page entry file at the framework's location (e.g. `src/admin/design-system/page.tsx` for Vite) that imports and renders `DesignSystem`
@@ -225,10 +240,13 @@ Inspect `package.json`. For any of the following that are missing, append them t
 - `clsx`
 - `tailwind-merge`
 - `lucide-react`
+- `@milkdown/crepe`
+- `@milkdown/core`
+- `@milkdown/react`
 
 Example:
 > Run this to install missing deps:
-> `npm install @radix-ui/react-dialog class-variance-authority clsx tailwind-merge lucide-react`
+> `npm install @radix-ui/react-dialog class-variance-authority clsx tailwind-merge lucide-react @milkdown/crepe @milkdown/core @milkdown/react`
 
 ## Phase 6 — Update agent instructions
 
@@ -244,7 +262,61 @@ Append (or replace, if the markers already exist) the block from `references/age
 
 If the file is being created from scratch, also include a one-line top-level title above the block.
 
-## Phase 7 — Wrap up
+## Phase 7 — Scan for existing UI to migrate
+
+After the scaffold is in place, do a quick scan for **user-facing UI that already exists in the codebase** and was not written using the design system. The point is to surface the migration opportunity — not to do it now.
+
+### 7a. Detect
+
+Scan the framework's standard UI locations (skip the route page you just wrote, and skip everything under `components/design-system/`, `components/ui/`, and `lib/`):
+
+- **Vite** — `src/pages/**`, `src/routes/**`, `src/views/**`, `src/components/**` (excluding `src/components/ui/` and `src/components/design-system/`)
+- **Next.js app router** — `app/**/page.tsx`, `app/**/layout.tsx`, `app/**/*.tsx` (excluding `app/admin/design-system/**`), and `components/**` (excluding `components/ui/` and `components/design-system/`)
+- **Next.js pages router** — `pages/**/*.tsx` (excluding `pages/admin/design-system.tsx`), and `components/**`
+- **Rails + Inertia** — `app/frontend/pages/**` or `app/javascript/pages/**` (excluding the design-system page), plus the components directory
+- **Rails + react-on-rails** — same component directories the user has registered
+
+For each candidate file, look for **signals that it renders user-facing UI without the design system**:
+
+- Raw `<button>` / `<a>` / `<input>` / `<select>` / `<form>` elements with their own ad-hoc Tailwind classes (instead of `<Button>`, `<Input>`, `<Select>`, etc.)
+- Inline color utilities that bypass tokens — `bg-white`, `bg-gray-50`, `bg-slate-100`, `text-gray-900`, `text-zinc-500`, `border-gray-200`, raw hex via `style={{...}}`, etc.
+- Page shells / layouts / headers / footers built directly in JSX rather than reusing the structure sections
+- Nav menus, sidebars, and cards built ad-hoc
+
+Group findings into broad buckets (don't list every file individually — just pattern + count + one or two example paths):
+
+- Pages / routes
+- Layouts / shells / headers / footers
+- Navigation / menus
+- Forms / inputs
+- Buttons / links
+- Cards / listings / content blocks
+
+If the scan finds **nothing meaningful** (e.g. brand-new project, or everything already follows the system), say so in one sentence and skip 7b. Move on to Phase 8.
+
+### 7b. Offer migration
+
+If there's UI to migrate, summarize what you found in chat — short, scannable. Then ask, using AskUserQuestion:
+
+- Question: "Want me to migrate the existing UI to use the new design system?"
+- Options:
+  - `Yes, migrate everything now` — agent walks the codebase file-by-file, replacing ad-hoc styles and elements with tokens and primitives. Confirm with the user before each substantial file change.
+  - `Yes, but just <bucket>` — narrow scope (e.g. only buttons, only pages). Ask which bucket if they pick this.
+  - `Not now` — skip; user can re-run later.
+
+If the user picks a migration option, proceed. Otherwise move on. Do not auto-migrate without explicit user opt-in — design-system migrations touch a lot of code and need explicit consent.
+
+### 7c. Migration guidance (if user opted in)
+
+When migrating:
+
+- Replace raw `<button>` with `<Button>` and pick the closest variant; same for `<input>`, `<select>`, `<a>` styled-as-button, `<form>` field wrappers.
+- Replace inline color utilities with tokens — `bg-white` → `bg-page`, `bg-gray-50` → `bg-surface`, `text-gray-900` → `text-ink-display`, `text-gray-500` → `text-ink-muted`, `border-gray-200` → `border-hairline`, `bg-blue-600` → `bg-accent`, etc. When the original color clearly isn't semantic (e.g. a brand-specific color used once), flag it in chat and ask before substituting.
+- Wrap long-form prose blocks in `.body-content`.
+- Keep the user in the loop: report progress per file or per bucket, surface anything ambiguous, and stop to ask rather than guessing.
+- Do not change behavior or copy — only styles, structure, and primitive substitution.
+
+## Phase 8 — Wrap up
 
 Print a short summary in chat:
 
@@ -252,7 +324,8 @@ Print a short summary in chat:
 - How to toggle dark mode (button in the header — also persists in localStorage)
 - Which agent file got the managed block
 - The install command (if dependencies were missing)
-- A nudge: "Re-run this skill any time to add new sections or update tokens — it detects existing setup and merges non-destructively."
+- What was migrated in Phase 7 (or "no migration needed" / "user deferred migration")
+- A nudge: "Re-run this skill any time to add new sections, update tokens, or re-scan for migration candidates — it detects existing setup and merges non-destructively."
 
 Stop.
 
@@ -271,6 +344,13 @@ structure/
   page-headers          #page-headers
   body-content          #body-content
   footers               #footers
+elements/
+  iconography           #iconography
+  buttons               #buttons
+  forms                 #forms
+  labels                #labels
+  listings              #listings
+  modal                 #modal
 base-styles/
   heading-scale         #heading-scale
   h1                    #h1
@@ -286,13 +366,6 @@ base-styles/
   list-item             #list-item
   blockquote            #blockquote
   hr                    #hr
-elements/
-  iconography           #iconography
-  buttons               #buttons
-  forms                 #forms
-  labels                #labels
-  listings              #listings
-  modal                 #modal
 ```
 
 Each section uses the `<SectionShell>` wrapper which renders five blocks in this order:

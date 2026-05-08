@@ -5,7 +5,7 @@ This codebase has a design system documented at [`__ROUTE_PATH__`](__ROUTE_PATH_
 
 When implementing UI:
 
-1. **Always check the design system first.** Before writing any frontend markup or styles, refer to `__ROUTE_PATH__` and the components under `components/ui/` and `components/design-system/sections/`. Use the existing tokens (`bg-page`, `bg-surface`, `text-ink-body`, etc.) and the existing primitives (`<Button>`, `<Input>`, `<Label>`, `<Dialog>` and friends).
+1. **Always check the design system first.** Before writing any frontend markup or styles, refer to `__ROUTE_PATH__` and the components under `components/ui/` and `components/design-system/sections/`. Use the existing tokens (`bg-page`, `bg-surface`, `text-ink-body`, etc.) and the existing primitives (`<Button>`, `<Input>`, `<Label>`, `<Select>`, `<Checkbox>`, `<Radio>`, `<RichTextField>`, `<Dialog>` and friends).
 
 2. **Do not invent ad-hoc styles.** Don't reach for raw hex values, raw font sizes, or one-off Tailwind utilities when a token or primitive exists. Don't introduce new variant systems alongside the existing `cva`-based ones.
 

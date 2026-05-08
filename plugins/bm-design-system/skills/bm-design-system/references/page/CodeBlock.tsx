@@ -23,7 +23,7 @@ export function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
       <button
         type="button"
         onClick={handleCopy}
-        className="absolute right-2 top-2 inline-flex h-7 items-center gap-1 rounded border border-hairline bg-surface px-2 text-xs text-ink-muted hover:text-ink-display"
+        className="absolute right-2 top-2 inline-flex h-7 cursor-pointer items-center gap-1 rounded border border-hairline bg-surface px-2 text-xs text-ink-muted hover:text-ink-display"
         aria-label="Copy code"
       >
         {copied ? (
