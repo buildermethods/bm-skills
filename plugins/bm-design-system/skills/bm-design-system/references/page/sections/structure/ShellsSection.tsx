@@ -1,13 +1,12 @@
 import { SectionShell } from "@/components/design-system/SectionShell";
 
-const code = `<div className="min-h-screen bg-page text-ink-body">
-  <header className="border-b border-hairline bg-page">{/* nav */}</header>
-  <div className="mx-auto flex max-w-7xl">
-    <aside className="hidden w-64 shrink-0 border-r border-hairline lg:block">
-      {/* sub nav */}
-    </aside>
-    <main className="min-w-0 flex-1 p-6">{/* content */}</main>
-  </div>
+const code = `<div className="flex min-h-screen bg-page text-ink-body">
+  <aside className="group flex w-14 shrink-0 flex-col overflow-hidden border-r border-hairline transition-[width] duration-200 hover:w-56">
+    {/* Main navigation rail — see Main navigation section */}
+  </aside>
+  <main className="min-w-0 flex-1">
+    {/* Page header (optional with sub-nav tabs) → page content */}
+  </main>
 </div>`;
 
 export function ShellsSection() {
@@ -18,35 +17,45 @@ export function ShellsSection() {
       description={
         <>
           The outermost page frame. A shell is a full-bleed{" "}
-          <code>bg-page</code> container with a sticky header and either a
-          centered content column or a sidebar + main split.
+          <code>bg-page</code> container with the main-navigation rail on
+          the left and a content area on the right. The rail expands on
+          hover; sub-navigation lives inside page headers as horizontal
+          tabs (not in the shell).
         </>
       }
       whenToUse={
         <ul>
           <li>Every authenticated screen.</li>
-          <li>
-            Use sidebar shell when the screen has stable sub-navigation; use
-            single-column shell otherwise.
-          </li>
+          <li>Pair with a Page header at the top of the main content area.</li>
         </ul>
       }
       whenNotToUse={
         <ul>
-          <li>Marketing/landing pages — those use a dedicated marketing shell.</li>
+          <li>Marketing/landing pages — those use a dedicated marketing shell with a horizontal top nav.</li>
           <li>Modals/sheets — they layer on top of the shell, not replace it.</li>
         </ul>
       }
       preview={
         <div className="overflow-hidden rounded-md border border-hairline">
-          <div className="flex h-8 items-center border-b border-hairline bg-page px-3 text-xs text-ink-muted">
-            Header
-          </div>
-          <div className="flex h-40">
-            <div className="hidden w-32 border-r border-hairline bg-surface p-3 text-xs text-ink-muted sm:block">
-              Sidebar
+          <div className="flex h-44">
+            <div className="w-10 shrink-0 border-r border-hairline bg-page p-2">
+              <div className="mb-2 h-6 w-6 rounded bg-accent-faded" />
+              <div className="space-y-1.5">
+                <div className="h-4 w-6 rounded bg-surface" />
+                <div className="h-4 w-6 rounded bg-surface" />
+                <div className="h-4 w-6 rounded bg-surface" />
+              </div>
             </div>
-            <div className="flex-1 p-3 text-xs text-ink-muted">Main</div>
+            <div className="flex-1 bg-surface p-3">
+              <div className="mb-3 border-b border-hairline pb-2">
+                <div className="h-3 w-24 rounded bg-page" />
+              </div>
+              <div className="space-y-1.5">
+                <div className="h-2 w-3/4 rounded bg-page" />
+                <div className="h-2 w-1/2 rounded bg-page" />
+                <div className="h-2 w-2/3 rounded bg-page" />
+              </div>
+            </div>
           </div>
         </div>
       }
@@ -54,12 +63,18 @@ export function ShellsSection() {
       options={
         <ul className="list-disc pl-5">
           <li>
-            <strong>Single-column</strong>: omit <code>&lt;aside&gt;</code>,
-            wrap content in a centered <code>max-w-3xl</code> container.
+            <strong>Rail-only</strong>: just the main-nav rail and a content
+            column. Default for app screens.
           </li>
           <li>
-            <strong>Sidebar + main</strong>: as shown above. Sidebar collapses
-            to a sheet on <code>&lt; lg</code>.
+            <strong>With sub-nav</strong>: page header inside{" "}
+            <code>main</code> appends sub-navigation tabs — see Page headers
+            "with tabs" variant. No second sidebar needed.
+          </li>
+          <li>
+            <strong>Mobile</strong>: rail stays at <code>w-14</code> on all
+            screen sizes (icons remain tappable). Optionally collapse it
+            into a hamburger sheet on <code>&lt; sm</code>.
           </li>
         </ul>
       }

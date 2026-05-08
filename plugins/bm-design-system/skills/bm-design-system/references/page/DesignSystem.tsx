@@ -17,6 +17,8 @@ import { FormsSection } from "@/components/design-system/sections/elements/Forms
 import { LabelsSection } from "@/components/design-system/sections/elements/LabelsSection";
 import { ListingsSection } from "@/components/design-system/sections/elements/ListingsSection";
 import { ModalSection } from "@/components/design-system/sections/elements/ModalSection";
+import { CalloutSection } from "@/components/design-system/sections/elements/CalloutSection";
+import { DropdownMenuSection } from "@/components/design-system/sections/elements/DropdownMenuSection";
 
 export function DesignSystem() {
   const [navOpen, setNavOpen] = React.useState(false);
@@ -97,6 +99,8 @@ export function DesignSystem() {
           <LabelsSection />
           <ListingsSection />
           <ModalSection />
+          <DropdownMenuSection />
+          <CalloutSection />
           <BaseStylesSection />
         </main>
       </div>

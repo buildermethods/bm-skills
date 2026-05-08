@@ -121,6 +121,12 @@
 .body-content li { padding-left: 0.25rem; }
 .body-content li + li { margin-top: 0.25rem; }
 
+.callout {
+  border: 1px solid var(--color-hairline);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+}
+
 html {
   scroll-behavior: smooth;
 }

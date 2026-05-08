@@ -1,7 +1,7 @@
 {
   "name": "bm-design-system",
   "description": "Guides you through creating a design system for a new app or feature.",
-  "version": "0.1.1",
+  "version": "0.1.6",
   "author": {
     "name": "Brian Casel",
     "email": "brian@buildermethods.com"
