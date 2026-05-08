@@ -7,26 +7,36 @@ A collection of public, open-source skills for builders — by [Brian Casel](htt
 - [**Builder Methods Pro**](https://buildermethods.com/pro) — Training, community, and direct support from Brian and fellow builders.
 - [**Builder Briefing**](https://buildermethods.com) — Brian's free weekly newsletter with updates and notes on building with AI.
 
-## What's inside
-
-This repo is a Claude Code plugin marketplace. Each plugin is a self-contained area of work containing one or more related skills. The collection grows over time as new skills are released.
-
-Current plugins:
-
-- **bm-prd-creator** — Guides you through creating a Product Requirements Document (PRD) for a new app or feature.
-
 ## Installation
 
-Add this marketplace to Claude Code:
+This repo is a Claude Code plugin marketplace. Add it once:
 
 ```
 /plugin marketplace add buildermethods/bm-skills
 ```
 
-Then install any plugin from the marketplace:
+Then install any of the skills below:
+
+```
+/plugin install <skill-name>
+```
+
+## Skills
+
+### bm-prd-creator
+
+Guides you through turning a raw idea into a structured Product Requirements Document. Produces a complete `prd.md` plus a sequence of milestone prompt files you can hand to a coding agent to drive implementation.
 
 ```
 /plugin install bm-prd-creator
+```
+
+### bm-design-system
+
+Scaffolds a complete design system into a React + Tailwind v4 codebase: a single-page reference at `/admin/design-system` that previews and documents every primitive, plus reusable shadcn-style components and managed instructions in `AGENTS.md`/`CLAUDE.md` so future agents always defer to the system instead of drifting.
+
+```
+/plugin install bm-design-system
 ```
 
 ## Documentation
