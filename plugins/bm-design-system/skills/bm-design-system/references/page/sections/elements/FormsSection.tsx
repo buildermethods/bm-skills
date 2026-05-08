@@ -1,11 +1,20 @@
 import { SectionShell } from "@/components/design-system/SectionShell";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Radio, RadioGroup } from "@/components/ui/radio";
+import { Select } from "@/components/ui/select";
+import { RichTextField } from "@/components/ui/rich-text-field";
 
 const code = `import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Radio, RadioGroup } from "@/components/ui/radio";
+import { Select } from "@/components/ui/select";
+import { RichTextField } from "@/components/ui/rich-text-field";
 
 <form className="space-y-4">
+  {/* Text input */}
   <div className="space-y-1.5">
     <label htmlFor="email" className="text-sm font-medium text-ink-display">
       Email
@@ -13,6 +22,56 @@ import { Button } from "@/components/ui/button";
     <Input id="email" type="email" placeholder="you@example.com" />
     <p className="text-xs text-ink-muted">We'll only use this for account notifications.</p>
   </div>
+
+  {/* Select */}
+  <div className="space-y-1.5">
+    <label htmlFor="country" className="text-sm font-medium text-ink-display">
+      Country
+    </label>
+    <Select id="country" defaultValue="">
+      <option value="" disabled>Choose one…</option>
+      <option value="us">United States</option>
+      <option value="ca">Canada</option>
+      <option value="uk">United Kingdom</option>
+    </Select>
+  </div>
+
+  {/* Radio group */}
+  <fieldset className="space-y-1.5">
+    <legend className="text-sm font-medium text-ink-display">Plan</legend>
+    <RadioGroup>
+      <label className="flex items-center gap-2 text-sm text-ink-body">
+        <Radio name="plan" value="free" defaultChecked />
+        Free
+      </label>
+      <label className="flex items-center gap-2 text-sm text-ink-body">
+        <Radio name="plan" value="pro" />
+        Pro
+      </label>
+      <label className="flex items-center gap-2 text-sm text-ink-body">
+        <Radio name="plan" value="team" />
+        Team
+      </label>
+    </RadioGroup>
+  </fieldset>
+
+  {/* Checkbox */}
+  <label className="flex items-start gap-2 text-sm text-ink-body">
+    <Checkbox id="newsletter" defaultChecked />
+    <span>
+      <span className="font-medium text-ink-display">Send me product updates</span>
+      <span className="block text-xs text-ink-muted">Roughly one email per month.</span>
+    </span>
+  </label>
+
+  {/* Rich text (milkdown) */}
+  <div className="space-y-1.5">
+    <label htmlFor="bio" className="text-sm font-medium text-ink-display">
+      Bio
+    </label>
+    <RichTextField placeholder="Tell us about yourself…" />
+  </div>
+
   <Button type="submit">Save</Button>
 </form>`;
 
@@ -23,9 +82,11 @@ export function FormsSection() {
       title="Forms"
       description={
         <>
-          Forms compose <code>&lt;Input&gt;</code>, native HTML labels, helper
-          text, and Buttons. Vertical spacing between fields uses{" "}
-          <code>space-y-4</code>; spacing inside a field uses{" "}
+          Forms compose <code>&lt;Input&gt;</code>, <code>&lt;Select&gt;</code>,
+          <code>&lt;Checkbox&gt;</code>, <code>&lt;Radio&gt;</code>,{" "}
+          <code>&lt;RichTextField&gt;</code> (milkdown), native HTML labels,
+          helper text, and <code>&lt;Button&gt;</code>. Vertical spacing between
+          fields uses <code>space-y-4</code>; spacing inside a field uses{" "}
           <code>space-y-1.5</code>.
         </>
       }
@@ -33,6 +94,7 @@ export function FormsSection() {
         <ul>
           <li>All data-entry surfaces.</li>
           <li>Wrap fields with their own <code>&lt;label&gt;</code> for accessibility.</li>
+          <li>Use <code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code> around radio groups.</li>
         </ul>
       }
       whenNotToUse={
@@ -62,24 +124,78 @@ export function FormsSection() {
               We'll only use this for account notifications.
             </p>
           </div>
+
           <div className="space-y-1.5">
             <label
-              htmlFor="ds-form-name"
+              htmlFor="ds-form-country"
               className="text-sm font-medium text-ink-display"
             >
-              Display name
+              Country
             </label>
-            <Input id="ds-form-name" placeholder="Ada Lovelace" />
+            <Select id="ds-form-country" defaultValue="">
+              <option value="" disabled>
+                Choose one…
+              </option>
+              <option value="us">United States</option>
+              <option value="ca">Canada</option>
+              <option value="uk">United Kingdom</option>
+            </Select>
           </div>
+
+          <fieldset className="space-y-1.5">
+            <legend className="text-sm font-medium text-ink-display">
+              Plan
+            </legend>
+            <RadioGroup>
+              <label className="flex items-center gap-2 text-sm text-ink-body">
+                <Radio name="ds-form-plan" value="free" defaultChecked />
+                Free
+              </label>
+              <label className="flex items-center gap-2 text-sm text-ink-body">
+                <Radio name="ds-form-plan" value="pro" />
+                Pro
+              </label>
+              <label className="flex items-center gap-2 text-sm text-ink-body">
+                <Radio name="ds-form-plan" value="team" />
+                Team
+              </label>
+            </RadioGroup>
+          </fieldset>
+
+          <label className="flex items-start gap-2 text-sm text-ink-body">
+            <Checkbox id="ds-form-newsletter" defaultChecked />
+            <span>
+              <span className="font-medium text-ink-display">
+                Send me product updates
+              </span>
+              <span className="block text-xs text-ink-muted">
+                Roughly one email per month.
+              </span>
+            </span>
+          </label>
+
+          <div className="space-y-1.5">
+            <label
+              htmlFor="ds-form-bio"
+              className="text-sm font-medium text-ink-display"
+            >
+              Bio
+            </label>
+            <RichTextField placeholder="Tell us about yourself…" />
+          </div>
+
           <Button type="submit">Save</Button>
         </form>
       }
       code={code}
       options={
         <ul className="list-disc pl-5">
-          <li>Use HTML <code>&lt;label htmlFor&gt;</code> with the input's <code>id</code> for accessibility.</li>
-          <li>Helper text uses <code>text-xs text-ink-muted</code> directly under the input.</li>
-          <li>Error states: render a <code>text-xs text-signal</code> message in the same slot as helper text and add <code>aria-invalid</code> to the input.</li>
+          <li>Use HTML <code>&lt;label htmlFor&gt;</code> with the field's <code>id</code> for accessibility.</li>
+          <li>Helper text uses <code>text-xs text-ink-muted</code> directly under the field.</li>
+          <li>Error states: render a <code>text-xs text-signal</code> message in the same slot as helper text and add <code>aria-invalid</code> to the field.</li>
+          <li>Radio groups: wrap in <code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code> and share a <code>name</code> across all <code>&lt;Radio&gt;</code> inputs.</li>
+          <li>Selects: use a disabled empty <code>&lt;option&gt;</code> as a placeholder when no default makes sense.</li>
+          <li>Rich text: <code>&lt;RichTextField&gt;</code> wraps milkdown's Crepe — emits markdown via <code>onChange</code>. Requires <code>@milkdown/crepe</code>.</li>
         </ul>
       }
     />

@@ -90,8 +90,8 @@ export function BaseStylesSection() {
         title="Anchor (a)"
         description={
           <>
-            Inline links use the accent color and a 1px underline with a 2px
-            offset. Hover darkens the accent slightly.
+            Inline links use the accent color with no underline. Hover darkens
+            the accent slightly.
           </>
         }
         whenToUse={
@@ -150,48 +150,93 @@ export function BaseStylesSection() {
       <SectionShell
         id="lists"
         title="Lists (ul / ol)"
-        description="Unordered and ordered lists, inheriting base styles. Items have a small gap between them by default."
+        description={
+          <>
+            Lists are unstyled by default — no bullets, no numbers, no padding —
+            so they're safe to use as semantic containers in nav, sidebars, and
+            listings. To get default disc/decimal styling back, wrap the list
+            (or its parent) in <code>.body-content</code>.
+          </>
+        }
         preview={
           <div className="grid gap-6 sm:grid-cols-2">
             <div>
-              <div className="mb-2 text-xs font-mono text-ink-muted">ul</div>
+              <div className="mb-2 text-xs font-mono text-ink-muted">
+                ul (default)
+              </div>
               <ul>
-                <li>Unordered first item</li>
-                <li>Unordered second item</li>
-                <li>Unordered third item</li>
+                <li>Unstyled first item</li>
+                <li>Unstyled second item</li>
+                <li>Unstyled third item</li>
               </ul>
             </div>
             <div>
-              <div className="mb-2 text-xs font-mono text-ink-muted">ol</div>
+              <div className="mb-2 text-xs font-mono text-ink-muted">
+                ul inside .body-content
+              </div>
+              <div className="body-content">
+                <ul>
+                  <li>Bulleted first item</li>
+                  <li>Bulleted second item</li>
+                  <li>Bulleted third item</li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <div className="mb-2 text-xs font-mono text-ink-muted">
+                ol (default)
+              </div>
               <ol>
-                <li>Ordered first item</li>
-                <li>Ordered second item</li>
-                <li>Ordered third item</li>
+                <li>Unstyled first item</li>
+                <li>Unstyled second item</li>
+                <li>Unstyled third item</li>
               </ol>
+            </div>
+            <div>
+              <div className="mb-2 text-xs font-mono text-ink-muted">
+                ol inside .body-content
+              </div>
+              <div className="body-content">
+                <ol>
+                  <li>Numbered first item</li>
+                  <li>Numbered second item</li>
+                  <li>Numbered third item</li>
+                </ol>
+              </div>
             </div>
           </div>
         }
-        code={`<ul>
+        code={`{/* unstyled — for nav, sidebars, listings */}
+<ul>
   <li>One</li>
   <li>Two</li>
 </ul>
 
-<ol>
-  <li>First</li>
-  <li>Second</li>
-</ol>`}
+{/* default disc/decimal — for prose */}
+<div className="body-content">
+  <ul>
+    <li>One</li>
+    <li>Two</li>
+  </ul>
+</div>`}
       />
 
       <SectionShell
         id="list-item"
         title="List item (li)"
-        description="Individual list item. Inherits styles; small left padding aligns the marker."
+        description="Individual list item. Unstyled by default; gets disc/decimal markers and indentation only when its parent list is inside .body-content."
         preview={
-          <ul>
-            <li>A single list item, styled by base CSS.</li>
-          </ul>
+          <div className="body-content">
+            <ul>
+              <li>A single list item inside .body-content.</li>
+            </ul>
+          </div>
         }
-        code={`<li>A single list item.</li>`}
+        code={`<div className="body-content">
+  <ul>
+    <li>A single list item.</li>
+  </ul>
+</div>`}
       />
 
       <SectionShell

@@ -25,6 +25,17 @@ const NAV: NavGroup[] = [
     ],
   },
   {
+    label: "Elements",
+    items: [
+      { id: "iconography", label: "Iconography" },
+      { id: "buttons", label: "Buttons" },
+      { id: "forms", label: "Forms" },
+      { id: "labels", label: "Labels" },
+      { id: "listings", label: "Listings" },
+      { id: "modal", label: "Modal" },
+    ],
+  },
+  {
     label: "Base styles",
     items: [
       { id: "heading-scale", label: "Heading scale" },
@@ -41,17 +52,6 @@ const NAV: NavGroup[] = [
       { id: "list-item", label: "List item (li)" },
       { id: "blockquote", label: "Blockquote" },
       { id: "hr", label: "Horizontal rule" },
-    ],
-  },
-  {
-    label: "Elements",
-    items: [
-      { id: "iconography", label: "Iconography" },
-      { id: "buttons", label: "Buttons" },
-      { id: "forms", label: "Forms" },
-      { id: "labels", label: "Labels" },
-      { id: "listings", label: "Listings" },
-      { id: "modal", label: "Modal" },
     ],
   },
 ];
