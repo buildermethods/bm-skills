@@ -1,11 +1,25 @@
 # Palette derivation
 
-Inputs from the user:
-- `accent` — a single hex (e.g. `#4f46e5`)
-- `signal` — a single hex (e.g. `#d97706`)
-- `neutral` — a named family with a 9-step scale (50 / 100 / 200 / 400 / 500 / 700 / 800 / 900 / 950)
+Inputs are locked to the defaults declared in Phase 2 of `SKILL.md`:
+- `accent` — `#0891b2` (Cyan)
+- `signal` — `#fcd34d` (Amber light) — same shade in both light and dark modes
+- `neutral` — Slate (Tailwind's slate scale: 50 / 100 / 200 / 400 / 500 / 700 / 800 / 900 / 950)
 
-Output: ten tokens × two modes (light + dark) = twenty hex values, written into the `@theme` block of `design-system.css`.
+Output: ten tokens × two modes (light + dark) = twenty hex values, written into the `@theme` block of `design-system.css`. The resolved values are pre-computed in Phase 2 of `SKILL.md` — this file documents the algorithm so the skill can re-derive if defaults ever change.
+
+## Slate scale
+
+| Step | Hex       |
+|------|-----------|
+| 50   | `#f8fafc` |
+| 100  | `#f1f5f9` |
+| 200  | `#e2e8f0` |
+| 400  | `#94a3b8` |
+| 500  | `#64748b` |
+| 700  | `#334155` |
+| 800  | `#1e293b` |
+| 900  | `#0f172a` |
+| 950  | `#020617` |
 
 ## Rules
 
@@ -31,9 +45,9 @@ Note: `page` light is pure white (cleaner than `neutral.50`); `page` dark uses `
 
 | Token           | Light                    | Dark                              |
 |-----------------|--------------------------|-----------------------------------|
-| `accent`        | user accent              | user accent (no shift)            |
+| `accent`        | accent                   | accent (same shade)               |
 | `accent-faded`  | accent mixed 12% on `#ffffff` | accent mixed 18% on `neutral.950` |
-| `signal`        | user signal              | user signal (no shift)            |
+| `signal`        | signal                   | signal (same shade — pinned to a light tint)               |
 | `signal-faded`  | signal mixed 12% on `#ffffff` | signal mixed 18% on `neutral.950` |
 
 ### Mixing formula
@@ -66,6 +80,6 @@ Inputs:
 - b = round(229*0.18 + 11*0.82) = round(41.22 + 9.02) = 50
 - → `#161432`
 
-## Fallback
+## Note on the locked signal shade
 
-If the user picks a custom accent or signal that is extremely dark (luminance < 0.2) or extremely light (luminance > 0.8), warn them in chat — the faded variants may be hard to distinguish — but do not block. Compute as specified.
+The signal default (`#fcd34d`) is intentionally a light amber (Tailwind amber-300). It's pinned to the same shade in both modes so badges/callouts/status indicators read consistently. The faded variants on `#ffffff` (light) and `#020617` (dark) compute to `#fffaea` and `#2f2b21` respectively — both are subtle background tints that signal text sits on top of.

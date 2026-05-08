@@ -9,19 +9,17 @@ You are guiding a builder through scaffolding a complete design system into a Re
 
 ## Audience assumption
 
-The user understands what they want their app to look and feel like. They are NOT expected to hand-pick every CSS variable or know shadcn/ui internals. Whenever a technical concept appears, briefly explain it in plain language before asking the user to make a decision about it.
+The user wants a complete, opinionated design system scaffolded into their app with as few decisions as possible. Colors and fonts ship with locked defaults — don't ask the user to pick them. Whenever a technical concept appears in a phase that *does* take input (route, scope, migration), briefly explain it in plain language before asking.
 
 ## Core interaction principles
 
-1. **Always propose a default with reasoning, then ask to confirm or change.** Never ask open-ended "what do you want?" questions when you can propose a sensible default and explain why. The user is much better at editing a proposal than generating one.
+1. **Use the AskUserQuestion tool for decisions with discrete options.** The user is likely on mobile — tappable options beat typing. For free-form input (custom hex codes, custom font names) use a normal chat message.
 
-2. **Use the AskUserQuestion tool for decisions with discrete options.** For free-form input (a custom hex code, a custom font name) use a normal chat message. For curated picklists, always use AskUserQuestion — the user is much more likely to be on mobile, and tappable options beat typing.
+2. **One decision at a time, in sequence.** Walk through phases in order. Lock each phase before moving to the next.
 
-3. **One decision at a time, in sequence.** Walk through phases in order. Lock each phase before moving to the next.
+3. **Keep your prose tight.** Short framings, no preamble. The user is making decisions, not reading essays.
 
-4. **Keep your prose tight.** Short framings, no preamble. The user is making decisions, not reading essays.
-
-5. **The design system is opinionated, not exhaustive.** Ship a small, useful, beautiful set of primitives with sensible defaults. The user can extend by re-running the skill later.
+4. **The design system is opinionated, not exhaustive.** Ship a small, useful, beautiful set of primitives with locked defaults. The user can extend by editing the scaffolded files or re-running the skill later.
 
 ## Hard assumptions
 
@@ -79,100 +77,64 @@ If the user picks Other and provides a custom path, accept it (must start with `
 
 Save the chosen route as `routePath` for downstream phases.
 
-## Phase 2 — Color palette
+## Phase 2 — Branding defaults
 
-Explain in one short paragraph: "We define ten color tokens built from three inputs — an accent, a signal, and a base neutral. I'll suggest a few balanced combos to pick from, or you can define your own. You'll see the full derived palette before we lock it."
+Colors and fonts ship locked. Do **not** ask the user to pick them. Announce what's coming in one short summary, then move on:
 
-### 2a. Pick a combo
+> Going with these defaults — the design system page will preview them all and you can edit the scaffolded CSS later if you want to tweak:
+>
+> - **Display font:** Plus Jakarta Sans
+> - **Body font:** DM Sans
+> - **Accent:** Cyan (`#0891b2`)
+> - **Signal:** Amber light (`#fcd34d`) — same shade in light and dark
+> - **Neutral:** Slate
 
-Use AskUserQuestion. Pull options from `references/palette-presets.json` (`combos` array) — each combo bundles an accent + signal + neutral that have been chosen to work well together. Show the combo `label` as the option title and the `description` as the option description. Add one final option: `Custom — I'll define my own colors`.
+Use the values below for substitution in Phase 4. Don't ask the user to confirm — just proceed.
 
-If the user picks a curated combo, take its `accent.hex`, `signal.hex`, and `neutral` (named family) directly and skip 2b.
+### Fonts
 
-### 2b. Custom path (only if user picked Custom)
+| Role     | Family             | Google Fonts import URL                                                                              | CSS stack                                                       |
+|----------|--------------------|------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| display  | Plus Jakarta Sans  | `https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap`       | `'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif`     |
+| body     | DM Sans            | `https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap`                     | `'DM Sans', ui-sans-serif, system-ui, sans-serif`               |
 
-Do **not** ask for accent and signal as separate questions. Instead, ask for both at once via free-form chat:
+### Resolved palette
 
-> "Paste your accent and signal hex codes. The accent is your primary brand color (used for buttons, links, focused states). The signal is a secondary highlight color (used sparingly for badges, callouts, status). Example: `accent: #4f46e5, signal: #d97706`."
+Derived from accent `#0891b2`, signal `#fcd34d` (light shade pinned in both modes), and the Slate neutral scale, per the rules in `references/derive-palette.md`:
 
-Parse both hex codes from the response. If only one is provided, re-prompt for the missing one in the same chat exchange — do not split into a new picklist question.
+| Token         | Light     | Dark      |
+|---------------|-----------|-----------|
+| page          | `#ffffff` | `#020617` |
+| surface       | `#f8fafc` | `#0f172a` |
+| hairline      | `#e2e8f0` | `#1e293b` |
+| ink-body      | `#334155` | `#e2e8f0` |
+| ink-display   | `#0f172a` | `#f8fafc` |
+| ink-muted     | `#64748b` | `#94a3b8` |
+| accent        | `#0891b2` | `#0891b2` |
+| accent-faded  | `#e1f2f6` | `#031f33` |
+| signal        | `#fcd34d` | `#fcd34d` |
+| signal-faded  | `#fffaea` | `#2f2b21` |
 
-Then use AskUserQuestion to pick the base neutral from `references/palette-presets.json` (`neutral` array — slate / zinc / stone / gray / neutral, Tailwind's built-in families used to derive `page` / `surface` / `hairline` / `ink-*`).
+Save these as `palette` and `fonts` for Phase 4.
 
-### 2c. Derive + confirm
-
-Apply the derivation rules in `references/derive-palette.md` to produce the full token table:
-
-| Token         | Light                       | Dark                          |
-|---------------|-----------------------------|-------------------------------|
-| page          | neutral-50                  | neutral-950                   |
-| surface       | neutral-100                 | neutral-900                   |
-| hairline      | neutral-200                 | neutral-800                   |
-| ink-body      | neutral-700                 | neutral-200                   |
-| ink-display   | neutral-900                 | neutral-50                    |
-| ink-muted     | neutral-500                 | neutral-400                   |
-| accent        | <user accent>               | <user accent, slightly lifted>|
-| accent-faded  | accent @ 12% on white       | accent @ 18% on neutral-900   |
-| signal        | <user signal>               | <user signal, slightly lifted>|
-| signal-faded  | signal @ 12% on white       | signal @ 18% on neutral-900   |
-
-Show the user a chat-rendered table of the resolved hex values. Then ask:
-
-- Question: "Lock this palette?"
-- Options: `Yes, lock it`, `Tweak one token`, `Start over`
-
-If "Tweak one token", ask which token, then ask for a custom hex (light + dark). Loop until "Yes, lock it".
-
-Save as `palette` for Phase 5.
-
-## Phase 3 — Fonts
-
-Explain: "Two fonts: one for headlines, one for body. Both load from Google Fonts via `@import` in the CSS — no build config needed. I'll suggest a few balanced pairings to pick from, or you can define your own."
-
-### 3a. Pick a font pairing
-
-Use AskUserQuestion. Pull options from `references/font-presets.json` (`combos` array) — each combo bundles a headline + body that have been chosen to work well together. Show the combo `label` as the option title and the `description` as the option description. Add one final option: `Custom — I'll define my own fonts`.
-
-If the user picks a curated combo, take its `headline` and `body` objects directly and skip 3b.
-
-### 3b. Custom path (only if user picked Custom)
-
-Do **not** ask for headline and body fonts as separate questions. Instead, ask for both at once via free-form chat:
-
-> "Paste the Google Fonts family names for your headline and body fonts. Example: `headline: Bricolage Grotesque, body: Inter`. (You can use the same font for both if you prefer.)"
-
-Parse both family names from the response. If only one is provided, re-prompt for the missing one in the same chat exchange — do not split into a new picklist question. Then construct each font's `import` URL and `stack` using the `customDefaults` block in `font-presets.json`:
-
-- `import` — `https://fonts.googleapis.com/css2?family=<URL-encoded family>:wght@<headlineWeights or bodyWeights>&display=swap`
-- `stack` — `'<family>', <sansFallback>` (use `serifFallback` instead if the family is clearly a serif — e.g. Fraunces, Lora, Source Serif, Playfair, etc.)
-
-### 3c. Confirm
-
-Show the chosen pair in a single-line preview. Ask:
-
-- Question: "Lock these fonts?"
-- Options: `Yes`, `Pick again`
-
-Save as `fonts` for Phase 5.
-
-## Phase 4 — (re-run only) Scope
+## Phase 3 — (re-run only) Scope
 
 Skip this phase on first run.
 
-If re-run mode, after Phase 3 ask:
+If re-run mode, after Phase 2 ask:
 
 - Question: "What do you want to update?"
-- Options: `Tokens only (colors + fonts)`, `Add new sections to the page`, `Full re-scaffold (overwrites everything inside the bm-design-system markers)`
+- Options: `Refresh tokens to current defaults`, `Add new sections to the page`, `Full re-scaffold (overwrites everything inside the bm-design-system markers)`
 
 If "Add new sections", ask which section IDs to add (free-form, comma-separated against the canonical section list below).
 
 If "Full re-scaffold", confirm with a second AskUserQuestion: `Yes, overwrite`, `Cancel`.
 
-## Phase 5 — Write files
+## Phase 4 — Write files
 
-This is the "do the work" phase. Don't show drafts; just write the files. The user already approved the inputs.
+This is the "do the work" phase. Don't show drafts; just write the files. The defaults are locked and the user already confirmed the route.
 
-### 5a. Resolve target paths
+### 4a. Resolve target paths
 
 Pick the path map for the detected framework. The canonical Vite map is:
 
@@ -193,7 +155,7 @@ Per-framework overrides:
 - **Rails + react-on-rails** — print a manual snippet pointing to the user's existing component registration; do not auto-edit Ruby files.
 - **Unknown** — write components into `src/components/...` if `src/` exists, otherwise the project root, and print a manual route registration snippet.
 
-### 5b. Copy the templates
+### 4b. Copy the templates
 
 For each template under `references/`, write to its mapped target. Substitute these tokens (string-replace) at write time:
 
@@ -212,12 +174,12 @@ Files to write (sources under `references/`, plus their substitution behavior):
 - `page/{SidebarNav,ThemeToggle,SectionShell,CodeBlock,ColorSwatch}.tsx` → `components/design-system/`
 - `page/palette.ts` → `components/design-system/palette.ts` — **substitute color + font tokens** here
 - `page/sections/**/*.tsx` → `components/design-system/sections/`. Note: all 14 base-styles sub-sections live in a single `BaseStylesSection.tsx` (returns a fragment of 14 anchored `SectionShell`s); the canonical section list maps to anchors, not files.
-- `components-ui/{button,input,label,dialog,checkbox,radio,select,rich-text-field}.tsx` → `components/ui/` (skip a file if it already exists and the existing one already comes from this skill — check for a `bm-design-system` marker comment; otherwise ask the user before overwriting). Note: `rich-text-field.tsx` imports `@milkdown/crepe` — make sure the milkdown deps in 5e are installed before the user navigates to the form section, or the page will fail to render.
+- `components-ui/{button,input,label,dialog,checkbox,radio,select,rich-text-field,dropdown-menu}.tsx` → `components/ui/` (skip a file if it already exists and the existing one already comes from this skill — check for a `bm-design-system` marker comment; otherwise ask the user before overwriting). Note: `rich-text-field.tsx` imports `@milkdown/crepe` and `dropdown-menu.tsx` imports `@radix-ui/react-dropdown-menu` — make sure the deps in 4e are installed before the user navigates to those sections, or the page will fail to render.
 - `styles/design-system.css` → target stylesheet path; **substitute color + font tokens** here
 - `lib/utils.ts` → `lib/utils.ts` only if missing
 - A small route-page entry file at the framework's location (e.g. `src/admin/design-system/page.tsx` for Vite) that imports and renders `DesignSystem`
 
-### 5c. Wire the stylesheet
+### 4c. Wire the stylesheet
 
 Append `@import "./design-system.css";` (or correct relative path) to the project's existing entry CSS, immediately after `@import "tailwindcss";`. If the import is already present, skip. Wrap the import in `bm-design-system:start` / `bm-design-system:end` HTML-comment-style CSS block markers so re-runs can be non-destructive:
 
@@ -227,15 +189,16 @@ Append `@import "./design-system.css";` (or correct relative path) to the projec
 /* bm-design-system:end */
 ```
 
-### 5d. Register the route
+### 4d. Register the route
 
 Use the corresponding snippet under `references/routing/`. Edit the user's router file in place when the framework supports clean detection (Vite + react-router-dom: look for the `<Routes>` block; Next.js: file-based, no edit needed). Otherwise print the snippet and tell the user where to paste it.
 
-### 5e. Report missing dependencies
+### 4e. Report missing dependencies
 
 Inspect `package.json`. For any of the following that are missing, append them to a single install command and print it (do **not** run npm/yarn yourself):
 
 - `@radix-ui/react-dialog`
+- `@radix-ui/react-dropdown-menu`
 - `class-variance-authority`
 - `clsx`
 - `tailwind-merge`
@@ -246,11 +209,32 @@ Inspect `package.json`. For any of the following that are missing, append them t
 
 Example:
 > Run this to install missing deps:
-> `npm install @radix-ui/react-dialog class-variance-authority clsx tailwind-merge lucide-react @milkdown/crepe @milkdown/core @milkdown/react`
+> `npm install @radix-ui/react-dialog @radix-ui/react-dropdown-menu class-variance-authority clsx tailwind-merge lucide-react @milkdown/crepe @milkdown/core @milkdown/react`
 
-## Phase 6 — Update agent instructions
+## Phase 5 — Update agent instructions
 
-Open `AGENTS.md` if it exists, else `CLAUDE.md` if it exists, else create `AGENTS.md`.
+Open `AGENTS.md` if it exists, else `CLAUDE.md` if it exists, else create `AGENTS.md`. If both exist, update both the same way so they stay in sync.
+
+### 5a. Reconcile existing UI / styling directives
+
+Before appending the managed block, read the file end-to-end and look for any **pre-existing instructions about UI, CSS, design, styling, color, typography, components, or frontend conventions** that live *outside* a `bm-design-system:start`/`end` block. Examples of what to flag:
+
+- "Use Tailwind classes like `bg-blue-600` for primary buttons"
+- "Headings should use Inter / our custom font stack"
+- A "Styling" / "Design" / "UI conventions" / "Components" / "Frontend" section
+- Per-component rules ("buttons should be rounded-md", "cards use `bg-gray-50`")
+- Color palette references, hex codes, font names, spacing scales
+- Pointers to other style guides or component libraries
+
+These will conflict with — or quietly override — the new design system if left in place. Resolve every conflict found:
+
+- **If the existing directive is fully superseded** (e.g. a hardcoded color palette, a "use these utilities" list, a font directive), **remove it**.
+- **If the existing directive carries non-styling intent worth keeping** (e.g. "all forms must be accessible", "preserve the existing route structure"), **rewrite it** to drop the styling specifics and keep the intent, and add a deferral clause like "follow the design system at `__ROUTE_PATH__` for visual conventions."
+- **If you're not sure** whether something should go, surface it to the user in chat — quote the line, say what you'd do, and ask before editing. Default to keeping content when ambiguous.
+
+Make the edits in place, briefly note in chat what you removed or rewrote, then proceed to 5b.
+
+### 5b. Append the managed block
 
 Append (or replace, if the markers already exist) the block from `references/agent-instructions.md`. The block is delimited by HTML comments:
 
@@ -262,11 +246,11 @@ Append (or replace, if the markers already exist) the block from `references/age
 
 If the file is being created from scratch, also include a one-line top-level title above the block.
 
-## Phase 7 — Scan for existing UI to migrate
+## Phase 6 — Scan for existing UI to migrate
 
 After the scaffold is in place, do a quick scan for **user-facing UI that already exists in the codebase** and was not written using the design system. The point is to surface the migration opportunity — not to do it now.
 
-### 7a. Detect
+### 6a. Detect
 
 Scan the framework's standard UI locations (skip the route page you just wrote, and skip everything under `components/design-system/`, `components/ui/`, and `lib/`):
 
@@ -292,9 +276,9 @@ Group findings into broad buckets (don't list every file individually — just p
 - Buttons / links
 - Cards / listings / content blocks
 
-If the scan finds **nothing meaningful** (e.g. brand-new project, or everything already follows the system), say so in one sentence and skip 7b. Move on to Phase 8.
+If the scan finds **nothing meaningful** (e.g. brand-new project, or everything already follows the system), say so in one sentence and skip 6b. Move on to Phase 7.
 
-### 7b. Offer migration
+### 6b. Offer migration
 
 If there's UI to migrate, summarize what you found in chat — short, scannable. Then ask, using AskUserQuestion:
 
@@ -306,7 +290,7 @@ If there's UI to migrate, summarize what you found in chat — short, scannable.
 
 If the user picks a migration option, proceed. Otherwise move on. Do not auto-migrate without explicit user opt-in — design-system migrations touch a lot of code and need explicit consent.
 
-### 7c. Migration guidance (if user opted in)
+### 6c. Migration guidance (if user opted in)
 
 When migrating:
 
@@ -316,7 +300,7 @@ When migrating:
 - Keep the user in the loop: report progress per file or per bucket, surface anything ambiguous, and stop to ask rather than guessing.
 - Do not change behavior or copy — only styles, structure, and primitive substitution.
 
-## Phase 8 — Wrap up
+## Phase 7 — Wrap up
 
 Print a short summary in chat:
 
@@ -324,8 +308,8 @@ Print a short summary in chat:
 - How to toggle dark mode (button in the header — also persists in localStorage)
 - Which agent file got the managed block
 - The install command (if dependencies were missing)
-- What was migrated in Phase 7 (or "no migration needed" / "user deferred migration")
-- A nudge: "Re-run this skill any time to add new sections, update tokens, or re-scan for migration candidates — it detects existing setup and merges non-destructively."
+- What was migrated in Phase 6 (or "no migration needed" / "user deferred migration")
+- A nudge: "Re-run this skill any time to add new sections, refresh tokens, or re-scan for migration candidates — it detects existing setup and merges non-destructively."
 
 Stop.
 
@@ -351,6 +335,8 @@ elements/
   labels                #labels
   listings              #listings
   modal                 #modal
+  dropdown-menu         #dropdown-menu
+  callout               #callout
 base-styles/
   heading-scale         #heading-scale
   h1                    #h1
@@ -378,7 +364,7 @@ Each section uses the `<SectionShell>` wrapper which renders five blocks in this
 
 ## Token derivation reference
 
-See `references/derive-palette.md` for the exact algorithm that turns the user's three picked colors into the full ten-token light + dark palette.
+See `references/derive-palette.md` for the exact algorithm that turns the locked accent / signal / neutral defaults into the full ten-token light + dark palette.
 
 ## Style notes for the scaffolded page
 
