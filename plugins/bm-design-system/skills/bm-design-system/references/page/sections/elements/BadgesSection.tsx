@@ -1,19 +1,19 @@
 import { SectionShell } from "@/components/design-system/SectionShell";
-import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
 
-const code = `import { Label } from "@/components/ui/label";
+const code = `import { Badge } from "@/components/ui/badge";
 
-<Label tone="neutral">Draft</Label>
-<Label tone="accent">New</Label>
-<Label tone="signal">Warning</Label>
-<Label tone="muted">Archived</Label>
-<Label tone="solid">Pro</Label>`;
+<Badge tone="neutral">Draft</Badge>
+<Badge tone="accent">New</Badge>
+<Badge tone="signal">Warning</Badge>
+<Badge tone="muted">Archived</Badge>
+<Badge tone="solid">Pro</Badge>`;
 
-export function LabelsSection() {
+export function BadgesSection() {
   return (
     <SectionShell
-      id="labels"
-      title="Labels"
+      id="badges"
+      title="Badges"
       description={
         <>
           Small inline tag/badge for status or category. Five tones cover most
@@ -36,11 +36,11 @@ export function LabelsSection() {
       }
       preview={
         <div className="flex flex-wrap items-center gap-3">
-          <Label tone="neutral">Draft</Label>
-          <Label tone="accent">New</Label>
-          <Label tone="signal">Warning</Label>
-          <Label tone="muted">Archived</Label>
-          <Label tone="solid">Pro</Label>
+          <Badge tone="neutral">Draft</Badge>
+          <Badge tone="accent">New</Badge>
+          <Badge tone="signal">Warning</Badge>
+          <Badge tone="muted">Archived</Badge>
+          <Badge tone="solid">Pro</Badge>
         </div>
       }
       code={code}

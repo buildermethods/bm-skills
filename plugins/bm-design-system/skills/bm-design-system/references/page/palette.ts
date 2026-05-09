@@ -61,6 +61,12 @@ export const SPLASH: PaletteEntry[] = [
     hexDark: "__COLOR_ACCENT_FADED_DARK__",
   },
   {
+    name: "accent-darker",
+    utility: "bg-accent-darker / text-accent-darker",
+    hexLight: "__COLOR_ACCENT_DARKER_LIGHT__",
+    hexDark: "__COLOR_ACCENT_DARKER_DARK__",
+  },
+  {
     name: "signal",
     utility: "bg-signal / text-signal",
     hexLight: "__COLOR_SIGNAL_LIGHT__",
@@ -71,6 +77,12 @@ export const SPLASH: PaletteEntry[] = [
     utility: "bg-signal-faded",
     hexLight: "__COLOR_SIGNAL_FADED_LIGHT__",
     hexDark: "__COLOR_SIGNAL_FADED_DARK__",
+  },
+  {
+    name: "signal-darker",
+    utility: "bg-signal-darker / text-signal-darker",
+    hexLight: "__COLOR_SIGNAL_DARKER_LIGHT__",
+    hexDark: "__COLOR_SIGNAL_DARKER_DARK__",
   },
 ];
 

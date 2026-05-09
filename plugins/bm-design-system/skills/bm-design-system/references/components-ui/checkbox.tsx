@@ -1,3 +1,4 @@
+// bm-design-system: checkbox primitive
 import * as React from "react";
 import { cn } from "@/lib/utils";
 

@@ -1,0 +1,30 @@
+<!--
+  Theme boot script — paste this into the <head> of the app's HTML layout,
+  BEFORE any <script> that loads React / hydration code (e.g. Vite tags,
+  Next.js `<Script strategy="beforeInteractive">`, etc.).
+
+  Without this, the page renders in light mode on every full reload and only
+  switches to the user's stored preference once the React tree mounts a
+  component that uses `useTheme()`. That's especially bad when the only
+  consumer of `useTheme()` is inside a portal (e.g. a dropdown menu) that
+  doesn't mount until the user opens it — the page is then stuck in light
+  mode until the user manually opens the menu.
+
+  The logic mirrors `lib/theme.ts`:
+    - storage key: `bm-ds-theme`
+    - valid values: `light` | `dark` | `system` (anything else falls back to `system`)
+    - `system` resolves via `prefers-color-scheme: dark`
+    - `dark` resolved → adds `.dark` to <html>; `light` resolved → no class
+-->
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('bm-ds-theme');
+      var theme = stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'system';
+      var resolved = theme === 'system'
+        ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+        : theme;
+      if (resolved === 'dark') document.documentElement.classList.add('dark');
+    } catch (e) {}
+  })();
+</script>

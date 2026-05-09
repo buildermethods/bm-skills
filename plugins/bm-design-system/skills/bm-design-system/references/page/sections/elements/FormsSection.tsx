@@ -15,7 +15,7 @@ import { RichTextField } from "@/components/ui/rich-text-field";
 
 <form className="space-y-4">
   {/* Text input */}
-  <div className="space-y-1.5">
+  <div className="space-y-2">
     <label htmlFor="email" className="text-sm font-medium text-ink-display">
       Email
     </label>
@@ -24,7 +24,7 @@ import { RichTextField } from "@/components/ui/rich-text-field";
   </div>
 
   {/* Select */}
-  <div className="space-y-1.5">
+  <div className="space-y-2">
     <label htmlFor="country" className="text-sm font-medium text-ink-display">
       Country
     </label>
@@ -37,7 +37,7 @@ import { RichTextField } from "@/components/ui/rich-text-field";
   </div>
 
   {/* Radio group */}
-  <fieldset className="space-y-1.5">
+  <fieldset className="space-y-2">
     <legend className="text-sm font-medium text-ink-display">Plan</legend>
     <RadioGroup>
       <label className="flex items-center gap-2 text-sm text-ink-body">
@@ -57,7 +57,7 @@ import { RichTextField } from "@/components/ui/rich-text-field";
 
   {/* Checkbox */}
   <label className="flex items-start gap-2 text-sm text-ink-body">
-    <Checkbox id="newsletter" defaultChecked />
+    <Checkbox id="newsletter" defaultChecked className="mt-0.5" />
     <span>
       <span className="font-medium text-ink-display">Send me product updates</span>
       <span className="block text-xs text-ink-muted">Roughly one email per month.</span>
@@ -65,7 +65,7 @@ import { RichTextField } from "@/components/ui/rich-text-field";
   </label>
 
   {/* Rich text (milkdown) */}
-  <div className="space-y-1.5">
+  <div className="space-y-2">
     <label htmlFor="bio" className="text-sm font-medium text-ink-display">
       Bio
     </label>
@@ -87,7 +87,7 @@ export function FormsSection() {
           <code>&lt;RichTextField&gt;</code> (milkdown), native HTML labels,
           helper text, and <code>&lt;Button&gt;</code>. Vertical spacing between
           fields uses <code>space-y-4</code>; spacing inside a field uses{" "}
-          <code>space-y-1.5</code>.
+          <code>space-y-2</code>.
         </>
       }
       whenToUse={
@@ -108,7 +108,7 @@ export function FormsSection() {
           className="max-w-md space-y-4"
           onSubmit={(e) => e.preventDefault()}
         >
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <label
               htmlFor="ds-form-email"
               className="text-sm font-medium text-ink-display"
@@ -125,7 +125,7 @@ export function FormsSection() {
             </p>
           </div>
 
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <label
               htmlFor="ds-form-country"
               className="text-sm font-medium text-ink-display"
@@ -142,7 +142,7 @@ export function FormsSection() {
             </Select>
           </div>
 
-          <fieldset className="space-y-1.5">
+          <fieldset className="space-y-2">
             <legend className="text-sm font-medium text-ink-display">
               Plan
             </legend>
@@ -163,7 +163,11 @@ export function FormsSection() {
           </fieldset>
 
           <label className="flex items-start gap-2 text-sm text-ink-body">
-            <Checkbox id="ds-form-newsletter" defaultChecked />
+            <Checkbox
+              id="ds-form-newsletter"
+              defaultChecked
+              className="mt-0.5"
+            />
             <span>
               <span className="font-medium text-ink-display">
                 Send me product updates
@@ -174,7 +178,7 @@ export function FormsSection() {
             </span>
           </label>
 
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <label
               htmlFor="ds-form-bio"
               className="text-sm font-medium text-ink-display"

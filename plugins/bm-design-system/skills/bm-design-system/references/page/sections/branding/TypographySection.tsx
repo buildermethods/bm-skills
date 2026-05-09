@@ -17,7 +17,7 @@ export function TypographySection() {
         <>
           Two families. Headlines use <code>{FONTS.display}</code>, body copy
           uses <code>{FONTS.body}</code>. Both load from Google Fonts via{" "}
-          <code>@import</code> in the design-system stylesheet.
+          <code>&lt;link&gt;</code> tags in the app's HTML <code>&lt;head&gt;</code>.
         </>
       }
       whenToUse={

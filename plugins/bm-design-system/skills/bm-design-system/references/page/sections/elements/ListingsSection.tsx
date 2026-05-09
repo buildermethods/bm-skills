@@ -1,5 +1,5 @@
 import { SectionShell } from "@/components/design-system/SectionShell";
-import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
 import { ChevronRight, Folder } from "lucide-react";
 
 const code = `<ul className="divide-y divide-hairline overflow-hidden rounded-md border border-hairline bg-page">
@@ -11,7 +11,7 @@ const code = `<ul className="divide-y divide-hairline overflow-hidden rounded-md
           <div className="truncate text-sm font-medium text-ink-display">{item.title}</div>
           <div className="truncate text-xs text-ink-muted">{item.subtitle}</div>
         </div>
-        <Label tone="muted">{item.status}</Label>
+        <Badge tone="muted">{item.status}</Badge>
         <ChevronRight className="h-4 w-4 text-ink-muted" />
       </a>
     </li>
@@ -34,7 +34,7 @@ export function ListingsSection() {
         <>
           A vertical list of selectable rows — the workhorse of dashboards
           and resource indexes. Each row composes an icon, a title, supporting
-          metadata, an optional Label, and a chevron affordance.
+          metadata, an optional Badge, and a chevron affordance.
         </>
       }
       whenToUse={
@@ -63,9 +63,9 @@ export function ListingsSection() {
                     {item.subtitle}
                   </div>
                 </div>
-                <Label tone={item.status === "Active" ? "accent" : "muted"}>
+                <Badge tone={item.status === "Active" ? "accent" : "muted"}>
                   {item.status}
-                </Label>
+                </Badge>
                 <ChevronRight className="h-4 w-4 text-ink-muted" />
               </div>
             </li>

@@ -257,6 +257,8 @@ You are entering plan mode to plan and then build milestone {N} of this project.
    - Any decisions made during implementation that weren't pre-specified in the PRD
    - Anything the next milestone will need to know
    - Any deviations from the PRD and why
+
+Ask me any clarifying questions using AskUserQuestion tool to lock in the implementation plan for this milestone.
 ```
 
 ## Style notes for the PRD output

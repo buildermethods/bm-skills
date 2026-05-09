@@ -83,7 +83,7 @@ Colors and fonts ship locked. Do **not** ask the user to pick them. Announce wha
 
 > Going with these defaults — the design system page will preview them all and you can edit the scaffolded CSS later if you want to tweak:
 >
-> - **Display font:** Plus Jakarta Sans
+> - **Display font:** Inter
 > - **Body font:** DM Sans
 > - **Accent:** Cyan (`#0891b2`)
 > - **Signal:** Amber light (`#fcd34d`) — same shade in light and dark
@@ -93,27 +93,29 @@ Use the values below for substitution in Phase 4. Don't ask the user to confirm 
 
 ### Fonts
 
-| Role     | Family             | Google Fonts import URL                                                                              | CSS stack                                                       |
-|----------|--------------------|------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
-| display  | Plus Jakarta Sans  | `https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap`       | `'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif`     |
-| body     | DM Sans            | `https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap`                     | `'DM Sans', ui-sans-serif, system-ui, sans-serif`               |
+| Role     | Family    | Google Fonts import URL                                                                | CSS stack                                            |
+|----------|-----------|----------------------------------------------------------------------------------------|------------------------------------------------------|
+| display  | Inter     | `https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap`     | `'Inter', ui-sans-serif, system-ui, sans-serif`      |
+| body     | DM Sans   | `https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap`       | `'DM Sans', ui-sans-serif, system-ui, sans-serif`    |
 
 ### Resolved palette
 
 Derived from accent `#0891b2`, signal `#fcd34d` (light shade pinned in both modes), and the Slate neutral scale, per the rules in `references/derive-palette.md`:
 
-| Token         | Light     | Dark      |
-|---------------|-----------|-----------|
-| page          | `#ffffff` | `#020617` |
-| surface       | `#f8fafc` | `#0f172a` |
-| hairline      | `#e2e8f0` | `#1e293b` |
-| ink-body      | `#334155` | `#e2e8f0` |
-| ink-display   | `#0f172a` | `#f8fafc` |
-| ink-muted     | `#64748b` | `#94a3b8` |
-| accent        | `#0891b2` | `#0891b2` |
-| accent-faded  | `#e1f2f6` | `#031f33` |
-| signal        | `#fcd34d` | `#fcd34d` |
-| signal-faded  | `#fffaea` | `#2f2b21` |
+| Token          | Light     | Dark      |
+|----------------|-----------|-----------|
+| page           | `#ffffff` | `#020617` |
+| surface        | `#f8fafc` | `#0f172a` |
+| hairline       | `#e2e8f0` | `#1e293b` |
+| ink-body       | `#334155` | `#e2e8f0` |
+| ink-display    | `#0f172a` | `#f8fafc` |
+| ink-muted      | `#64748b` | `#94a3b8` |
+| accent         | `#0891b2` | `#0891b2` |
+| accent-faded   | `#e1f2f6` | `#031f33` |
+| accent-darker  | `#0e7490` | `#0e7490` |
+| signal         | `#fcd34d` | `#fcd34d` |
+| signal-faded   | `#fffaea` | `#2f2b21` |
+| signal-darker  | `#b45309` | `#b45309` |
 
 Save these as `palette` and `fonts` for Phase 4.
 
@@ -157,6 +159,9 @@ Per-framework overrides:
 
 ### 4b. Copy the templates
 
+(See also Phase 4e for the theme boot script.)
+
+
 For each template under `references/`, write to its mapped target. Substitute these tokens (string-replace) at write time:
 
 | Token in template                  | Replacement                                                       |
@@ -171,12 +176,13 @@ For each template under `references/`, write to its mapped target. Substitute th
 Files to write (sources under `references/`, plus their substitution behavior):
 
 - `page/DesignSystem.tsx` → `components/design-system/DesignSystem.tsx` (Next.js app-router clients also need a `"use client"` directive)
-- `page/{SidebarNav,ThemeToggle,SectionShell,CodeBlock,ColorSwatch}.tsx` → `components/design-system/`
+- `page/{SidebarNav,SectionShell,CodeBlock,ColorSwatch}.tsx` → `components/design-system/`
 - `page/palette.ts` → `components/design-system/palette.ts` — **substitute color + font tokens** here
 - `page/sections/**/*.tsx` → `components/design-system/sections/`. Note: all 14 base-styles sub-sections live in a single `BaseStylesSection.tsx` (returns a fragment of 14 anchored `SectionShell`s); the canonical section list maps to anchors, not files.
-- `components-ui/{button,input,label,dialog,checkbox,radio,select,rich-text-field,dropdown-menu}.tsx` → `components/ui/` (skip a file if it already exists and the existing one already comes from this skill — check for a `bm-design-system` marker comment; otherwise ask the user before overwriting). Note: `rich-text-field.tsx` imports `@milkdown/crepe` and `dropdown-menu.tsx` imports `@radix-ui/react-dropdown-menu` — make sure the deps in 4e are installed before the user navigates to those sections, or the page will fail to render.
+- `components-ui/{button,input,badge,dialog,checkbox,radio,select,rich-text-field,dropdown-menu,theme-toggle}.tsx` → `components/ui/` (skip a file if it already exists and the existing one already comes from this skill — check for a `bm-design-system` marker comment; otherwise ask the user before overwriting). Note: `rich-text-field.tsx` imports `@milkdown/crepe` and `dropdown-menu.tsx` imports `@radix-ui/react-dropdown-menu` — make sure the deps in 4f are installed before the user navigates to those sections, or the page will fail to render.
 - `styles/design-system.css` → target stylesheet path; **substitute color + font tokens** here
 - `lib/utils.ts` → `lib/utils.ts` only if missing
+- `lib/theme.ts` → `lib/theme.ts` (the `useTheme` hook + helpers backing `<ThemeToggle>`)
 - A small route-page entry file at the framework's location (e.g. `src/admin/design-system/page.tsx` for Vite) that imports and renders `DesignSystem`
 
 ### 4c. Wire the stylesheet
@@ -189,11 +195,54 @@ Append `@import "./design-system.css";` (or correct relative path) to the projec
 /* bm-design-system:end */
 ```
 
+**Tailwind v4 source detection — Rails + Inertia and other split-source projects.** Tailwind v4 normally auto-detects which files contain class names, but the auto-detection doesn't reliably cover projects where the source roots are split across multiple top-level directories — most notably **Rails + Inertia**, which has page components under `app/javascript/pages/` and shared components under `app/frontend/`. If the entry CSS lives in `app/javascript/entrypoints/` (or anywhere that doesn't naturally walk up to both roots), classes used in the other root will be silently dropped from the build and pages will render unstyled.
+
+For Rails + Inertia (and any other framework where the source roots are split), add an explicit `@source` directive to the entry CSS that walks up to the closest common ancestor of all source roots. For Rails + Inertia with the entry CSS at `app/javascript/entrypoints/application.css`, that's:
+
+```css
+@import "tailwindcss";
+
+/* Tailwind v4 auto-detection doesn't reliably reach both `app/javascript/`
+   and `app/frontend/` in this Rails+Inertia setup, so declare them explicitly. */
+@source "../../**/*.{ts,tsx,js,jsx}";
+
+/* bm-design-system:start */
+@import "./design-system.css";
+/* bm-design-system:end */
+```
+
+Place the `@source` line *between* the `tailwindcss` import and the design-system import. For other frameworks (Vite with everything under `src/`, Next.js with everything under `app/`), Tailwind's auto-detection works and an explicit `@source` is unnecessary — skip it.
+
 ### 4d. Register the route
 
 Use the corresponding snippet under `references/routing/`. Edit the user's router file in place when the framework supports clean detection (Vite + react-router-dom: look for the `<Routes>` block; Next.js: file-based, no edit needed). Otherwise print the snippet and tell the user where to paste it.
 
-### 4e. Report missing dependencies
+### 4e. Install the HTML layout head snippets
+
+Two snippets need to land inside the app's HTML layout `<head>`, before any `<script>` that loads React / hydration code (Vite tags, Inertia entrypoint, Next.js scripts, etc.):
+
+#### 4e-i. Font `<link>` tags
+
+The `@theme` block defines `--font-display: "Plus Jakarta Sans", …` and `--font-sans: "DM Sans", …`, but those CSS variables only resolve to the right typeface if the font files are actually loaded. Don't load fonts via `@import url(...)` inside `design-system.css` — bundlers inline that file mid-bundle, after Tailwind's rules. CSS spec says `@import` must come before any other rules, so browsers silently drop those imports and the page renders in the system fallback (`ui-sans-serif`).
+
+Install the link-tag snippet from `references/styles/font-link-tags.html` into the layout's `<head>`. Substitute `__HEADLINE_FONT_URL__` and `__BODY_FONT_URL__` with the URLs picked in Phase 2. When both fonts are Google Fonts, prefer collapsing them into a single `&family=…` stylesheet for one fewer request.
+
+#### 4e-ii. Theme boot script
+
+The `<ThemeToggle>` primitive persists the user's choice to `localStorage["bm-ds-theme"]`, but the React hook that reads it (`useTheme` in `lib/theme.ts`) only fires when a component using it actually mounts. In real apps the toggle commonly lives inside a portal-rendered dropdown that doesn't mount until the user opens it — so without a boot-time script, every full page load renders in light mode regardless of the saved preference.
+
+Install the inline script from `references/styles/theme-boot-script.html` into the same `<head>`. It reads the same storage key and resolution rules as `lib/theme.ts`, then adds (or omits) the `.dark` class on `<html>` synchronously before paint.
+
+#### Per-framework target for both snippets
+
+- **Rails + Inertia** — `app/views/layouts/application.html.erb`, immediately above `vite_javascript_tag` / `vite_typescript_tag`.
+- **Next.js (app router)** — inside `app/layout.tsx`'s `<head>` (font links via `next/font` or plain `<link>` tags; theme boot via `<Script id="theme-boot" strategy="beforeInteractive">{...}</Script>` or a `dangerouslySetInnerHTML` script).
+- **Next.js (pages router)** — `pages/_document.tsx`, inside `<Head>` of the custom `Document`.
+- **Vite + react-router-dom** — `index.html`, inside `<head>` before `<script type="module" src="/src/main.tsx"></script>`.
+
+Wrap each inserted block in `bm-design-system:start` / `bm-design-system:end` HTML comment markers so re-runs can replace them idempotently.
+
+### 4f. Report missing dependencies
 
 Inspect `package.json`. For any of the following that are missing, append them to a single install command and print it (do **not** run npm/yarn yourself):
 
@@ -332,7 +381,7 @@ elements/
   iconography           #iconography
   buttons               #buttons
   forms                 #forms
-  labels                #labels
+  badges                #badges
   listings              #listings
   modal                 #modal
   dropdown-menu         #dropdown-menu

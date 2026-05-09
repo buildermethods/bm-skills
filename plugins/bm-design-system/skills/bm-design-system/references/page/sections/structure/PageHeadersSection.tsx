@@ -5,10 +5,10 @@ import { Bell, Search } from "lucide-react";
 
 const code = `{/* Basic — title row only */}
 <div className="border-b border-hairline pb-6">
-  <div className="flex items-start justify-between gap-4">
+  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
     <div>
-      <h1 className="text-2xl font-semibold text-ink-display">Projects</h1>
-      <p className="mt-1 text-sm text-ink-muted">Everything your team is working on.</p>
+      <h1>Projects</h1>
+      <p className="mt-1">Everything your team is working on.</p>
     </div>
 
     {/* Right-side slot — buttons, icons, search, links */}
@@ -24,10 +24,10 @@ const code = `{/* Basic — title row only */}
 
 {/* With tabs — appends sub-navigation, results in two horizontal lines */}
 <div>
-  <div className="flex items-start justify-between gap-4 border-b border-hairline pb-6">
+  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between border-b border-hairline pb-6">
     <div>
-      <h1 className="text-2xl font-semibold text-ink-display">Acme Inc.</h1>
-      <p className="mt-1 text-sm text-ink-muted">Workspace settings and billing.</p>
+      <h1>Acme Inc.</h1>
+      <p className="mt-1">Workspace settings and billing.</p>
     </div>
     <div className="flex items-center gap-2">
       <Button>Save</Button>
@@ -78,14 +78,10 @@ export function PageHeadersSection() {
               Basic — with right-side actions
             </p>
             <div className="border-b border-hairline pb-6">
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div>
-                  <h1 className="text-2xl font-semibold text-ink-display">
-                    Projects
-                  </h1>
-                  <p className="mt-1 text-sm text-ink-muted">
-                    Everything your team is working on.
-                  </p>
+                  <h1>Projects</h1>
+                  <p className="mt-1">Everything your team is working on.</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <button
@@ -107,12 +103,10 @@ export function PageHeadersSection() {
               With search in the right slot
             </p>
             <div className="border-b border-hairline pb-6">
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div>
-                  <h1 className="text-2xl font-semibold text-ink-display">
-                    Members
-                  </h1>
-                  <p className="mt-1 text-sm text-ink-muted">
+                  <h1>Members</h1>
+                  <p className="mt-1">
                     Manage who has access to this workspace.
                   </p>
                 </div>
@@ -132,14 +126,10 @@ export function PageHeadersSection() {
               With sub-navigation tabs (two horizontal lines)
             </p>
             <div>
-              <div className="flex items-start justify-between gap-4 border-b border-hairline pb-6">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between border-b border-hairline pb-6">
                 <div>
-                  <h1 className="text-2xl font-semibold text-ink-display">
-                    Acme Inc.
-                  </h1>
-                  <p className="mt-1 text-sm text-ink-muted">
-                    Workspace settings and billing.
-                  </p>
+                  <h1>Acme Inc.</h1>
+                  <p className="mt-1">Workspace settings and billing.</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <Button>Save</Button>

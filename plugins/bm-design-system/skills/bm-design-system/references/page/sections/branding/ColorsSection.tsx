@@ -53,7 +53,7 @@ export function ColorsSection() {
             <h3 className="mb-3 text-sm font-semibold text-ink-display">
               Surfaces
             </h3>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
               {SURFACES.map((c) => (
                 <ColorSwatch key={c.name} {...c} />
               ))}
@@ -63,7 +63,7 @@ export function ColorsSection() {
             <h3 className="mb-3 text-sm font-semibold text-ink-display">
               Text
             </h3>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
               {TEXT.map((c) => (
                 <ColorSwatch key={c.name} {...c} />
               ))}
@@ -73,7 +73,7 @@ export function ColorsSection() {
             <h3 className="mb-3 text-sm font-semibold text-ink-display">
               Splash
             </h3>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
               {SPLASH.map((c) => (
                 <ColorSwatch key={c.name} {...c} />
               ))}

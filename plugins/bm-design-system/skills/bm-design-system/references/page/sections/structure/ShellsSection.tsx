@@ -1,11 +1,13 @@
 import { SectionShell } from "@/components/design-system/SectionShell";
 
 const code = `<div className="flex min-h-screen bg-page text-ink-body">
-  {/* Main navigation rail — see Main navigation section. Hidden on < md;
-     a hamburger in the page header opens the mobile drawer instead. */}
+  {/* Main navigation rail — see Main navigation section. Hidden below lg;
+     a hamburger fixed to the top-right opens the mobile drawer instead. */}
   <MainNav />
-  <main className="min-w-0 flex-1">
-    {/* Page header (optional with sub-nav tabs) → page content */}
+  <main className="min-w-0 flex-1 px-6 py-8 sm:px-10">
+    <div className="mx-auto max-w-4xl">
+      {/* Page header (optional with sub-nav tabs) → page content */}
+    </div>
   </main>
 </div>`;
 
@@ -19,10 +21,11 @@ export function ShellsSection() {
           The outermost page frame. A shell is a full-bleed{" "}
           <code>bg-page</code> container with the main-navigation rail on
           the left and a content area on the right. The rail toggles
-          between collapsed and expanded with a button (state persisted to
-          localStorage), and is hidden entirely on screens narrower than{" "}
-          <code>md</code> in favor of a mobile drawer. Sub-navigation lives
-          inside page headers as horizontal tabs (not in the shell).
+          between collapsed (<code>w-14</code>) and expanded (<code>w-56</code>)
+          via a chevron button (state persisted to <code>localStorage</code>),
+          and is hidden entirely below the <code>lg</code> breakpoint in
+          favor of a fixed hamburger and slide-in drawer. Sub-navigation
+          lives inside page headers as horizontal tabs (not in the shell).
         </>
       }
       whenToUse={
@@ -74,10 +77,16 @@ export function ShellsSection() {
             "with tabs" variant. No second sidebar needed.
           </li>
           <li>
+            <strong>Content max-width</strong>: wrap children in{" "}
+            <code>mx-auto max-w-4xl</code> so long-form content stays
+            readable. The shell itself is full-bleed; the constraint lives
+            on the inner container.
+          </li>
+          <li>
             <strong>Mobile</strong>: hide the rail with{" "}
-            <code>hidden md:flex</code> and render a hamburger button in
-            the top-right (in the page header's right-side slot or pinned)
-            that opens the same nav contents in a slide-in drawer overlay.
+            <code>hidden lg:flex</code> and render a hamburger fixed to the
+            top-right of the viewport (<code>fixed right-3 top-3 z-30</code>)
+            that opens the same nav as a slide-in drawer overlay.
           </li>
         </ul>
       }

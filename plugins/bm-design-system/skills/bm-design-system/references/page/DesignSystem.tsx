@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Menu, X } from "lucide-react";
 import { SidebarNav } from "@/components/design-system/SidebarNav";
-import { ThemeToggle } from "@/components/design-system/ThemeToggle";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ColorsSection } from "@/components/design-system/sections/branding/ColorsSection";
 import { TypographySection } from "@/components/design-system/sections/branding/TypographySection";
 import { ShellsSection } from "@/components/design-system/sections/structure/ShellsSection";
@@ -14,7 +14,7 @@ import { BaseStylesSection } from "@/components/design-system/sections/base-styl
 import { IconographySection } from "@/components/design-system/sections/elements/IconographySection";
 import { ButtonsSection } from "@/components/design-system/sections/elements/ButtonsSection";
 import { FormsSection } from "@/components/design-system/sections/elements/FormsSection";
-import { LabelsSection } from "@/components/design-system/sections/elements/LabelsSection";
+import { BadgesSection } from "@/components/design-system/sections/elements/BadgesSection";
 import { ListingsSection } from "@/components/design-system/sections/elements/ListingsSection";
 import { ModalSection } from "@/components/design-system/sections/elements/ModalSection";
 import { CalloutSection } from "@/components/design-system/sections/elements/CalloutSection";
@@ -96,7 +96,7 @@ export function DesignSystem() {
           <IconographySection />
           <ButtonsSection />
           <FormsSection />
-          <LabelsSection />
+          <BadgesSection />
           <ListingsSection />
           <ModalSection />
           <DropdownMenuSection />

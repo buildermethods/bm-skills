@@ -1,3 +1,4 @@
+// bm-design-system: button primitive
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -12,7 +13,7 @@ const buttonVariants = cva(
         secondary: "bg-surface text-ink-display border border-hairline hover:bg-hairline/40",
         ghost: "text-ink-body hover:bg-surface",
         soft: "bg-accent-faded text-accent hover:bg-accent-faded/80",
-        danger: "bg-signal text-page hover:bg-signal/90",
+        danger: "bg-signal text-signal-darker hover:bg-signal/90",
         link: "text-accent underline-offset-2 hover:underline p-0 h-auto",
       },
       size: {

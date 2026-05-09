@@ -5,13 +5,14 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import {
   ChevronsLeft,
   ChevronsRight,
-  ChevronUp,
   Folder,
   Home,
   LogOut,
@@ -29,11 +30,12 @@ const code = `// app/components/MainNav.tsx
 import * as React from "react";
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem,
-  DropdownMenuSeparator, DropdownMenuTrigger,
+  DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import {
-  ChevronsLeft, ChevronsRight, ChevronUp, Folder, Home,
-  LogOut, Menu, Settings, User, Users, X,
+  ChevronsLeft, ChevronsRight, Folder, Home, LogOut, Menu,
+  Settings, User, Users, X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -58,165 +60,205 @@ export function MainNav() {
 
   return (
     <>
-      {/* Mobile hamburger — pin to the top-right of your page header on < md */}
-      <button
-        type="button"
-        onClick={() => setMobileOpen(true)}
-        className="fixed right-4 top-4 z-30 inline-flex h-9 w-9 items-center justify-center rounded-md border border-hairline bg-page text-ink-body md:hidden"
-        aria-label="Open navigation"
-      >
-        <Menu className="h-4 w-4" />
-      </button>
-
-      {/* Desktop rail — fixed-width, hidden on < md */}
+      {/* Desktop rail — hidden below lg */}
       <aside
         className={cn(
-          "hidden shrink-0 flex-col border-r border-hairline bg-page transition-[width] duration-200 md:flex",
+          "hidden shrink-0 flex-col border-r border-hairline bg-page transition-[width] duration-200 lg:flex",
           open ? "w-56" : "w-14",
         )}
       >
-        <RailContents
-          open={open}
-          onToggle={() => setOpen(!open)}
-        />
+        <RailBody open={open} onToggle={() => setOpen(!open)} />
       </aside>
 
       {/* Mobile drawer — slides in from the left, dismisses on overlay click */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-40 md:hidden">
+        <div className="fixed inset-0 z-40 lg:hidden">
           <div
             className="absolute inset-0 bg-ink-display/40 backdrop-blur-sm"
             onClick={() => setMobileOpen(false)}
+            aria-hidden
           />
-          <aside className="absolute left-0 top-0 flex h-full w-64 flex-col border-r border-hairline bg-page shadow-xl">
-            <button
-              type="button"
-              onClick={() => setMobileOpen(false)}
-              className="absolute right-2 top-2 inline-flex h-8 w-8 items-center justify-center rounded-md text-ink-muted hover:bg-surface"
-              aria-label="Close navigation"
-            >
-              <X className="h-4 w-4" />
-            </button>
-            <RailContents open onToggle={undefined} />
+          <aside className="absolute left-0 top-0 flex h-full w-64 flex-col bg-page shadow-xl">
+            <div className="flex h-14 shrink-0 items-center justify-between border-b border-hairline px-4">
+              <span className="font-display text-sm font-semibold text-ink-display">Acme</span>
+              <button
+                type="button"
+                onClick={() => setMobileOpen(false)}
+                className="inline-flex h-8 w-8 items-center justify-center rounded-md text-ink-muted hover:bg-surface hover:text-ink-display"
+                aria-label="Close navigation"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+            <RailNav open onClose={() => setMobileOpen(false)} />
+            <div className="border-t border-hairline p-2">
+              <UserMenu open />
+            </div>
           </aside>
         </div>
       )}
+
+      {/* Mobile hamburger — fixed to the top-right corner of the viewport */}
+      <button
+        type="button"
+        onClick={() => setMobileOpen(true)}
+        className="fixed right-3 top-3 z-30 inline-flex h-9 w-9 items-center justify-center rounded-md border border-hairline bg-page text-ink-body hover:bg-surface lg:hidden"
+        aria-label="Open navigation"
+      >
+        <Menu className="h-4 w-4" />
+      </button>
     </>
   );
 }
 
-function RailContents({ open, onToggle }: {
-  open: boolean;
-  onToggle?: () => void;
-}) {
+function RailBody({ open, onToggle }: { open: boolean; onToggle: () => void }) {
   return (
     <>
-      <a href="/" className="flex h-14 shrink-0 items-center gap-3 border-b border-hairline px-4 text-ink-display no-underline">
-        <span className="font-display text-sm font-semibold">A</span>
-        {open && <span className="font-display text-sm font-semibold">Acme</span>}
-      </a>
-      <nav className="flex flex-1 flex-col gap-1 p-2">
-        <NavItem href="/dashboard" icon={Home} label="Dashboard" active open={open} />
-        <NavItem href="/projects" icon={Folder} label="Projects" open={open} />
-        <NavItem href="/members" icon={Users} label="Members" open={open} />
-        <NavItem href="/settings" icon={Settings} label="Settings" open={open} />
-      </nav>
-      {/* Bottom stack — when collapsed, the expand toggle sits ABOVE the
-         account button so the chevron is the first thing the cursor reaches
-         on its way down the rail. When expanded, the larger account row sits
-         on top and the collapse chevron tucks underneath. */}
-      {onToggle && !open && (
+      {/* Brand row — when expanded, the collapse chevron sits next to the brand */}
+      <div
+        className={cn(
+          "flex h-14 shrink-0 items-center gap-3 border-b border-hairline px-3",
+          open ? "justify-between" : "justify-center",
+        )}
+      >
+        <a
+          href="/"
+          className="flex min-w-0 items-center gap-2 text-ink-display no-underline"
+          aria-label="Home"
+        >
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-accent-faded font-display text-sm font-semibold text-accent">
+            A
+          </span>
+          {open && (
+            <span className="truncate font-display text-sm font-semibold">
+              Acme
+            </span>
+          )}
+        </a>
+        {open && (
+          <button
+            type="button"
+            onClick={onToggle}
+            className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-ink-muted hover:bg-surface hover:text-ink-display"
+            aria-label="Collapse sidebar"
+          >
+            <ChevronsLeft className="h-4 w-4" />
+          </button>
+        )}
+      </div>
+
+      <RailNav open={open} />
+
+      <div className="border-t border-hairline p-2">
+        <UserMenu open={open} />
+      </div>
+
+      {/* Expand chevron — only renders when collapsed, sits below the user menu */}
+      {!open && (
         <div className="border-t border-hairline p-2">
           <button
             type="button"
             onClick={onToggle}
-            className="flex h-9 w-full cursor-pointer items-center justify-center rounded-md text-ink-muted hover:bg-surface hover:text-ink-display"
-            aria-label="Expand navigation"
+            className="flex h-9 w-full items-center justify-center rounded-md text-ink-muted hover:bg-surface hover:text-ink-display"
+            aria-label="Expand sidebar"
           >
             <ChevronsRight className="h-4 w-4" />
           </button>
         </div>
       )}
-      <div className="border-t border-hairline p-2">
-        <UserMenu open={open} />
-      </div>
-      {onToggle && open && (
-        <div className="border-t border-hairline p-2">
-          <button
-            type="button"
-            onClick={onToggle}
-            className="flex h-9 w-full cursor-pointer items-center justify-center rounded-md text-ink-muted hover:bg-surface hover:text-ink-display"
-            aria-label="Collapse navigation"
-          >
-            <ChevronsLeft className="h-4 w-4" />
-          </button>
-        </div>
-      )}
     </>
   );
 }
 
-function NavItem({ href, icon: Icon, label, active, open }: {
+function RailNav({ open, onClose }: { open: boolean; onClose?: () => void }) {
+  return (
+    <nav className="flex flex-1 flex-col gap-1 p-2 text-sm">
+      <NavItem href="/dashboard" icon={Home}    label="Dashboard" active open={open} onClick={onClose} />
+      <NavItem href="/projects"  icon={Folder}  label="Projects"        open={open} onClick={onClose} />
+      <NavItem href="/members"   icon={Users}   label="Members"         open={open} onClick={onClose} />
+      <NavItem href="/settings"  icon={Settings} label="Settings"       open={open} onClick={onClose} />
+    </nav>
+  );
+}
+
+function NavItem({ href, icon: Icon, label, active, open, onClick }: {
   href: string;
   icon: React.ComponentType<{ className?: string }>;
   label: string;
   active?: boolean;
   open: boolean;
+  onClick?: () => void;
 }) {
-  const cls = cn(
-    "group/nav-item relative flex items-center rounded-md text-sm no-underline",
-    open ? "gap-3 px-3 py-2" : "h-9 justify-center",
-    active
-      ? "bg-accent-faded text-accent"
-      : "text-ink-body hover:bg-surface hover:text-ink-display",
-  );
   return (
-    <a href={href} className={cls}>
-      <Icon className="h-4 w-4 shrink-0" />
-      {open ? (
-        <span className="whitespace-nowrap">{label}</span>
-      ) : (
+    <div className="group/nav-item relative">
+      <a
+        href={href}
+        onClick={onClick}
+        aria-label={open ? undefined : label}
+        className={cn(
+          "flex items-center gap-3 rounded-md no-underline",
+          open ? "px-3 py-2" : "mx-auto h-9 w-9 justify-center",
+          active
+            ? "bg-accent-faded text-accent"
+            : "text-ink-body hover:bg-surface hover:text-ink-display",
+        )}
+      >
+        <Icon className="h-4 w-4 shrink-0" />
+        {open && <span className="truncate">{label}</span>}
+      </a>
+      {!open && (
         // Floating label — pops outside the rail on hover, doesn't expand it
-        <span className="pointer-events-none absolute left-full top-1/2 z-50 ml-2 -translate-y-1/2 whitespace-nowrap rounded-md border border-hairline bg-page px-2 py-1 text-xs font-medium text-ink-display opacity-0 shadow-md transition-opacity group-hover/nav-item:opacity-100 group-focus-within/nav-item:opacity-100">
+        <span
+          role="tooltip"
+          className="pointer-events-none absolute left-full top-1/2 z-50 ml-2 -translate-y-1/2 whitespace-nowrap rounded-md border border-hairline bg-page px-2 py-1 text-xs font-medium text-ink-display opacity-0 shadow-md transition-opacity group-hover/nav-item:opacity-100"
+        >
           {label}
         </span>
       )}
-    </a>
+    </div>
   );
 }
 
 function UserMenu({ open }: { open: boolean }) {
+  const email = "you@example.com";
+  const initial = email.charAt(0).toUpperCase();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
           type="button"
+          aria-label={open ? undefined : email}
           className={cn(
-            "group/user relative flex w-full cursor-pointer items-center rounded-md text-sm text-ink-body hover:bg-surface hover:text-ink-display",
-            open ? "gap-3 px-2 py-1.5" : "h-9 justify-center",
+            "group/user relative flex w-full items-center gap-3 rounded-md text-left text-ink-body hover:bg-surface hover:text-ink-display focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
+            open ? "px-2 py-2" : "h-10 justify-center",
           )}
-          aria-label="Account menu"
         >
           <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent-faded text-xs font-semibold text-accent">
-            BC
+            {initial}
           </span>
           {open ? (
-            <>
-              <span className="min-w-0 flex-1 truncate text-left">bc@test.com</span>
-              <ChevronUp className="h-4 w-4 shrink-0 opacity-60" />
-            </>
+            <span className="min-w-0 flex-1 truncate text-sm">{email}</span>
           ) : (
             <span className="pointer-events-none absolute left-full top-1/2 z-50 ml-2 -translate-y-1/2 whitespace-nowrap rounded-md border border-hairline bg-page px-2 py-1 text-xs font-medium text-ink-display opacity-0 shadow-md transition-opacity group-hover/user:opacity-100">
-              Account
+              {email}
             </span>
           )}
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent side="top" align="start" sideOffset={8} className="w-56">
+      <DropdownMenuContent side="top" align="start" className="w-56">
+        <DropdownMenuLabel className="normal-case tracking-normal">
+          <span className="block text-[10px] uppercase tracking-wider text-ink-muted">Signed in as</span>
+          <span className="block truncate text-xs font-medium text-ink-display">{email}</span>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
         <DropdownMenuItem><User /> Profile</DropdownMenuItem>
         <DropdownMenuItem><Settings /> Settings</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem destructive><LogOut /> Sign out</DropdownMenuItem>
+        <div className="px-2 py-2">
+          <ThemeToggle block />
+        </div>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem><LogOut /> Sign out</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -247,55 +289,64 @@ function PreviewNavItem({
   active?: boolean;
   open: boolean;
 }) {
-  const cls = cn(
-    "group/nav-item relative flex items-center rounded-md text-sm",
-    open ? "gap-3 px-3 py-2" : "h-9 justify-center",
-    active
-      ? "bg-accent-faded text-accent"
-      : "text-ink-body hover:bg-surface hover:text-ink-display",
-  );
   return (
-    <span className={cls}>
-      <Icon className="h-4 w-4 shrink-0" />
-      {open ? (
-        <span className="whitespace-nowrap">{label}</span>
-      ) : (
+    <div className="group/nav-item relative">
+      <span
+        className={cn(
+          "flex items-center gap-3 rounded-md text-sm",
+          open ? "px-3 py-2" : "mx-auto h-9 w-9 justify-center",
+          active
+            ? "bg-accent-faded text-accent"
+            : "text-ink-body hover:bg-surface hover:text-ink-display",
+        )}
+      >
+        <Icon className="h-4 w-4 shrink-0" />
+        {open && <span className="whitespace-nowrap">{label}</span>}
+      </span>
+      {!open && (
         <span className="pointer-events-none absolute left-full top-1/2 z-50 ml-2 -translate-y-1/2 whitespace-nowrap rounded-md border border-hairline bg-page px-2 py-1 text-xs font-medium text-ink-display opacity-0 shadow-md transition-opacity group-hover/nav-item:opacity-100">
           {label}
         </span>
       )}
-    </span>
+    </div>
   );
 }
 
 function PreviewUserMenu({ open }: { open: boolean }) {
+  const email = "you@example.com";
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
           type="button"
+          aria-label={open ? undefined : email}
           className={cn(
-            "group/user relative flex w-full cursor-pointer items-center rounded-md text-sm text-ink-body hover:bg-surface hover:text-ink-display",
-            open ? "gap-3 px-2 py-1.5" : "h-9 justify-center",
+            "group/user relative flex w-full cursor-pointer items-center gap-3 rounded-md text-left text-ink-body hover:bg-surface hover:text-ink-display focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
+            open ? "px-2 py-2" : "h-10 justify-center",
           )}
-          aria-label="Account menu"
         >
           <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent-faded text-xs font-semibold text-accent">
-            BC
+            Y
           </span>
           {open ? (
-            <>
-              <span className="min-w-0 flex-1 truncate text-left">bc@test.com</span>
-              <ChevronUp className="h-4 w-4 shrink-0 opacity-60" />
-            </>
+            <span className="min-w-0 flex-1 truncate text-sm">{email}</span>
           ) : (
             <span className="pointer-events-none absolute left-full top-1/2 z-50 ml-2 -translate-y-1/2 whitespace-nowrap rounded-md border border-hairline bg-page px-2 py-1 text-xs font-medium text-ink-display opacity-0 shadow-md transition-opacity group-hover/user:opacity-100">
-              Account
+              {email}
             </span>
           )}
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent side="top" align="start" sideOffset={8} className="w-56">
+      <DropdownMenuContent side="top" align="start" className="w-56">
+        <DropdownMenuLabel className="normal-case tracking-normal">
+          <span className="block text-[10px] uppercase tracking-wider text-ink-muted">
+            Signed in as
+          </span>
+          <span className="block truncate text-xs font-medium text-ink-display">
+            {email}
+          </span>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
         <DropdownMenuItem>
           <User /> Profile
         </DropdownMenuItem>
@@ -303,7 +354,11 @@ function PreviewUserMenu({ open }: { open: boolean }) {
           <Settings /> Settings
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem destructive>
+        <div className="px-2 py-2">
+          <ThemeToggle block />
+        </div>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
           <LogOut /> Sign out
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -321,54 +376,59 @@ function DesktopPreview() {
           open ? "w-56" : "w-14",
         )}
       >
-        <div className="flex h-14 shrink-0 items-center gap-3 border-b border-hairline px-4">
-          <span className="font-display text-sm font-semibold text-ink-display">
-            A
+        <div
+          className={cn(
+            "flex h-14 shrink-0 items-center gap-3 border-b border-hairline px-3",
+            open ? "justify-between" : "justify-center",
+          )}
+        >
+          <span className="flex min-w-0 items-center gap-2 text-ink-display">
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-accent-faded font-display text-sm font-semibold text-accent">
+              A
+            </span>
+            {open && (
+              <span className="truncate font-display text-sm font-semibold">
+                Acme
+              </span>
+            )}
           </span>
           {open && (
-            <span className="font-display text-sm font-semibold text-ink-display">
-              Acme
-            </span>
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="inline-flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-md text-ink-muted hover:bg-surface hover:text-ink-display"
+              aria-label="Collapse sidebar"
+            >
+              <ChevronsLeft className="h-4 w-4" />
+            </button>
           )}
         </div>
-        <nav className="flex flex-1 flex-col gap-1 p-2">
+        <nav className="flex flex-1 flex-col gap-1 p-2 text-sm">
           <PreviewNavItem icon={Home} label="Dashboard" active open={open} />
           <PreviewNavItem icon={Folder} label="Projects" open={open} />
           <PreviewNavItem icon={Users} label="Members" open={open} />
           <PreviewNavItem icon={Settings} label="Settings" open={open} />
         </nav>
+        <div className="border-t border-hairline p-2">
+          <PreviewUserMenu open={open} />
+        </div>
         {!open && (
           <div className="border-t border-hairline p-2">
             <button
               type="button"
               onClick={() => setOpen(true)}
               className="flex h-9 w-full cursor-pointer items-center justify-center rounded-md text-ink-muted hover:bg-surface hover:text-ink-display"
-              aria-label="Expand navigation"
+              aria-label="Expand sidebar"
             >
               <ChevronsRight className="h-4 w-4" />
-            </button>
-          </div>
-        )}
-        <div className="border-t border-hairline p-2">
-          <PreviewUserMenu open={open} />
-        </div>
-        {open && (
-          <div className="border-t border-hairline p-2">
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              className="flex h-9 w-full cursor-pointer items-center justify-center rounded-md text-ink-muted hover:bg-surface hover:text-ink-display"
-              aria-label="Collapse navigation"
-            >
-              <ChevronsLeft className="h-4 w-4" />
             </button>
           </div>
         )}
       </aside>
       <div className="flex flex-1 items-center justify-center bg-surface px-6 text-center text-xs text-ink-muted">
         {open
-          ? "Click the chevron at the bottom of the rail to collapse it. The state persists to localStorage."
-          : "Hover an icon — its label pops out beside the rail without expanding it."}
+          ? "When expanded, the collapse chevron sits next to the brand. State persists to localStorage."
+          : "When collapsed, hover an icon to pop a tooltip-style label outside the rail."}
       </div>
     </div>
   );
@@ -378,7 +438,7 @@ function MobilePreview() {
   const [open, setOpen] = React.useState(false);
   return (
     <div className="relative mx-auto h-96 w-72 overflow-hidden rounded-2xl border border-hairline bg-page shadow-sm">
-      {/* Fake page header with hamburger pinned right */}
+      {/* Fake page surface with hamburger fixed in the top-right corner */}
       <div className="flex h-14 items-center justify-between border-b border-hairline px-4">
         <span className="font-display text-sm font-semibold text-ink-display">
           Acme
@@ -402,7 +462,7 @@ function MobilePreview() {
             className="absolute inset-0 bg-ink-display/40 backdrop-blur-sm"
             onClick={() => setOpen(false)}
           />
-          <aside className="absolute left-0 top-0 flex h-full w-56 flex-col border-r border-hairline bg-page shadow-xl">
+          <aside className="absolute left-0 top-0 flex h-full w-64 flex-col bg-page shadow-xl">
             <div className="flex h-14 shrink-0 items-center justify-between border-b border-hairline px-4">
               <span className="font-display text-sm font-semibold text-ink-display">
                 Acme
@@ -416,7 +476,7 @@ function MobilePreview() {
                 <X className="h-4 w-4" />
               </button>
             </div>
-            <nav className="flex flex-1 flex-col gap-1 p-2">
+            <nav className="flex flex-1 flex-col gap-1 p-2 text-sm">
               <PreviewNavItem icon={Home} label="Dashboard" active open />
               <PreviewNavItem icon={Folder} label="Projects" open />
               <PreviewNavItem icon={Users} label="Members" open />
@@ -439,15 +499,20 @@ export function MainNavSection() {
       title="Main navigation"
       description={
         <>
-          A vertical rail at the left edge of the shell. The rail width is
-          fixed in either state — never animated by hover. A toggle at the
-          bottom switches between collapsed (icons only) and expanded (icons
-          plus labels); the choice is remembered in <code>localStorage</code>.
-          When collapsed, hovering an item pops its label out to the right of
-          the rail without resizing the rail itself. A user-account dropdown
-          pinned just above the toggle opens upward. On screens narrower than{" "}
-          <code>md</code>, the rail is replaced by a hamburger button in the
-          page header that opens the same nav as a slide-in drawer.
+          A vertical rail at the left edge of the shell. The rail has two
+          fixed widths — collapsed (<code>w-14</code>, icons only) and
+          expanded (<code>w-56</code>, icons plus labels) — and a chevron
+          toggle switches between them. When expanded, the toggle sits in
+          the brand row at the top; when collapsed, an expand chevron sits
+          at the very bottom of the rail. The choice is persisted to{" "}
+          <code>localStorage</code>. When collapsed, hovering an item pops a
+          tooltip-style label out to the right of the rail without resizing
+          it. A user-account dropdown above the bottom edge holds a
+          signed-in-as label, Profile / Settings, the theme toggle, and Sign
+          out — and shows the avatar plus email when expanded, avatar only
+          when collapsed. On screens narrower than <code>lg</code>, the rail
+          is hidden in favor of a hamburger button fixed to the top-right
+          corner that opens the same nav as a slide-in drawer.
         </>
       }
       whenToUse={
@@ -473,7 +538,7 @@ export function MainNavSection() {
           </div>
           <div>
             <p className="mb-2 text-xs uppercase tracking-wider text-ink-muted">
-              Mobile — hamburger in the top-right opens a drawer
+              Mobile — hamburger fixed to the top-right corner opens a drawer
             </p>
             <MobilePreview />
           </div>
@@ -489,30 +554,48 @@ export function MainNavSection() {
           </li>
           <li>
             <strong>Persistence</strong>: open/closed state is written to{" "}
-            <code>localStorage</code> under{" "}
-            <code>main-nav-open</code> (rename the key per app). Hydrate
-            inside <code>useEffect</code> to stay SSR-safe.
+            <code>localStorage</code> under <code>main-nav-open</code>{" "}
+            (rename per app). Hydrate inside <code>useEffect</code> so SSR
+            stays deterministic.
           </li>
           <li>
-            <strong>Floating labels (collapsed)</strong>: each item is its own{" "}
-            <code>group/nav-item</code> with an{" "}
-            <code>absolute left-full</code> tooltip-style label. The label is{" "}
-            <code>pointer-events-none</code> and only opacity-toggles, so the
-            rail width is never disturbed.
+            <strong>Toggle position</strong>: the collapse chevron lives in
+            the brand row when the rail is expanded (next to the brand on
+            the right). When the rail is collapsed there's no room for it
+            there, so the expand chevron sits at the very bottom of the
+            rail under the user menu.
+          </li>
+          <li>
+            <strong>Active item highlight (collapsed)</strong>: each item is
+            a 36px square pill (<code>h-9 w-9</code>) centered with{" "}
+            <code>mx-auto</code> inside the 40px-wide nav column — keeps the{" "}
+            <code>bg-accent-faded</code> highlight as a square rather than a
+            full-width strip.
+          </li>
+          <li>
+            <strong>Floating labels (collapsed)</strong>: each item is its
+            own <code>group/nav-item</code> with an{" "}
+            <code>absolute left-full</code> tooltip-style label. The label
+            is <code>pointer-events-none</code> and only opacity-toggles, so
+            the rail width is never disturbed.
           </li>
           <li>
             <strong>Account menu</strong>: a Radix{" "}
             <code>DropdownMenu</code> with{" "}
             <code>side="top" align="start"</code> so it slides up from the
-            bottom-left corner. Trigger shows an avatar plus email when
-            expanded, avatar only when collapsed.
+            bottom-left corner. Contents (top to bottom): signed-in-as
+            label, Profile, Settings, separator, the{" "}
+            <code>&lt;ThemeToggle block /&gt;</code> primitive, separator,
+            Sign out. Trigger shows avatar + email when expanded, avatar
+            only when collapsed.
           </li>
           <li>
             <strong>Mobile</strong>: hide the rail with{" "}
-            <code>hidden md:flex</code>, render a hamburger pinned to the
-            top-right (or in your page header's right-side slot) that toggles
-            a fixed-position drawer overlay containing the same{" "}
-            <code>RailContents</code>.
+            <code>hidden lg:flex</code>, render a hamburger fixed to{" "}
+            <code>right-3 top-3</code> with <code>z-30</code> and{" "}
+            <code>bg-page</code> so it stays readable while the page
+            scrolls. The drawer is <code>w-64</code> with its own brand row
+            and close button at the top.
           </li>
         </ul>
       }

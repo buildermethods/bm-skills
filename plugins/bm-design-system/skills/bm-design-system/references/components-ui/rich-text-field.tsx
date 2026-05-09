@@ -1,4 +1,4 @@
-"use client";
+// bm-design-system: rich-text-field primitive
 import * as React from "react";
 import { Crepe } from "@milkdown/crepe";
 import "@milkdown/crepe/theme/common/style.css";
@@ -57,8 +57,7 @@ const RichTextField = React.forwardRef<HTMLDivElement, RichTextFieldProps>(
       <div
         ref={localRef}
         className={cn(
-          "rounded-md border border-hairline bg-page text-ink-body",
-          "min-h-[10rem]",
+          "bm-rich-text rounded-md border border-hairline bg-page text-ink-body",
           "focus-within:outline-none focus-within:ring-2 focus-within:ring-accent focus-within:ring-offset-2 focus-within:ring-offset-page focus-within:border-accent focus-within:bg-accent-faded",
           className,
         )}

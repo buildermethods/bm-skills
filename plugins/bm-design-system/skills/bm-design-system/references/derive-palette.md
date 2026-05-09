@@ -43,12 +43,16 @@ Note: `page` light is pure white (cleaner than `neutral.50`); `page` dark uses `
 
 ### Splash — driven by `accent` and `signal`
 
-| Token           | Light                    | Dark                              |
-|-----------------|--------------------------|-----------------------------------|
-| `accent`        | accent                   | accent (same shade)               |
-| `accent-faded`  | accent mixed 12% on `#ffffff` | accent mixed 18% on `neutral.950` |
-| `signal`        | signal                   | signal (same shade — pinned to a light tint)               |
-| `signal-faded`  | signal mixed 12% on `#ffffff` | signal mixed 18% on `neutral.950` |
+| Token           | Light                              | Dark                              |
+|-----------------|------------------------------------|-----------------------------------|
+| `accent`        | accent                             | accent (same shade)               |
+| `accent-faded`  | accent mixed 12% on `#ffffff`      | accent mixed 18% on `neutral.950` |
+| `accent-darker` | accent one step darker (e.g. cyan-700 for cyan-600 accent) | same as light (pinned)            |
+| `signal`        | signal                             | signal (same shade — pinned to a light tint) |
+| `signal-faded`  | signal mixed 12% on `#ffffff`      | signal mixed 18% on `neutral.950` |
+| `signal-darker` | a darker shade of signal with high contrast against `signal` and `signal-faded` backgrounds (e.g. amber-700 `#b45309` for amber-300 signal) | same as light (pinned) |
+
+The `*-darker` tokens are intended for foreground use *on top of* their faded/base counterpart — e.g. `bg-signal text-signal-darker` for a danger button, or `bg-signal-faded text-signal-darker` for a status badge — where contrast against the lighter background needs more depth than the base color provides.
 
 ### Mixing formula
 

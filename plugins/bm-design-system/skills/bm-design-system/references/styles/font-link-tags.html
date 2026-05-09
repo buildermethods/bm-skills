@@ -1,0 +1,23 @@
+<!--
+  Web-font link tags — paste into the app's HTML layout <head>, before any
+  Vite / React / hydration script tags.
+
+  Loading the fonts via <link> rather than CSS @import sidesteps a common
+  pitfall: bundlers inline design-system.css mid-bundle (after Tailwind's
+  rules), which violates the CSS spec (@import must come before any other
+  rules), so browsers silently drop the @import and the fonts never load.
+  Symptom: text falls back to the system sans-serif even though `--font-*`
+  variables look correct.
+
+  Substitution variables (filled in at scaffold time):
+    __HEADLINE_FONT_URL__  →  e.g. https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap
+    __BODY_FONT_URL__      →  e.g. https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap
+
+  Where the two fonts are both Google Fonts, you can collapse them into a
+  single &family=… stylesheet for one fewer request:
+    https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="__HEADLINE_FONT_URL__" rel="stylesheet">
+<link href="__BODY_FONT_URL__" rel="stylesheet">

@@ -37,7 +37,7 @@ import { Settings, User, Users, LogOut } from "lucide-react";
     <DropdownMenuItem><Users /> Team</DropdownMenuItem>
     <DropdownMenuItem><Settings /> Settings</DropdownMenuItem>
     <DropdownMenuSeparator />
-    <DropdownMenuItem destructive><LogOut /> Sign out</DropdownMenuItem>
+    <DropdownMenuItem><LogOut /> Sign out</DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>`;
 
@@ -89,7 +89,7 @@ export function DropdownMenuSection() {
                   <Settings /> Settings
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem destructive>
+                <DropdownMenuItem>
                   <LogOut /> Sign out
                 </DropdownMenuItem>
               </DropdownMenuContent>
