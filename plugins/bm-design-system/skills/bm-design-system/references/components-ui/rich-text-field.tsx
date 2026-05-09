@@ -57,9 +57,9 @@ const RichTextField = React.forwardRef<HTMLDivElement, RichTextFieldProps>(
       <div
         ref={localRef}
         className={cn(
-          "rounded-md border border-hairline bg-page text-ink-body shadow-sm",
-          "min-h-[10rem] p-3",
-          "focus-within:outline-none focus-within:ring-2 focus-within:ring-accent focus-within:ring-offset-2 focus-within:ring-offset-page focus-within:border-accent",
+          "rounded-md border border-hairline bg-page text-ink-body",
+          "min-h-[10rem]",
+          "focus-within:outline-none focus-within:ring-2 focus-within:ring-accent focus-within:ring-offset-2 focus-within:ring-offset-page focus-within:border-accent focus-within:bg-accent-faded",
           className,
         )}
       />

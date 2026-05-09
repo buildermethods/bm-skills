@@ -134,3 +134,79 @@ html {
 [id] {
   scroll-margin-top: 5rem;
 }
+
+/* Milkdown Crepe rich-text editor — override the bundled theme so the
+   field inherits the app's display + body fonts, drops the heavy default
+   padding, and renders inside the design system's bordered field shell.
+   Crepe's CSS is imported via the React component (side-effect import) and
+   typically lands in the cascade *after* this file, so font-family and
+   padding use !important to win without depending on bundler order. */
+.milkdown {
+  font-family: var(--font-sans) !important;
+  color: var(--color-ink-body);
+  background-color: transparent !important;
+}
+
+.milkdown .ProseMirror {
+  padding: 0.625rem 0.75rem !important;
+  outline: none;
+  font-family: var(--font-sans) !important;
+  color: var(--color-ink-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: transparent !important;
+}
+
+.milkdown .ProseMirror :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-display) !important;
+  color: var(--color-ink-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 0.75rem 0 0.25rem;
+}
+
+.milkdown .ProseMirror h1 { font-size: 1.75rem; letter-spacing: -0.02em; }
+.milkdown .ProseMirror h2 { font-size: 1.5rem;  letter-spacing: -0.02em; }
+.milkdown .ProseMirror h3 { font-size: 1.25rem; }
+.milkdown .ProseMirror h4 { font-size: 1.125rem; }
+.milkdown .ProseMirror h5 { font-size: 1rem; }
+.milkdown .ProseMirror h6 {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-ink-muted);
+}
+
+.milkdown .ProseMirror p {
+  font-family: var(--font-sans) !important;
+  color: var(--color-ink-body);
+  margin: 0.5rem 0;
+}
+
+.milkdown .ProseMirror :is(ul, ol) {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+.milkdown .ProseMirror ul { list-style: disc; }
+.milkdown .ProseMirror ol { list-style: decimal; }
+
+.milkdown .ProseMirror li { padding-left: 0.25rem; }
+.milkdown .ProseMirror li + li { margin-top: 0.25rem; }
+
+.milkdown .ProseMirror blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 1rem;
+  color: var(--color-ink-muted);
+  font-style: italic;
+  margin: 0.75rem 0;
+}
+
+.milkdown .ProseMirror :is(strong, b) {
+  color: var(--color-ink-display);
+  font-weight: 600;
+}
+
+.milkdown .ProseMirror :is(code, pre) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
