@@ -49,7 +49,7 @@ export function ThemeToggle({ block = false, className }: ThemeToggleProps) {
               "inline-flex h-7 cursor-pointer items-center justify-center rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
               block ? "flex-1" : "w-7",
               isActive
-                ? "bg-page text-ink-display shadow-sm"
+                ? "bg-page text-ink-display"
                 : "text-ink-muted hover:text-ink-display",
             )}
           >

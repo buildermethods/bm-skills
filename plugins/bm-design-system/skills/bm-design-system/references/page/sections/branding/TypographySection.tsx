@@ -2,8 +2,8 @@ import { SectionShell } from "@/components/design-system/SectionShell";
 import { FONTS } from "@/components/design-system/palette";
 
 const code = `// Set in design-system.css via @theme:
-//   --font-display: __HEADLINE_FONT__;
-//   --font-sans: __BODY_FONT__;
+//   --font-display: 'Stack Sans Text', ui-sans-serif, system-ui, sans-serif;
+//   --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
 
 <h1 className="font-display">Display headline</h1>
 <p className="font-sans">Body paragraph.</p>`;

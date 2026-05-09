@@ -196,7 +196,7 @@ export function FormsSection() {
         <ul className="list-disc pl-5">
           <li>Use HTML <code>&lt;label htmlFor&gt;</code> with the field's <code>id</code> for accessibility.</li>
           <li>Helper text uses <code>text-xs text-ink-muted</code> directly under the field.</li>
-          <li>Error states: render a <code>text-xs text-signal</code> message in the same slot as helper text and add <code>aria-invalid</code> to the field.</li>
+          <li>Error states: render a <code>text-xs text-danger-display</code> message in the same slot as helper text and add <code>aria-invalid</code> to the field.</li>
           <li>Radio groups: wrap in <code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code> and share a <code>name</code> across all <code>&lt;Radio&gt;</code> inputs.</li>
           <li>Selects: use a disabled empty <code>&lt;option&gt;</code> as a placeholder when no default makes sense.</li>
           <li>Rich text: <code>&lt;RichTextField&gt;</code> wraps milkdown's Crepe — emits markdown via <code>onChange</code>. Requires <code>@milkdown/crepe</code>.</li>

@@ -8,36 +8,42 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-display: __HEADLINE_FONT__;
-  --font-sans: __BODY_FONT__;
+  --font-display: 'Stack Sans Text', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
 
-  --color-page: __COLOR_PAGE_LIGHT__;
-  --color-surface: __COLOR_SURFACE_LIGHT__;
-  --color-hairline: __COLOR_HAIRLINE_LIGHT__;
-  --color-ink-body: __COLOR_INK_BODY_LIGHT__;
-  --color-ink-display: __COLOR_INK_DISPLAY_LIGHT__;
-  --color-ink-muted: __COLOR_INK_MUTED_LIGHT__;
-  --color-accent: __COLOR_ACCENT_LIGHT__;
-  --color-accent-faded: __COLOR_ACCENT_FADED_LIGHT__;
-  --color-accent-darker: __COLOR_ACCENT_DARKER_LIGHT__;
-  --color-signal: __COLOR_SIGNAL_LIGHT__;
-  --color-signal-faded: __COLOR_SIGNAL_FADED_LIGHT__;
-  --color-signal-darker: __COLOR_SIGNAL_DARKER_LIGHT__;
+  --color-page: #ffffff;
+  --color-surface: #f8fafc;
+  --color-hairline: #e2e8f0;
+  --color-ink-body: #334155;
+  --color-ink-display: #0f172a;
+  --color-ink-muted: #64748b;
+  --color-accent: oklch(71.5% 0.143 215.221);
+  --color-accent-faded: oklch(96% 0.025 215.221);
+  --color-accent-display: oklch(62% 0.135 215.221);
+  --color-signal: #fcd34d;
+  --color-signal-faded: #fffaea;
+  --color-signal-display: oklch(76% 0.165 82);
+  --color-danger: oklch(64% 0.22 25);
+  --color-danger-faded: oklch(96% 0.025 25);
+  --color-danger-display: oklch(55% 0.20 25);
 }
 
 .dark {
-  --color-page: __COLOR_PAGE_DARK__;
-  --color-surface: __COLOR_SURFACE_DARK__;
-  --color-hairline: __COLOR_HAIRLINE_DARK__;
-  --color-ink-body: __COLOR_INK_BODY_DARK__;
-  --color-ink-display: __COLOR_INK_DISPLAY_DARK__;
-  --color-ink-muted: __COLOR_INK_MUTED_DARK__;
-  --color-accent: __COLOR_ACCENT_DARK__;
-  --color-accent-faded: __COLOR_ACCENT_FADED_DARK__;
-  --color-accent-darker: __COLOR_ACCENT_DARKER_DARK__;
-  --color-signal: __COLOR_SIGNAL_DARK__;
-  --color-signal-faded: __COLOR_SIGNAL_FADED_DARK__;
-  --color-signal-darker: __COLOR_SIGNAL_DARKER_DARK__;
+  --color-page: #020617;
+  --color-surface: #0f172a;
+  --color-hairline: #1e293b;
+  --color-ink-body: #e2e8f0;
+  --color-ink-display: #f8fafc;
+  --color-ink-muted: #94a3b8;
+  --color-accent: oklch(78.9% 0.154 211.53);
+  --color-accent-faded: oklch(22% 0.045 211.53);
+  --color-accent-display: oklch(86% 0.135 211.53);
+  --color-signal: #fcd34d;
+  --color-signal-faded: #2f2b21;
+  --color-signal-display: oklch(93% 0.13 95);
+  --color-danger: oklch(72% 0.20 22);
+  --color-danger-faded: oklch(22% 0.05 22);
+  --color-danger-display: oklch(82% 0.18 22);
 }
 
 @layer base {
@@ -73,11 +79,11 @@
   h6 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ink-muted); }
 
   a {
-    color: var(--color-accent);
+    color: var(--color-accent-display);
     text-decoration: none;
     transition: color 120ms ease;
   }
-  a:hover { color: color-mix(in oklab, var(--color-accent), black 15%); }
+  a:hover { color: color-mix(in oklab, var(--color-accent-display), black 15%); }
 
   p { color: var(--color-ink-body); }
 
@@ -129,11 +135,72 @@
 .body-content li { padding-left: 0.25rem; }
 .body-content li + li { margin-top: 0.25rem; }
 
-.callout {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-hairline);
-  border-radius: 0.5rem;
-  padding: 1.25rem;
+@layer components {
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium cursor-pointer transition-colors;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-page;
+    @apply disabled:pointer-events-none disabled:opacity-50;
+    @apply h-10 px-4 text-sm;
+  }
+  .btn-small { @apply h-8 px-3 text-sm; }
+  .btn-large { @apply h-11 px-5 text-base; }
+  .btn-icon  { @apply h-10 w-10 px-0; }
+
+  .btn-primary   { @apply bg-accent text-page hover:bg-accent/90; }
+  .btn-secondary { @apply bg-surface text-ink-display border border-hairline hover:bg-hairline/40; }
+  .btn-ghost     { @apply text-ink-body hover:bg-surface; }
+  .btn-soft      { @apply bg-accent-faded text-accent hover:bg-accent-faded/80; }
+  .btn-danger    { @apply bg-danger text-page hover:bg-danger/90; }
+  .btn-link      { @apply text-accent underline-offset-2 hover:underline p-0 h-auto; }
+
+  /* Form fields (input, select, textarea) */
+  .form-control {
+    @apply flex h-10 w-full rounded-md border border-hairline bg-page px-3 py-2 text-sm text-ink-body;
+    @apply placeholder:text-ink-muted;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-page focus-visible:border-accent focus-visible:bg-accent-faded/50;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .form-control-select { @apply appearance-none pr-9; }
+  .form-control-textarea { @apply h-auto min-h-[6rem] py-2 leading-normal; }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1.5 text-xs font-medium leading-none;
+  }
+  .badge-neutral { @apply bg-surface text-ink-body border border-hairline; }
+  .badge-accent  { @apply bg-accent-faded text-accent-display; }
+  .badge-signal  { @apply bg-signal-faded text-signal-display; }
+  .badge-muted   { @apply bg-transparent text-ink-muted border border-hairline; }
+  .badge-solid   { @apply bg-accent text-page; }
+
+  /* Modal (dialog) */
+  .modal-overlay {
+    @apply fixed inset-0 z-50 bg-ink-display/40 backdrop-blur-sm;
+  }
+  .modal {
+    @apply fixed left-1/2 top-1/2 z-50 w-full -translate-x-1/2 -translate-y-1/2;
+    @apply rounded-lg border border-hairline bg-page p-6 shadow-lg;
+    @apply max-w-lg;
+  }
+  .modal-small { @apply max-w-md; }
+  .modal-large { @apply max-w-2xl; }
+  .modal-header { @apply flex flex-col gap-1.5 mb-4; }
+  .modal-footer { @apply flex flex-col-reverse gap-2 mt-6 sm:flex-row sm:justify-end; }
+  .modal-title  { @apply text-lg font-semibold text-ink-display; }
+  .modal-description { @apply text-sm text-ink-muted; }
+  .modal-close {
+    @apply absolute right-4 top-4 cursor-pointer rounded-sm text-ink-muted hover:text-ink-display;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-accent;
+  }
+
+  /* Callouts */
+  .callout {
+    @apply bg-surface border border-hairline rounded-lg p-5;
+  }
+  .callout-accent { @apply bg-accent-faded; }
+  .callout-signal { @apply bg-signal-faded; }
+  .callout-danger { @apply bg-danger-faded; }
 }
 
 html {

@@ -199,7 +199,7 @@ function NavItem({ href, icon: Icon, label, active, open, onClick }: {
           "flex items-center gap-3 rounded-md no-underline",
           open ? "px-3 py-2" : "mx-auto h-9 w-9 justify-center",
           active
-            ? "bg-accent-faded text-accent"
+            ? "bg-accent-faded text-accent-display"
             : "text-ink-body hover:bg-surface hover:text-ink-display",
         )}
       >
@@ -296,7 +296,7 @@ function PreviewNavItem({
           "flex items-center gap-3 rounded-md text-sm",
           open ? "px-3 py-2" : "mx-auto h-9 w-9 justify-center",
           active
-            ? "bg-accent-faded text-accent"
+            ? "bg-accent-faded text-accent-display"
             : "text-ink-body hover:bg-surface hover:text-ink-display",
         )}
       >

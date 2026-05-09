@@ -3,23 +3,20 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-const badgeVariants = cva(
-  "inline-flex items-center gap-1 rounded-full px-2.5 py-1.5 text-xs font-medium leading-none",
-  {
-    variants: {
-      tone: {
-        neutral: "bg-surface text-ink-body border border-hairline",
-        accent: "bg-accent-faded text-accent",
-        signal: "bg-signal-faded text-signal-darker",
-        muted: "bg-transparent text-ink-muted border border-hairline",
-        solid: "bg-accent text-page",
-      },
-    },
-    defaultVariants: {
-      tone: "neutral",
+const badgeVariants = cva("badge", {
+  variants: {
+    tone: {
+      neutral: "badge-neutral",
+      accent: "badge-accent",
+      signal: "badge-signal",
+      muted: "badge-muted",
+      solid: "badge-solid",
     },
   },
-);
+  defaultVariants: {
+    tone: "neutral",
+  },
+});
 
 export interface BadgeProps
   extends React.HTMLAttributes<HTMLSpanElement>,

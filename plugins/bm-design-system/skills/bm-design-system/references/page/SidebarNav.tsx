@@ -100,7 +100,7 @@ export function SidebarNav({ onNavigate }: SidebarNavProps) {
                     className={[
                       "block rounded-md px-2 py-1.5 no-underline transition-colors",
                       isActive
-                        ? "bg-accent-faded text-accent"
+                        ? "bg-accent-faded text-accent-display"
                         : "text-ink-body hover:bg-surface hover:text-ink-display",
                     ].join(" ")}
                   >

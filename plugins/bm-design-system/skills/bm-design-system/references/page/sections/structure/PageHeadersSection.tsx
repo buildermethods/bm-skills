@@ -35,7 +35,7 @@ const code = `{/* Basic — title row only */}
   </div>
   <nav className="flex items-end justify-between gap-4 border-b border-hairline">
     <div className="flex items-center gap-6">
-      <a href="#" className="-mb-px cursor-pointer border-b-2 border-accent px-1 py-3 text-sm font-medium text-accent no-underline">Overview</a>
+      <a href="#" className="-mb-px cursor-pointer border-b-2 border-accent px-1 py-3 text-sm font-medium text-accent-display no-underline">Overview</a>
       <a href="#" className="-mb-px cursor-pointer border-b-2 border-transparent px-1 py-3 text-sm text-ink-body no-underline hover:text-ink-display">Members</a>
       <a href="#" className="-mb-px cursor-pointer border-b-2 border-transparent px-1 py-3 text-sm text-ink-body no-underline hover:text-ink-display">Billing</a>
     </div>
@@ -137,7 +137,7 @@ export function PageHeadersSection() {
               </div>
               <nav className="flex items-end justify-between gap-4 border-b border-hairline">
                 <div className="flex items-center gap-6">
-                  <span className="-mb-px cursor-pointer border-b-2 border-accent px-1 py-3 text-sm font-medium text-accent">
+                  <span className="-mb-px cursor-pointer border-b-2 border-accent px-1 py-3 text-sm font-medium text-accent-display">
                     Overview
                   </span>
                   <span className="-mb-px cursor-pointer border-b-2 border-transparent px-1 py-3 text-sm text-ink-body">

@@ -39,7 +39,7 @@ const DropdownMenuItem = React.forwardRef<
       "relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors",
       "focus:bg-surface focus:text-ink-display data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       destructive
-        ? "text-signal focus:bg-signal-faded focus:text-signal"
+        ? "text-danger-display focus:bg-danger-faded focus:text-danger-display"
         : "text-ink-body",
       "[&_svg]:h-4 [&_svg]:w-4 [&_svg]:shrink-0 [&_svg]:text-ink-muted",
       className,

@@ -2,7 +2,7 @@ import { SectionShell } from "@/components/design-system/SectionShell";
 
 const code = `<nav className="flex items-end justify-between gap-4 border-b border-hairline">
   <div className="flex items-center gap-6">
-    <a href="#" className="-mb-px cursor-pointer border-b-2 border-accent px-1 py-3 text-sm font-medium text-accent no-underline">Overview</a>
+    <a href="#" className="-mb-px cursor-pointer border-b-2 border-accent px-1 py-3 text-sm font-medium text-accent-display no-underline">Overview</a>
     <a href="#" className="-mb-px cursor-pointer border-b-2 border-transparent px-1 py-3 text-sm text-ink-body no-underline hover:text-ink-display">Activity</a>
     <a href="#" className="-mb-px cursor-pointer border-b-2 border-transparent px-1 py-3 text-sm text-ink-body no-underline hover:text-ink-display">Members</a>
     <a href="#" className="-mb-px cursor-pointer border-b-2 border-transparent px-1 py-3 text-sm text-ink-body no-underline hover:text-ink-display">Billing</a>
@@ -49,7 +49,7 @@ export function SubNavSection() {
               Tabs only
             </p>
             <nav className="flex items-end gap-6 border-b border-hairline">
-              <span className="-mb-px cursor-pointer border-b-2 border-accent px-1 py-3 text-sm font-medium text-accent">
+              <span className="-mb-px cursor-pointer border-b-2 border-accent px-1 py-3 text-sm font-medium text-accent-display">
                 Overview
               </span>
               <span className="-mb-px cursor-pointer border-b-2 border-transparent px-1 py-3 text-sm text-ink-body">
@@ -70,7 +70,7 @@ export function SubNavSection() {
             </p>
             <nav className="flex items-end justify-between gap-4 border-b border-hairline">
               <div className="flex items-center gap-6">
-                <span className="-mb-px cursor-pointer border-b-2 border-accent px-1 py-3 text-sm font-medium text-accent">
+                <span className="-mb-px cursor-pointer border-b-2 border-accent px-1 py-3 text-sm font-medium text-accent-display">
                   Overview
                 </span>
                 <span className="-mb-px cursor-pointer border-b-2 border-transparent px-1 py-3 text-sm text-ink-body">
@@ -92,7 +92,7 @@ export function SubNavSection() {
         <ul className="list-disc pl-5">
           <li>
             <strong>Active state</strong>:{" "}
-            <code>border-b-2 border-accent text-accent font-medium</code>{" "}
+            <code>border-b-2 border-accent text-accent-display font-medium</code>{" "}
             on the active tab; <code>-mb-px</code> overlaps the parent's
             hairline so the underlines merge into one line.
           </li>
