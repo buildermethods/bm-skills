@@ -1,9 +1,9 @@
 import { SectionShell } from "@/components/design-system/SectionShell";
 
 const code = `<div className="flex min-h-screen bg-page text-ink-body">
-  <aside className="group flex w-14 shrink-0 flex-col overflow-hidden border-r border-hairline transition-[width] duration-200 hover:w-56">
-    {/* Main navigation rail — see Main navigation section */}
-  </aside>
+  {/* Main navigation rail — see Main navigation section. Hidden on < md;
+     a hamburger in the page header opens the mobile drawer instead. */}
+  <MainNav />
   <main className="min-w-0 flex-1">
     {/* Page header (optional with sub-nav tabs) → page content */}
   </main>
@@ -18,9 +18,11 @@ export function ShellsSection() {
         <>
           The outermost page frame. A shell is a full-bleed{" "}
           <code>bg-page</code> container with the main-navigation rail on
-          the left and a content area on the right. The rail expands on
-          hover; sub-navigation lives inside page headers as horizontal
-          tabs (not in the shell).
+          the left and a content area on the right. The rail toggles
+          between collapsed and expanded with a button (state persisted to
+          localStorage), and is hidden entirely on screens narrower than{" "}
+          <code>md</code> in favor of a mobile drawer. Sub-navigation lives
+          inside page headers as horizontal tabs (not in the shell).
         </>
       }
       whenToUse={
@@ -72,9 +74,10 @@ export function ShellsSection() {
             "with tabs" variant. No second sidebar needed.
           </li>
           <li>
-            <strong>Mobile</strong>: rail stays at <code>w-14</code> on all
-            screen sizes (icons remain tappable). Optionally collapse it
-            into a hamburger sheet on <code>&lt; sm</code>.
+            <strong>Mobile</strong>: hide the rail with{" "}
+            <code>hidden md:flex</code> and render a hamburger button in
+            the top-right (in the page header's right-side slot or pinned)
+            that opens the same nav contents in a slide-in drawer overlay.
           </li>
         </ul>
       }
