@@ -23,7 +23,9 @@ Then install any of the skills below:
 
 ## Skills
 
-### bm-prd-creator
+### PRD Creator
+
+`bm-prd-creator`
 
 Guides you through turning a raw idea into a structured Product Requirements Document. Produces a complete `prd.md` plus a sequence of milestone prompt files you can hand to a coding agent to drive implementation.
 
@@ -31,7 +33,11 @@ Guides you through turning a raw idea into a structured Product Requirements Doc
 /plugin install bm-prd-creator
 ```
 
-### bm-design-system
+[Documentation for PRD Creator](https://buildermethods/prd-creator)
+
+### Design System
+
+`bm-design-system`
 
 Scaffolds a complete design system into a React + Tailwind v4 codebase: a single-page reference at `/admin/design-system` that previews and documents every primitive, plus reusable shadcn-style components and managed instructions in `AGENTS.md`/`CLAUDE.md` so future agents always defer to the system instead of drifting.
 
@@ -39,9 +45,7 @@ Scaffolds a complete design system into a React + Tailwind v4 codebase: a single
 /plugin install bm-design-system
 ```
 
-## Documentation
-
-Full documentation and usage guides for each skill: [**buildermethods.com/bm-skills**](https://buildermethods.com/bm-skills)
+[Documentation for Design System](https://buildermethods/ai-design-system)
 
 ## License
 
