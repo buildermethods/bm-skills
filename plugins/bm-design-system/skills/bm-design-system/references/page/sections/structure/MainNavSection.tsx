@@ -149,11 +149,7 @@ function RailBody({ open, onToggle }: { open: boolean; onToggle: () => void }) {
 
       <RailNav open={open} />
 
-      <div className="border-t border-hairline p-2">
-        <UserMenu open={open} />
-      </div>
-
-      {/* Expand chevron — only renders when collapsed, sits below the user menu */}
+      {/* Expand chevron — only renders when collapsed, sits just above the user menu */}
       {!open && (
         <div className="border-t border-hairline p-2">
           <button
@@ -166,6 +162,10 @@ function RailBody({ open, onToggle }: { open: boolean; onToggle: () => void }) {
           </button>
         </div>
       )}
+
+      <div className="border-t border-hairline p-2">
+        <UserMenu open={open} />
+      </div>
     </>
   );
 }
@@ -409,9 +409,6 @@ function DesktopPreview() {
           <PreviewNavItem icon={Users} label="Members" open={open} />
           <PreviewNavItem icon={Settings} label="Settings" open={open} />
         </nav>
-        <div className="border-t border-hairline p-2">
-          <PreviewUserMenu open={open} />
-        </div>
         {!open && (
           <div className="border-t border-hairline p-2">
             <button
@@ -424,6 +421,9 @@ function DesktopPreview() {
             </button>
           </div>
         )}
+        <div className="border-t border-hairline p-2">
+          <PreviewUserMenu open={open} />
+        </div>
       </aside>
       <div className="flex flex-1 items-center justify-center bg-surface px-6 text-center text-xs text-ink-muted">
         {open
@@ -504,7 +504,7 @@ export function MainNavSection() {
           expanded (<code>w-56</code>, icons plus labels) — and a chevron
           toggle switches between them. When expanded, the toggle sits in
           the brand row at the top; when collapsed, an expand chevron sits
-          at the very bottom of the rail. The choice is persisted to{" "}
+          just above the user menu at the bottom of the rail. The choice is persisted to{" "}
           <code>localStorage</code>. When collapsed, hovering an item pops a
           tooltip-style label out to the right of the rail without resizing
           it. A user-account dropdown above the bottom edge holds a
@@ -562,8 +562,8 @@ export function MainNavSection() {
             <strong>Toggle position</strong>: the collapse chevron lives in
             the brand row when the rail is expanded (next to the brand on
             the right). When the rail is collapsed there's no room for it
-            there, so the expand chevron sits at the very bottom of the
-            rail under the user menu.
+            there, so the expand chevron sits just above the user menu at
+            the bottom of the rail.
           </li>
           <li>
             <strong>Active item highlight (collapsed)</strong>: each item is

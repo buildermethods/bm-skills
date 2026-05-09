@@ -382,6 +382,7 @@ elements/
   buttons               #buttons
   forms                 #forms
   badges                #badges
+  toggle-buttons        #toggle-buttons
   listings              #listings
   modal                 #modal
   dropdown-menu         #dropdown-menu
