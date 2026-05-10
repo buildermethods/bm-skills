@@ -8,6 +8,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --breakpoint-xs: 400px;
+
   --font-display: 'Stack Sans Text', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
 
@@ -71,12 +73,15 @@
     line-height: 1.2;
   }
 
-  h1 { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.03em; }
+  h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.03em; }
+  @media (min-width: 400px) {
+    h1 { font-size: 2.25rem; }
+  }
   h2 { font-size: 1.7rem;  letter-spacing: -0.03em; }
   h3 { font-size: 1.3rem; }
   h4 { font-size: 1.1rem; }
   h5 { font-size: 1rem; }
-  h6 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ink-muted); }
+  h6 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-ink-muted); }
 
   a {
     color: var(--color-accent-display);
@@ -252,7 +257,12 @@ html {
   max-width: none;
 }
 
-.bm-rich-text .milkdown .ProseMirror > * + * {
+/* Use :not() to skip ProseMirror's internal widget/cursor decorations,
+   which come and go with focus/selection state — without this, the visible
+   block jumps by 0.75rem when the bubble menu appears (the widget vanishes,
+   the next block stops being the "second child"). */
+.bm-rich-text .milkdown .ProseMirror > *:not(.ProseMirror-widget, .prosemirror-virtual-cursor, .ProseMirror-gapcursor)
+  + *:not(.ProseMirror-widget, .prosemirror-virtual-cursor, .ProseMirror-gapcursor) {
   margin-top: 0.75rem;
 }
 
@@ -289,6 +299,13 @@ html {
   line-height: 1.6;
 }
 
+/* Crepe's reset.css forces .milkdown .ProseMirror a to --crepe-color-primary
+   (a static grey) — re-bind it to the design system's accent so links inherit
+   the dark-mode color too. */
+.bm-rich-text .milkdown .ProseMirror a {
+  color: var(--color-accent-display);
+}
+
 .bm-rich-text .milkdown .ProseMirror ul,
 .bm-rich-text .milkdown .ProseMirror ol {
   padding-left: 1.5rem;
@@ -310,4 +327,75 @@ html {
   padding: 0.125rem 0.25rem;
   border-radius: 0.25rem;
   font-size: 0.875em;
+}
+
+/* Selection bubble menu (Crepe toolbar). Inverse-themed: light mode shows
+   the dark-mode page color and vice-versa. Ships with a softer shadow than
+   Crepe's default and forces icons to white/black so the inverse surface
+   has the right contrast. The selectors are scoped to `.bm-rich-text` so
+   we don't override Crepe in other contexts. */
+.bm-rich-text .milkdown .milkdown-toolbar {
+  background: #020617;
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.06),
+    0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+/* Shrink the popover and icons (Crepe defaults are 32px buttons / 24px svg). */
+.bm-rich-text .milkdown .milkdown-toolbar .toolbar-item {
+  width: 26px;
+  height: 26px;
+  margin: 4px 3px;
+  padding: 4px;
+}
+.bm-rich-text .milkdown .milkdown-toolbar .toolbar-item svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.5;
+}
+.bm-rich-text .milkdown .milkdown-toolbar .divider {
+  height: 18px;
+  margin: 8px 4px;
+}
+.bm-rich-text .milkdown .milkdown-toolbar .toolbar-item svg,
+.bm-rich-text .milkdown .milkdown-toolbar .toolbar-item svg path,
+.bm-rich-text .milkdown .milkdown-toolbar .toolbar-item svg text {
+  color: #ffffff;
+  fill: #ffffff;
+  stroke: currentColor;
+}
+.bm-rich-text .milkdown .milkdown-toolbar .toolbar-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.bm-rich-text .milkdown .milkdown-toolbar .toolbar-item:active,
+.bm-rich-text .milkdown .milkdown-toolbar .toolbar-item.active {
+  background: rgba(255, 255, 255, 0.16);
+}
+.bm-rich-text .milkdown .milkdown-toolbar .divider {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.dark .bm-rich-text .milkdown .milkdown-toolbar {
+  background: #ffffff;
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.18),
+    0 1px 2px 0 rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+.dark .bm-rich-text .milkdown .milkdown-toolbar .toolbar-item svg,
+.dark .bm-rich-text .milkdown .milkdown-toolbar .toolbar-item svg path,
+.dark .bm-rich-text .milkdown .milkdown-toolbar .toolbar-item svg text {
+  color: #000000;
+  fill: #000000;
+  stroke: currentColor;
+}
+.dark .bm-rich-text .milkdown .milkdown-toolbar .toolbar-item:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+.dark .bm-rich-text .milkdown .milkdown-toolbar .toolbar-item:active,
+.dark .bm-rich-text .milkdown .milkdown-toolbar .toolbar-item.active {
+  background: rgba(0, 0, 0, 0.12);
+}
+.dark .bm-rich-text .milkdown .milkdown-toolbar .divider {
+  background: rgba(0, 0, 0, 0.12);
 }

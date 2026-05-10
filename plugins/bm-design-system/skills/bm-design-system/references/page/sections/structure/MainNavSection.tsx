@@ -63,7 +63,7 @@ export function MainNav() {
       {/* Desktop rail — hidden below lg */}
       <aside
         className={cn(
-          "hidden shrink-0 flex-col border-r border-hairline bg-page transition-[width] duration-200 lg:flex",
+          "sticky top-0 hidden h-screen shrink-0 flex-col border-r border-hairline bg-page transition-[width] duration-200 lg:flex",
           open ? "w-56" : "w-14",
         )}
       >
@@ -172,7 +172,12 @@ function RailBody({ open, onToggle }: { open: boolean; onToggle: () => void }) {
 
 function RailNav({ open, onClose }: { open: boolean; onClose?: () => void }) {
   return (
-    <nav className="flex flex-1 flex-col gap-1 p-2 text-sm">
+    <nav
+      className={cn(
+        "flex min-h-0 flex-1 flex-col gap-1 p-2 text-sm",
+        open ? "overflow-x-hidden overflow-y-auto" : "overflow-visible",
+      )}
+    >
       <NavItem href="/dashboard" icon={Home}    label="Dashboard" active open={open} onClick={onClose} />
       <NavItem href="/projects"  icon={Folder}  label="Projects"        open={open} onClick={onClose} />
       <NavItem href="/members"   icon={Users}   label="Members"         open={open} onClick={onClose} />
@@ -210,7 +215,7 @@ function NavItem({ href, icon: Icon, label, active, open, onClick }: {
         // Floating label — pops outside the rail on hover, doesn't expand it
         <span
           role="tooltip"
-          className="pointer-events-none absolute left-full top-1/2 z-50 ml-2 -translate-y-1/2 whitespace-nowrap rounded-md border border-hairline bg-page px-2 py-1 text-xs font-medium text-ink-display opacity-0 shadow-md transition-opacity group-hover/nav-item:opacity-100"
+          className="pointer-events-none absolute left-full top-1/2 z-50 ml-[13px] -translate-y-1/2 whitespace-nowrap rounded-md border border-hairline bg-page px-2 py-1 text-xs font-medium text-ink-display opacity-0 shadow-sm transition-opacity group-hover/nav-item:opacity-100"
         >
           {label}
         </span>
