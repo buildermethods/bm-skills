@@ -1,7 +1,13 @@
 import { SectionShell } from "@/components/design-system/SectionShell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Bell, Search } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Bell, CircleEllipsis, Search } from "lucide-react";
 
 const code = `{/* Basic — title row only */}
 <div className="border-b border-hairline pb-6">
@@ -18,6 +24,34 @@ const code = `{/* Basic — title row only */}
       </button>
       <Button variant="secondary">Filter</Button>
       <Button>New project</Button>
+    </div>
+  </div>
+</div>
+
+{/* Single-item view — page title with the standard item settings dropdown
+    in the right slot. The CircleEllipsis trigger uses h-6 w-6 here (larger
+    than the h-4 w-4 used in listing rows). */}
+<div className="border-b border-hairline pb-6">
+  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+    <div className="min-w-0 flex-1">
+      <h1>Onboarding redesign</h1>
+    </div>
+    <div className="flex items-center gap-2">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button
+            type="button"
+            aria-label="Settings"
+            className="inline-flex cursor-pointer items-center justify-center text-ink-muted transition-colors hover:text-ink-body focus:outline-none focus-visible:text-ink-body"
+          >
+            <CircleEllipsis className="h-6 w-6" strokeWidth={1.5} />
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem>Deactivate</DropdownMenuItem>
+          <DropdownMenuItem destructive>Delete</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   </div>
 </div>
@@ -123,6 +157,40 @@ export function PageHeadersSection() {
 
           <div>
             <p className="mb-2 text-xs uppercase tracking-wider text-ink-muted">
+              Single-item view — title with settings dropdown (the standard
+              layout for viewing one item from a collection)
+            </p>
+            <div className="border-b border-hairline pb-6">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                <div className="min-w-0 flex-1">
+                  <h1>Onboarding redesign</h1>
+                </div>
+                <div className="flex items-center gap-2">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <button
+                        type="button"
+                        aria-label="Settings"
+                        className="inline-flex cursor-pointer items-center justify-center text-ink-muted transition-colors hover:text-ink-body focus:outline-none focus-visible:text-ink-body"
+                      >
+                        <CircleEllipsis
+                          className="h-6 w-6"
+                          strokeWidth={1.5}
+                        />
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem>Deactivate</DropdownMenuItem>
+                      <DropdownMenuItem destructive>Delete</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p className="mb-2 text-xs uppercase tracking-wider text-ink-muted">
               With sub-navigation tabs (two horizontal lines)
             </p>
             <div>
@@ -173,6 +241,14 @@ export function PageHeadersSection() {
             below the title row's <code>border-b</code> — the tabs row gets
             its own <code>border-b</code>, producing two horizontal lines
             with the active tab's underline merging into the lower one.
+          </li>
+          <li>
+            <strong>Single-item view</strong>: when viewing one item from a
+            collection, the right slot should hold our standard settings
+            dropdown — see <a href="#dropdown-menu">Dropdown menu</a>. Use{" "}
+            <code>h-6 w-6</code> on the <code>CircleEllipsis</code> here
+            (one size larger than in listing rows) to match the page
+            header's heavier visual weight.
           </li>
         </ul>
       }

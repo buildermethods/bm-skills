@@ -402,6 +402,7 @@ base-styles/
   list-item             #list-item
   blockquote            #blockquote
   hr                    #hr
+  label                 #label
 ```
 
 Each section uses the `<SectionShell>` wrapper which renders five blocks in this order:

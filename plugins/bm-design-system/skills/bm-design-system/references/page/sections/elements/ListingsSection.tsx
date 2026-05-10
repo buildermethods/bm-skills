@@ -1,19 +1,42 @@
 import { SectionShell } from "@/components/design-system/SectionShell";
 import { Badge } from "@/components/ui/badge";
-import { ChevronRight, Folder } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronRight, CircleEllipsis, Folder } from "lucide-react";
 
 const code = `<ul className="divide-y divide-hairline overflow-hidden rounded-md border border-hairline bg-page">
   {items.map((item) => (
     <li key={item.id}>
-      <a href={item.href} className="flex items-center gap-3 px-4 py-3 no-underline hover:bg-surface">
-        <Folder className="h-4 w-4 text-ink-muted" />
-        <div className="min-w-0 flex-1">
-          <div className="truncate text-sm font-medium text-ink-display">{item.title}</div>
-          <div className="truncate text-xs text-ink-muted">{item.subtitle}</div>
-        </div>
-        <Badge tone="muted">{item.status}</Badge>
-        <ChevronRight className="h-4 w-4 text-ink-muted" />
-      </a>
+      <div className="flex items-center gap-3 px-4 py-3 hover:bg-surface">
+        <a href={item.href} className="flex min-w-0 flex-1 items-center gap-3 no-underline">
+          <Folder className="h-4 w-4 text-ink-muted" />
+          <div className="min-w-0 flex-1">
+            <div className="truncate text-sm font-medium text-ink-display">{item.title}</div>
+            <div className="truncate text-xs text-ink-muted">{item.subtitle}</div>
+          </div>
+          <Badge tone="muted">{item.status}</Badge>
+        </a>
+        {/* Standard item settings dropdown — see Dropdown menu section. */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              type="button"
+              aria-label="Settings"
+              className="inline-flex cursor-pointer items-center justify-center text-ink-muted transition-colors hover:text-ink-body focus:outline-none focus-visible:text-ink-body"
+            >
+              <CircleEllipsis className="h-4 w-4" strokeWidth={1.5} />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem>Deactivate</DropdownMenuItem>
+            <DropdownMenuItem destructive>Delete</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </li>
   ))}
 </ul>`;
@@ -25,6 +48,26 @@ const ITEMS = [
   { id: 4, title: "Mobile launch checklist", subtitle: "Archived last week", status: "Archived" },
 ];
 
+function DemoSettingsMenu() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          type="button"
+          aria-label="Settings"
+          className="inline-flex cursor-pointer items-center justify-center text-ink-muted transition-colors hover:text-ink-body focus:outline-none focus-visible:text-ink-body"
+        >
+          <CircleEllipsis className="h-4 w-4" strokeWidth={1.5} />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem>Deactivate</DropdownMenuItem>
+        <DropdownMenuItem destructive>Delete</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
 export function ListingsSection() {
   return (
     <SectionShell
@@ -34,7 +77,8 @@ export function ListingsSection() {
         <>
           A vertical list of selectable rows — the workhorse of dashboards
           and resource indexes. Each row composes an icon, a title, supporting
-          metadata, an optional Badge, and a chevron affordance.
+          metadata, an optional Badge, a chevron affordance, and (for items
+          in a collection) a standard settings dropdown.
         </>
       }
       whenToUse={
@@ -53,20 +97,22 @@ export function ListingsSection() {
         <ul className="divide-y divide-hairline overflow-hidden rounded-md border border-hairline bg-page">
           {ITEMS.map((item) => (
             <li key={item.id}>
-              <div className="flex items-center gap-3 px-4 py-3">
-                <Folder className="h-4 w-4 text-ink-muted" />
-                <div className="min-w-0 flex-1">
-                  <div className="truncate text-sm font-medium text-ink-display">
-                    {item.title}
+              <div className="flex items-center gap-3 px-4 py-3 hover:bg-surface">
+                <div className="flex min-w-0 flex-1 items-center gap-3">
+                  <Folder className="h-4 w-4 text-ink-muted" />
+                  <div className="min-w-0 flex-1">
+                    <div className="truncate text-sm font-medium text-ink-display">
+                      {item.title}
+                    </div>
+                    <div className="truncate text-xs text-ink-muted">
+                      {item.subtitle}
+                    </div>
                   </div>
-                  <div className="truncate text-xs text-ink-muted">
-                    {item.subtitle}
-                  </div>
+                  <Badge tone={item.status === "Active" ? "accent" : "muted"}>
+                    {item.status}
+                  </Badge>
                 </div>
-                <Badge tone={item.status === "Active" ? "accent" : "muted"}>
-                  {item.status}
-                </Badge>
-                <ChevronRight className="h-4 w-4 text-ink-muted" />
+                <DemoSettingsMenu />
               </div>
             </li>
           ))}
@@ -78,6 +124,13 @@ export function ListingsSection() {
           <li>Wrap rows in <code>&lt;a&gt;</code> for navigation, or <code>&lt;button&gt;</code> for in-page selection.</li>
           <li>Drop the chevron when the row is non-navigable.</li>
           <li>Use <code>truncate</code> on title and subtitle to prevent overflow.</li>
+          <li>
+            <strong>Settings dropdown by default.</strong> When listings render
+            items in a collection (the typical case), include our standard
+            settings dropdown at the right edge of each row — see{" "}
+            <a href="#dropdown-menu">Dropdown menu</a> for the trigger pattern
+            (bare <code>CircleEllipsis</code>, no border).
+          </li>
         </ul>
       }
     />

@@ -9,8 +9,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   ChevronDown,
+  CircleEllipsis,
   LogOut,
-  MoreHorizontal,
   Settings,
   Trash2,
   User,
@@ -24,8 +24,9 @@ const code = `import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Settings, User, Users, LogOut } from "lucide-react";
+import { ChevronDown, CircleEllipsis, LogOut, Settings, Trash2, User, Users } from "lucide-react";
 
+{/* Button trigger */}
 <DropdownMenu>
   <DropdownMenuTrigger asChild>
     <Button variant="secondary">
@@ -38,6 +39,26 @@ import { Settings, User, Users, LogOut } from "lucide-react";
     <DropdownMenuItem><Settings /> Settings</DropdownMenuItem>
     <DropdownMenuSeparator />
     <DropdownMenuItem><LogOut /> Sign out</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+
+{/* Item settings dropdown — the standard pattern for row-level
+    "edit / archive / delete" overflow menus. Bare button (no border or
+    background), CircleEllipsis icon at strokeWidth 1.5, ink-muted with
+    hover:ink-body. */}
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <button
+      type="button"
+      aria-label="Settings"
+      className="inline-flex cursor-pointer items-center justify-center text-ink-muted transition-colors hover:text-ink-body focus:outline-none focus-visible:text-ink-body"
+    >
+      <CircleEllipsis className="h-4 w-4" strokeWidth={1.5} />
+    </button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent align="end">
+    <DropdownMenuItem>Deactivate</DropdownMenuItem>
+    <DropdownMenuItem destructive><Trash2 /> Delete</DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>`;
 
@@ -102,26 +123,22 @@ export function DropdownMenuSection() {
               <DropdownMenuTrigger asChild>
                 <button
                   type="button"
-                  className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-hairline text-ink-body hover:bg-surface"
-                  aria-label="More actions"
+                  aria-label="Settings"
+                  className="inline-flex cursor-pointer items-center justify-center text-ink-muted transition-colors hover:text-ink-body focus:outline-none focus-visible:text-ink-body"
                 >
-                  <MoreHorizontal className="h-4 w-4" />
+                  <CircleEllipsis className="h-4 w-4" strokeWidth={1.5} />
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem>
-                  <User /> Assign
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Settings /> Edit
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
+                <DropdownMenuItem>Deactivate</DropdownMenuItem>
                 <DropdownMenuItem destructive>
                   <Trash2 /> Delete
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <span className="text-xs text-ink-muted">Icon trigger</span>
+            <span className="text-xs text-ink-muted">
+              Item settings dropdown
+            </span>
           </div>
         </div>
       }
@@ -153,6 +170,16 @@ export function DropdownMenuSection() {
             <strong>Alignment</strong>: <code>align="start" | "center" | "end"</code>{" "}
             and <code>side="top" | "right" | "bottom" | "left"</code> on{" "}
             <code>DropdownMenuContent</code>.
+          </li>
+          <li>
+            <strong>Item settings dropdown — standard pattern.</strong> For
+            row-level "edit / archive / delete" overflow menus on listings or
+            single-item views, always use this exact trigger:{" "}
+            <code>CircleEllipsis</code> icon, <code>strokeWidth={1.5}</code>,
+            no border or background, <code>text-ink-muted</code> with{" "}
+            <code>hover:text-ink-body</code>. Use <code>h-4 w-4</code> on
+            listing rows; bump to <code>h-6 w-6</code> when used in a page
+            header for a single-item view.
           </li>
         </ul>
       }

@@ -94,6 +94,13 @@
 
   strong { color: var(--color-ink-display); font-weight: 600; }
 
+  label, legend {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-ink-display);
+  }
+
   ul, ol {
     color: var(--color-ink-body);
     list-style: none;

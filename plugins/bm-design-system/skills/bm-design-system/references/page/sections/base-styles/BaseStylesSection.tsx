@@ -258,6 +258,35 @@ export function BaseStylesSection() {
       />
 
       <SectionShell
+        id="label"
+        title="Label / legend"
+        description={
+          <>
+            Form-field labels (<code>&lt;label&gt;</code>) and{" "}
+            <code>&lt;legend&gt;</code> use the design system's standard label
+            style by default — small text, medium weight,{" "}
+            <code>ink-display</code> color. No utility classes needed. The
+            base rule applies to all <code>&lt;label&gt;</code> elements; for
+            the special case of a label used as a wrapper around a checkbox
+            or radio, add <code>font-normal text-ink-body</code> to override.
+          </>
+        }
+        preview={
+          <div className="space-y-2 max-w-sm">
+            <label htmlFor="ds-label-example">Email address</label>
+            <input
+              id="ds-label-example"
+              className="form-control"
+              placeholder="you@example.com"
+              type="email"
+            />
+          </div>
+        }
+        code={`<label htmlFor="email">Email address</label>
+<Input id="email" type="email" placeholder="you@example.com" />`}
+      />
+
+      <SectionShell
         id="hr"
         title="Horizontal rule"
         description={

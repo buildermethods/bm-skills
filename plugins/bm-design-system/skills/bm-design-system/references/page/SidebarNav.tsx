@@ -54,6 +54,7 @@ const NAV: NavGroup[] = [
       { id: "lists", label: "Lists (ul / ol)" },
       { id: "list-item", label: "List item (li)" },
       { id: "blockquote", label: "Blockquote" },
+      { id: "label", label: "Label / legend" },
       { id: "hr", label: "Horizontal rule" },
     ],
   },

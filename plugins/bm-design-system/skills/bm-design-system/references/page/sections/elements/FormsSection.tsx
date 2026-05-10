@@ -16,18 +16,14 @@ import { RichTextField } from "@/components/ui/rich-text-field";
 <form className="space-y-4">
   {/* Text input */}
   <div className="space-y-2">
-    <label htmlFor="email" className="text-sm font-medium text-ink-display">
-      Email
-    </label>
+    <label htmlFor="email">Email</label>
     <Input id="email" type="email" placeholder="you@example.com" />
     <p className="text-xs text-ink-muted">We'll only use this for account notifications.</p>
   </div>
 
   {/* Select */}
   <div className="space-y-2">
-    <label htmlFor="country" className="text-sm font-medium text-ink-display">
-      Country
-    </label>
+    <label htmlFor="country">Country</label>
     <Select id="country" defaultValue="">
       <option value="" disabled>Choose one…</option>
       <option value="us">United States</option>
@@ -38,17 +34,17 @@ import { RichTextField } from "@/components/ui/rich-text-field";
 
   {/* Radio group */}
   <fieldset className="space-y-2">
-    <legend className="text-sm font-medium text-ink-display">Plan</legend>
+    <legend>Plan</legend>
     <RadioGroup>
-      <label className="flex items-center gap-2 text-sm text-ink-body">
+      <label className="flex items-center gap-2 text-sm font-normal text-ink-body">
         <Radio name="plan" value="free" defaultChecked />
         Free
       </label>
-      <label className="flex items-center gap-2 text-sm text-ink-body">
+      <label className="flex items-center gap-2 text-sm font-normal text-ink-body">
         <Radio name="plan" value="pro" />
         Pro
       </label>
-      <label className="flex items-center gap-2 text-sm text-ink-body">
+      <label className="flex items-center gap-2 text-sm font-normal text-ink-body">
         <Radio name="plan" value="team" />
         Team
       </label>
@@ -56,7 +52,7 @@ import { RichTextField } from "@/components/ui/rich-text-field";
   </fieldset>
 
   {/* Checkbox */}
-  <label className="flex items-start gap-2 text-sm text-ink-body">
+  <label className="flex items-start gap-2 text-sm font-normal text-ink-body">
     <Checkbox id="newsletter" defaultChecked className="mt-0.5" />
     <span>
       <span className="font-medium text-ink-display">Send me product updates</span>
@@ -66,9 +62,7 @@ import { RichTextField } from "@/components/ui/rich-text-field";
 
   {/* Rich text (milkdown) */}
   <div className="space-y-2">
-    <label htmlFor="bio" className="text-sm font-medium text-ink-display">
-      Bio
-    </label>
+    <label htmlFor="bio">Bio</label>
     <RichTextField placeholder="Tell us about yourself…" />
   </div>
 
@@ -109,12 +103,7 @@ export function FormsSection() {
           onSubmit={(e) => e.preventDefault()}
         >
           <div className="space-y-2">
-            <label
-              htmlFor="ds-form-email"
-              className="text-sm font-medium text-ink-display"
-            >
-              Email
-            </label>
+            <label htmlFor="ds-form-email">Email</label>
             <Input
               id="ds-form-email"
               type="email"
@@ -126,12 +115,7 @@ export function FormsSection() {
           </div>
 
           <div className="space-y-2">
-            <label
-              htmlFor="ds-form-country"
-              className="text-sm font-medium text-ink-display"
-            >
-              Country
-            </label>
+            <label htmlFor="ds-form-country">Country</label>
             <Select id="ds-form-country" defaultValue="">
               <option value="" disabled>
                 Choose one…
@@ -143,26 +127,24 @@ export function FormsSection() {
           </div>
 
           <fieldset className="space-y-2">
-            <legend className="text-sm font-medium text-ink-display">
-              Plan
-            </legend>
+            <legend>Plan</legend>
             <RadioGroup>
-              <label className="flex items-center gap-2 text-sm text-ink-body">
+              <label className="flex items-center gap-2 text-sm font-normal text-ink-body">
                 <Radio name="ds-form-plan" value="free" defaultChecked />
                 Free
               </label>
-              <label className="flex items-center gap-2 text-sm text-ink-body">
+              <label className="flex items-center gap-2 text-sm font-normal text-ink-body">
                 <Radio name="ds-form-plan" value="pro" />
                 Pro
               </label>
-              <label className="flex items-center gap-2 text-sm text-ink-body">
+              <label className="flex items-center gap-2 text-sm font-normal text-ink-body">
                 <Radio name="ds-form-plan" value="team" />
                 Team
               </label>
             </RadioGroup>
           </fieldset>
 
-          <label className="flex items-start gap-2 text-sm text-ink-body">
+          <label className="flex items-start gap-2 text-sm font-normal text-ink-body">
             <Checkbox
               id="ds-form-newsletter"
               defaultChecked
@@ -179,12 +161,7 @@ export function FormsSection() {
           </label>
 
           <div className="space-y-2">
-            <label
-              htmlFor="ds-form-bio"
-              className="text-sm font-medium text-ink-display"
-            >
-              Bio
-            </label>
+            <label htmlFor="ds-form-bio">Bio</label>
             <RichTextField placeholder="Tell us about yourself…" />
           </div>
 
