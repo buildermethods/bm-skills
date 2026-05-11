@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Bell, CircleEllipsis, Search } from "lucide-react";
+import { Bell, Ellipsis, Search } from "lucide-react";
 
 const code = `{/* Basic — title row only */}
 <div className="border-b border-hairline pb-6">
@@ -29,7 +29,7 @@ const code = `{/* Basic — title row only */}
 </div>
 
 {/* Single-item view — page title with the standard item settings dropdown
-    in the right slot. The CircleEllipsis trigger uses h-6 w-6 here (larger
+    in the right slot. The Ellipsis trigger uses h-6 w-6 here (larger
     than the h-4 w-4 used in listing rows). */}
 <div className="border-b border-hairline pb-6">
   <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -44,7 +44,7 @@ const code = `{/* Basic — title row only */}
             aria-label="Settings"
             className="inline-flex cursor-pointer items-center justify-center text-ink-muted transition-colors hover:text-ink-body focus:outline-none focus-visible:text-ink-body"
           >
-            <CircleEllipsis className="h-6 w-6" strokeWidth={1.5} />
+            <Ellipsis className="h-6 w-6" strokeWidth={1.5} />
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -173,7 +173,7 @@ export function PageHeadersSection() {
                         aria-label="Settings"
                         className="inline-flex cursor-pointer items-center justify-center text-ink-muted transition-colors hover:text-ink-body focus:outline-none focus-visible:text-ink-body"
                       >
-                        <CircleEllipsis
+                        <Ellipsis
                           className="h-6 w-6"
                           strokeWidth={1.5}
                         />
@@ -246,7 +246,7 @@ export function PageHeadersSection() {
             <strong>Single-item view</strong>: when viewing one item from a
             collection, the right slot should hold our standard settings
             dropdown — see <a href="#dropdown-menu">Dropdown menu</a>. Use{" "}
-            <code>h-6 w-6</code> on the <code>CircleEllipsis</code> here
+            <code>h-6 w-6</code> on the <code>Ellipsis</code> here
             (one size larger than in listing rows) to match the page
             header's heavier visual weight.
           </li>

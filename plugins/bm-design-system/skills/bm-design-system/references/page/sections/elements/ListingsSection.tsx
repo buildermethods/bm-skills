@@ -6,7 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronRight, CircleEllipsis, Folder } from "lucide-react";
+import { ChevronRight, Ellipsis, Folder } from "lucide-react";
 
 const code = `<ul className="divide-y divide-hairline overflow-hidden rounded-md border border-hairline bg-page">
   {items.map((item) => (
@@ -28,7 +28,7 @@ const code = `<ul className="divide-y divide-hairline overflow-hidden rounded-md
               aria-label="Settings"
               className="inline-flex cursor-pointer items-center justify-center text-ink-muted transition-colors hover:text-ink-body focus:outline-none focus-visible:text-ink-body"
             >
-              <CircleEllipsis className="h-4 w-4" strokeWidth={1.5} />
+              <Ellipsis className="h-4 w-4" strokeWidth={1.5} />
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -57,7 +57,7 @@ function DemoSettingsMenu() {
           aria-label="Settings"
           className="inline-flex cursor-pointer items-center justify-center text-ink-muted transition-colors hover:text-ink-body focus:outline-none focus-visible:text-ink-body"
         >
-          <CircleEllipsis className="h-4 w-4" strokeWidth={1.5} />
+          <Ellipsis className="h-4 w-4" strokeWidth={1.5} />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
@@ -129,7 +129,7 @@ export function ListingsSection() {
             items in a collection (the typical case), include our standard
             settings dropdown at the right edge of each row — see{" "}
             <a href="#dropdown-menu">Dropdown menu</a> for the trigger pattern
-            (bare <code>CircleEllipsis</code>, no border).
+            (bare <code>Ellipsis</code>, no border).
           </li>
         </ul>
       }
