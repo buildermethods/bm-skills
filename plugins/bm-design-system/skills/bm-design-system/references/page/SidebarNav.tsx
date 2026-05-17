@@ -29,6 +29,7 @@ const NAV: NavGroup[] = [
     items: [
       { id: "iconography", label: "Iconography" },
       { id: "buttons", label: "Buttons" },
+      { id: "button-dropdown", label: "Button dropdown" },
       { id: "forms", label: "Forms" },
       { id: "badges", label: "Badges" },
       { id: "toggle-buttons", label: "Toggle buttons" },

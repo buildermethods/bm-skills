@@ -166,6 +166,23 @@
   .btn-danger    { @apply bg-danger text-page hover:bg-danger/90; }
   .btn-link      { @apply text-accent underline-offset-2 hover:underline p-0 h-auto; }
 
+  /* Button-dropdown (split button: primary action on the left, chevron end-cap
+     on the right that opens a menu of secondary actions). The two halves are
+     visually joined into one shape — the action half is rounded-left only and
+     the toggle half is rounded-right only, with a thin currentColor-tinted
+     divider between them so a single divider rule works across every variant
+     and custom-colored use. */
+  .btn-dropdown { @apply inline-flex; }
+  .btn-dropdown-action { @apply rounded-r-none; }
+  .btn-dropdown-toggle {
+    @apply rounded-l-none px-2;
+    border-left: 1px solid color-mix(in oklab, currentColor, transparent 75%);
+  }
+  /* Secondary variant already has a 1px border on every side; collapse the
+     shared edge so the divider doesn't read as a doubled hairline. */
+  .btn-dropdown-action.btn-secondary { border-right-width: 0; }
+  .btn-dropdown-toggle.btn-secondary { border-left-color: var(--color-hairline); }
+
   /* Form fields (input, select, textarea) */
   .form-control {
     @apply flex h-10 w-full rounded-md border border-hairline bg-page px-3 py-2 text-sm text-ink-body;

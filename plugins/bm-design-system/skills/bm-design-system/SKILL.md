@@ -179,7 +179,7 @@ Files to write (sources under `references/`, plus their substitution behavior):
 - `page/{SidebarNav,SectionShell,CodeBlock,ColorSwatch}.tsx` → `components/design-system/`
 - `page/palette.ts` → `components/design-system/palette.ts` — **substitute color + font tokens** here
 - `page/sections/**/*.tsx` → `components/design-system/sections/`. Note: all 14 base-styles sub-sections live in a single `BaseStylesSection.tsx` (returns a fragment of 14 anchored `SectionShell`s); the canonical section list maps to anchors, not files.
-- `components-ui/{button,input,badge,dialog,checkbox,radio,select,rich-text-field,dropdown-menu,theme-toggle}.tsx` → `components/ui/` (skip a file if it already exists and the existing one already comes from this skill — check for a `bm-design-system` marker comment; otherwise ask the user before overwriting). Note: `rich-text-field.tsx` imports `@milkdown/crepe` and `dropdown-menu.tsx` imports `@radix-ui/react-dropdown-menu` — make sure the deps in 4f are installed before the user navigates to those sections, or the page will fail to render.
+- `components-ui/{button,button-dropdown,input,badge,dialog,checkbox,radio,select,rich-text-field,dropdown-menu,theme-toggle}.tsx` → `components/ui/` (skip a file if it already exists and the existing one already comes from this skill — check for a `bm-design-system` marker comment; otherwise ask the user before overwriting). Note: `rich-text-field.tsx` imports `@milkdown/crepe` and `dropdown-menu.tsx` imports `@radix-ui/react-dropdown-menu` — make sure the deps in 4f are installed before the user navigates to those sections, or the page will fail to render.
 - `styles/design-system.css` → target stylesheet path; **substitute color + font tokens** here
 - `lib/utils.ts` → `lib/utils.ts` only if missing
 - `lib/theme.ts` → `lib/theme.ts` (the `useTheme` hook + helpers backing `<ThemeToggle>`)
@@ -380,6 +380,7 @@ structure/
 elements/
   iconography           #iconography
   buttons               #buttons
+  button-dropdown       #button-dropdown
   forms                 #forms
   badges                #badges
   toggle-buttons        #toggle-buttons
