@@ -30,7 +30,7 @@ const DataRow = React.forwardRef<HTMLDivElement, DataRowProps>(
       )}
       {...props}
     >
-      <dt className="text-sm font-medium text-ink-muted md:col-span-1">
+      <dt className="text-sm font-medium text-ink-muted md:col-span-1 md:pt-0.5">
         {title}
       </dt>
       <dd className="text-ink-body md:col-span-3 xl:col-span-4">{children}</dd>
