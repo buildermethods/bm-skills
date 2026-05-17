@@ -17,6 +17,7 @@ import { FormsSection } from "@/components/design-system/sections/elements/Forms
 import { BadgesSection } from "@/components/design-system/sections/elements/BadgesSection";
 import { ToggleButtonsSection } from "@/components/design-system/sections/elements/ToggleButtonsSection";
 import { ListingsSection } from "@/components/design-system/sections/elements/ListingsSection";
+import { DataTableSection } from "@/components/design-system/sections/elements/DataTableSection";
 import { ModalSection } from "@/components/design-system/sections/elements/ModalSection";
 import { CalloutSection } from "@/components/design-system/sections/elements/CalloutSection";
 import { DropdownMenuSection } from "@/components/design-system/sections/elements/DropdownMenuSection";
@@ -100,6 +101,7 @@ export function DesignSystem() {
           <BadgesSection />
           <ToggleButtonsSection />
           <ListingsSection />
+          <DataTableSection />
           <ModalSection />
           <DropdownMenuSection />
           <CalloutSection />
