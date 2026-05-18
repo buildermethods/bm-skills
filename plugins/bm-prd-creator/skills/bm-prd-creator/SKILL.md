@@ -1,6 +1,6 @@
 ---
 name: bm-prd-creator
-description: Use when the user wants to create a Product Requirements Document (PRD) for a new app, feature, or project. Guides the user through a structured interview and produces a complete PRD as a markdown file, along with ready-to-build milestones.
+description: Use when the user wants to create a Product Requirements Document (PRD) for a new app, feature, or project. Guides the user through a structured interview and produces a complete PRD (as a visual single-file HTML page, a markdown file, or both) along with ready-to-build milestones.
 user_invocable: true
 ---
 
@@ -32,6 +32,8 @@ The user understands product, user experience, and what they want their app to d
 
 6. **Keep your prose tight.** Short framings, no preamble. The user is making decisions, not reading essays.
 
+7. **HTML is the default output.** Early in the interview the user picks a format (HTML / Markdown / Both). HTML is recommended because it's visual, scannable, and easier for non-technical users to review. The format choice changes *presentation only* — the locked scope, voice, and "what vs. how" boundary are identical across formats.
+
 ## Phases
 
 Execute the following phases in order. Each phase's full instructions are in its own file under `steps/`. Read the relevant step file at the start of each phase and follow it. Do not skip ahead — confirm each phase is locked before moving to the next.
@@ -39,32 +41,35 @@ Execute the following phases in order. Each phase's full instructions are in its
 1. **Brain dump intake** — `steps/brain-dump.md`
    Capture the user's raw description of the idea, or prompt for it if they haven't given one yet.
 
-2. **Core purpose** — `steps/core-purpose.md`
+2. **Format choice** — `steps/format-choice.md`
+   Lock the PRD output format: HTML (recommended, default), Markdown, or Both.
+
+3. **Core purpose** — `steps/core-purpose.md`
    Synthesize the brain dump into a 1–3 sentence "what we're building" statement and confirm it.
 
-3. **Top-level features (in scope)** — `steps/top-level-features.md`
+4. **Top-level features (in scope)** — `steps/top-level-features.md`
    Propose 4–8 core features and lock the headline-level in-scope list.
 
-4. **Top-level out-of-scope** — `steps/out-of-scope.md`
+5. **Top-level out-of-scope** — `steps/out-of-scope.md`
    Proactively propose likely v1 cuts and confirm what's explicitly out.
 
-5. **Tech stack & starter template** — `steps/tech-stack.md`
+6. **Tech stack & starter template** — `steps/tech-stack.md`
    Detect the existing stack from the codebase, confirm it, and lock what the starter already provides.
 
-6. **External integrations & credentials** — `steps/integrations.md`
+7. **External integrations & credentials** — `steps/integrations.md`
    For each feature that needs an external service, propose a provider and list the credentials the user must obtain.
 
-7. **Data model** — `steps/data-model.md`
+8. **Data model** — `steps/data-model.md`
    Propose entities, fields, and relationships in plain language and confirm.
 
-8. **Per-feature scoping** — `steps/per-feature-scoping.md`
+9. **Per-feature scoping** — `steps/per-feature-scoping.md`
    For each in-scope feature, lock the user-facing in-scope and out-of-scope details one at a time.
 
-9. **Milestone breakout** — `steps/milestones.md`
-   Propose a default milestone sequence plus alternatives, then lock the names and scopes.
+10. **Milestone breakout** — `steps/milestones.md`
+    Propose a default milestone sequence plus alternatives, then lock the names and scopes.
 
-10. **Write files** — `steps/write-files.md`
-    Generate `_build_plan/prd.md` and each `milestones/N-{slug}/prompt.md`. Includes the PRD and prompt file templates and final style notes.
+11. **Write files** — `steps/write-files.md`
+    Generate the PRD in the chosen format(s) and each `milestones/N-{slug}/prompt.md`. References `steps/prd-html-template.md` for the HTML scaffold. Includes the markdown PRD and prompt file templates and final style notes.
 
 ## Final note on user energy
 
