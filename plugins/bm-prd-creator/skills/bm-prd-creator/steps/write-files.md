@@ -2,11 +2,22 @@
 
 Once everything is locked, generate the files. **Just write them.** Don't show a draft for approval first — the user already approved each piece during the interview.
 
-Create this exact structure in the codebase root:
+## What to write, based on the format choice
+
+Recall the format the user picked in the **Format choice** phase:
+
+- **HTML** → write `_build_plan/prd.html` only. Use the scaffold and section snippets in `steps/prd-html-template.md`.
+- **Markdown** → write `_build_plan/prd.md` only. Use the markdown template below.
+- **Both** → write **both** `_build_plan/prd.html` **and** `_build_plan/prd.md`. The two files must describe the same locked scope — HTML is a different presentation, not a different plan.
+
+Milestone `prompt.md` files are **always written as markdown** regardless of the format choice. They're consumed by the coding agent in plan mode, not by the user.
+
+Create this exact structure in the codebase root (file presence depends on the format choice above):
 
 ```
 _build_plan/
-  prd.md
+  prd.html         # HTML or Both
+  prd.md           # Markdown or Both
   milestones/
     1-{milestone-slug}/
       prompt.md
@@ -19,9 +30,17 @@ _build_plan/
 
 After writing the `_build_plan/` files, also add a short note about the `_build_plan/` folder to the project's agent instructions file — see "Agent instructions note" below.
 
-After writing, briefly tell the user the files are ready and how to use them: open the milestone-1 `prompt.md` and ask the agent to start there; after each milestone, the agent will write a `milestone-log.md` in that folder to record what was done.
+After writing, briefly tell the user the files are ready and how to use them. Tailor the message to what was written:
+
+- If `prd.html` was written: tell them to open it in a browser (`open _build_plan/prd.html`) to review the plan visually, then open the milestone-1 `prompt.md` and ask the agent to start there.
+- If only `prd.md` was written: tell them to open `_build_plan/prd.md` to review, then open the milestone-1 `prompt.md` and ask the agent to start there.
+- Either way, mention that after each milestone the agent will write a `milestone-log.md` in that milestone's folder to record what was done.
 
 ## File templates
+
+### prd.html structure
+
+See `steps/prd-html-template.md` for the complete scaffold, per-section snippets, and icon hints. Read that file in full when generating `prd.html` and follow it closely.
 
 ### prd.md structure
 
@@ -87,6 +106,11 @@ Mirror the structure of a high-quality real PRD. Use these sections in order:
 
 Keep this lean. The prompt.md is a thin trigger file — it does NOT re-summarize what's in the PRD.
 
+In the template below, substitute `{PRD_PATH}`:
+
+- If the user picked **HTML** only → `_build_plan/prd.html`
+- If the user picked **Markdown** only or **Both** → `_build_plan/prd.md` (markdown is easier for the agent to parse; if both formats exist, prefer the markdown one for the agent's context)
+
 ```markdown
 # Milestone {N} — {Name}
 
@@ -94,7 +118,7 @@ You are entering plan mode to plan and then build milestone {N} of this project.
 
 ## Context
 
-- Read `@_build_plan/prd.md` for the full project context, scope, data model, and tech stack.
+- Read `@{PRD_PATH}` for the full project context, scope, data model, and tech stack.
 - Read previous milestone folders (`@_build_plan/milestones/1-*/milestone-log.md`, etc.) to understand what has already been built. If you are working on milestone 1, there is no prior milestone to read.
 
 ## Your task
@@ -134,3 +158,4 @@ Do not treat `_build_plan/` as long-living documentation for the codebase. The c
 - The "Out of scope" lists are valuable — never skip them, never make them generic.
 - Data model fields are described in plain language (what the app needs to remember), not as database column definitions.
 - When referring to the starter template features, use the actual names if known (e.g., "Build New starter" rather than "the starter template").
+- These style notes apply to both formats. The HTML version uses the same locked content as the markdown — it's a different presentation, not a different scope.
