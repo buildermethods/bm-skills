@@ -33,7 +33,7 @@ Guides you through turning a raw idea into a structured Product Requirements Doc
 /plugin install bm-prd-creator
 ```
 
-[Documentation for PRD Creator](https://buildermethods/prd-creator)
+[Documentation for PRD Creator](https://buildermethods.com/prd-creator)
 
 ### Design System
 
@@ -45,7 +45,7 @@ Scaffolds a complete design system into a React + Tailwind v4 codebase: a single
 /plugin install bm-design-system
 ```
 
-[Documentation for Design System](https://buildermethods/ai-design-system)
+[Documentation for Design System](https://buildermethods.com/ai-design-system)
 
 ## License
 
