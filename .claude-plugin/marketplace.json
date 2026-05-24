@@ -31,6 +31,18 @@
       "homepage": "https://buildermethods.com",
       "category": "design",
       "tags": ["design", "design-system", "ui"]
+    },
+    {
+      "name": "bm-favicon-creator",
+      "source": "./plugins/bm-favicon-creator",
+      "description": "Generate a complete favicon set from a Lucide icon (or another source SVG) and wire the meta tags into your codebase.",
+      "author": {
+        "name": "Brian Casel",
+        "email": "brian@buildermethods.com"
+      },
+      "homepage": "https://buildermethods.com",
+      "category": "design",
+      "tags": ["favicon", "design", "branding"]
     }
   ]
 }

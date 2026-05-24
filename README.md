@@ -47,6 +47,18 @@ Scaffolds a complete design system into a React + Tailwind v4 codebase: a single
 
 [Documentation for Design System](https://buildermethods.com/ai-design-system)
 
+### Favicon Creator
+
+`bm-favicon-creator`
+
+Generates a complete favicon set from a Lucide icon (or another source SVG you point to) — a rounded square with your chosen background and icon colors — then writes `favicon.ico`, `icon.svg`, `icon.png`, and `apple-touch-icon.png` to `public/` and wires the favicon meta tags into your layout.
+
+```
+/plugin install bm-favicon-creator
+```
+
+[Documentation for Favicon Creator](https://buildermethods.com/favicon-creator)
+
 ## License
 
 Open source. Free to use, fork, and adapt.
