@@ -23,6 +23,10 @@ Then install any of the skills below:
 
 ## Skills
 
+- [**PRD Creator**](#prd-creator) — Turn a raw idea into a structured PRD plus milestone prompts for a coding agent.
+- [**Design System**](#design-system) — Scaffold a React + Tailwind v4 design system with a live reference page and agent guardrails.
+- [**Favicon Creator**](#favicon-creator) — Generate a full favicon set from a Lucide icon or SVG and wire it into your layout.
+
 ### PRD Creator
 
 `bm-prd-creator`
