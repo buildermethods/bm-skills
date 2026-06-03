@@ -45,7 +45,9 @@ export function ModalSection() {
         <>
           Built on Radix Dialog. Three sizes (<code>sm</code>,{" "}
           <code>md</code>, <code>lg</code>). Always uses an overlay and a
-          close button. Focus is trapped while open.
+          close button. Focus is trapped while open. If content is taller
+          than the viewport, the modal caps its height and scrolls
+          vertically so the top and bottom stay reachable.
         </>
       }
       whenToUse={
@@ -99,6 +101,35 @@ export function ModalSection() {
               </DialogFooter>
             </DialogContent>
           </Dialog>
+
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="secondary">Open tall</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Terms of service</DialogTitle>
+                <DialogDescription>
+                  When a modal is taller than the viewport, it scrolls
+                  vertically — try resizing the window shorter.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="space-y-3">
+                {Array.from({ length: 12 }).map((_, i) => (
+                  <p key={i}>
+                    Section {i + 1}. Lorem ipsum dolor sit amet, consectetur
+                    adipiscing elit. Sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris.
+                  </p>
+                ))}
+              </div>
+              <DialogFooter>
+                <Button variant="ghost">Decline</Button>
+                <Button>Accept</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       }
       code={code}
@@ -108,6 +139,7 @@ export function ModalSection() {
           <li>Always include <code>&lt;DialogTitle&gt;</code> — required for screen readers.</li>
           <li>Use <code>&lt;DialogDescription&gt;</code> for the supporting copy line.</li>
           <li>Buttons live inside <code>&lt;DialogFooter&gt;</code>; right-aligned on desktop, stacked on mobile.</li>
+          <li>Content taller than the viewport scrolls vertically inside the modal automatically.</li>
         </ul>
       }
     />

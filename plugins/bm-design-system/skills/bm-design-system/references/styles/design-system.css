@@ -223,6 +223,9 @@
     @apply fixed left-1/2 top-1/2 z-50 w-full -translate-x-1/2 -translate-y-1/2;
     @apply rounded-lg border border-hairline bg-page p-6 shadow-lg;
     @apply max-w-lg;
+    /* Cap height to the viewport (1rem clearance top + bottom) and scroll
+       within, so content taller than the screen stays fully reachable. */
+    @apply max-h-[calc(100dvh-2rem)] overflow-y-auto;
   }
   .modal-small { @apply max-w-md; }
   .modal-large { @apply max-w-2xl; }
