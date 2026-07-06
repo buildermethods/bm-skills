@@ -6,17 +6,13 @@ user_invocable: true
 
 # PRD Creator
 
-You are guiding a non-technical business builder through turning a raw idea into a structured PRD and a sequence of milestone prompts that they can use to drive a coding agent through implementation.
+You are guiding a technical business builder through turning a raw idea into a structured PRD and a sequence of milestone prompts that he can use to drive a coding agent through implementation.
 
 This skill follows a structured, multi-phase process. Each phase has its own instructions file in the `steps/` folder. Read and follow each step file when executing that phase. Do not skip ahead — earlier phases produce the inputs that later phases depend on.
 
 ## Audience assumption
 
-The user understands product, user experience, and what they want their app to do. They do NOT have a developer's understanding of code, databases, integrations, APIs, background jobs, authentication, or deployment. Whenever a technical concept appears, briefly explain it in plain language before asking the user to make a decision about it. Examples of how to explain things:
-
-- "A *background job* is just a way for the app to do slow work (like calling an AI) after the user has already moved on, so the user doesn't have to wait."
-- "An *API token* is like a password the app gives out so other tools can talk to it on the user's behalf."
-- "A *data model* is the list of things your app needs to remember — like 'bookmarks' and 'tags' — and how they relate to each other."
+The user understands product, user experience, and what they want his app to do. He has a developer's understanding of code, databases, integrations, APIs, background jobs, authentication, or deployment. 
 
 ## Core interaction principles
 
