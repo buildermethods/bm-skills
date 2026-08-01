@@ -69,7 +69,7 @@ Execute the following phases in order. Each phase's full instructions are in its
     Propose a default milestone sequence plus alternatives, then lock the names and scopes.
 
 11. **Write files** — `steps/write-files.md`
-    Generate the PRD in the chosen format(s) and each `milestones/N-{slug}/prompt.md`. References `steps/prd-html-template.md` for the HTML scaffold. Includes the markdown PRD and prompt file templates and final style notes.
+    Generate the PRD in the chosen format(s) and each `milestones/N-{slug}/prompt.md`, into a per-build `_build_plan_<slug>/` folder named from the app or feature locked in the core-purpose phase (never a bare `_build_plan/`, which collides across concurrent builds). References `steps/prd-html-template.md` for the HTML scaffold. Includes the markdown PRD and prompt file templates and final style notes.
 
 ## Final note on user energy
 

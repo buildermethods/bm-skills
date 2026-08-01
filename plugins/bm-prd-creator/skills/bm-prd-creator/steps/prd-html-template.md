@@ -1,6 +1,6 @@
 # PRD HTML template
 
-When the user picked **HTML** or **Both** in the format-choice phase, write `_build_plan/prd.html` using the scaffold and section snippets below. The file must be fully self-contained — only CDN-loaded dependencies (Tailwind, Google Fonts, Lucide), no other files, no build step.
+When the user picked **HTML** or **Both** in the format-choice phase, write `{BUILD_PLAN_DIR}/prd.html` using the scaffold and section snippets below, where `{BUILD_PLAN_DIR}` is the per-build `_build_plan_<slug>/` folder derived in `steps/write-files.md`. The file must be fully self-contained — only CDN-loaded dependencies (Tailwind, Google Fonts, Lucide), no other files, no build step.
 
 ## File scaffold
 
@@ -51,7 +51,7 @@ Start every `prd.html` from this scaffold. Fill in the `{{PLACEHOLDERS}}` and se
 
     <!-- DISCLAIMER (keep verbatim) -->
     <div class="rounded-lg border border-amber-200 dark:border-amber-900/60 bg-amber-50 dark:bg-amber-950/30 p-4 text-sm text-amber-900 dark:text-amber-200">
-      <p><strong class="font-semibold">About this file:</strong> Everything in <code class="font-mono text-xs">_build_plan/</code> (this PRD and the per-milestone folders) is a temporary documentation artifact for the initial build-out of this codebase. These files are not functional — no code, configuration, runtime logic, tests, or deployment process should import, read, reference, or depend on anything in <code class="font-mono text-xs">_build_plan/</code>. Once the initial milestones are built and shipped, the entire <code class="font-mono text-xs">_build_plan/</code> folder is expected to be deleted from the codebase.</p>
+      <p><strong class="font-semibold">About this file:</strong> Everything in <code class="font-mono text-xs">{BUILD_PLAN_DIR}/</code> (this PRD and the per-milestone folders) is a temporary documentation artifact for the build-out of this feature. These files are not functional — no code, configuration, runtime logic, tests, or deployment process should import, read, reference, or depend on anything in <code class="font-mono text-xs">{BUILD_PLAN_DIR}/</code>. The codebase may hold sibling <code class="font-mono text-xs">_build_plan_*/</code> folders for other builds; they are separate and unrelated. Once these milestones are built and shipped, this folder is expected to be deleted from the codebase.</p>
     </div>
 
     <!-- HERO -->

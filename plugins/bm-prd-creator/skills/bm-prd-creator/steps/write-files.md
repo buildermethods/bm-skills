@@ -2,20 +2,28 @@
 
 Once everything is locked, generate the files. **Just write them.** Don't show a draft for approval first — the user already approved each piece during the interview.
 
+## Where the files go
+
+The build-plan folder is named after this build, not a fixed name: **`_build_plan_<slug>/`**, where `<slug>` is a short kebab-case slug of the app or feature name locked in the **Core purpose** phase (e.g., "Bookmark Vault" — `_build_plan_bookmark-vault/`; "Team billing" — `_build_plan_team-billing/`).
+
+Never write to a bare `_build_plan/`. One codebase can hold more than one build plan at a time — several features in flight, or several agent sessions running concurrently — and a fixed folder name means the second PRD overwrites or interleaves with the first. The per-build slug keeps them siblings.
+
+Throughout the rest of this file, `{BUILD_PLAN_DIR}` stands for that derived folder name. Substitute the real name everywhere it appears, including inside the files you generate.
+
 ## What to write, based on the format choice
 
 Recall the format the user picked in the **Format choice** phase:
 
-- **HTML** → write `_build_plan/prd.html` only. Use the scaffold and section snippets in `steps/prd-html-template.md`.
-- **Markdown** → write `_build_plan/prd.md` only. Use the markdown template below.
-- **Both** → write **both** `_build_plan/prd.html` **and** `_build_plan/prd.md`. The two files must describe the same locked scope — HTML is a different presentation, not a different plan.
+- **HTML** → write `{BUILD_PLAN_DIR}/prd.html` only. Use the scaffold and section snippets in `steps/prd-html-template.md`.
+- **Markdown** → write `{BUILD_PLAN_DIR}/prd.md` only. Use the markdown template below.
+- **Both** → write **both** `{BUILD_PLAN_DIR}/prd.html` **and** `{BUILD_PLAN_DIR}/prd.md`. The two files must describe the same locked scope — HTML is a different presentation, not a different plan.
 
 Milestone `prompt.md` files are **always written as markdown** regardless of the format choice. They're consumed by the coding agent in plan mode, not by the user.
 
 Create this exact structure in the codebase root (file presence depends on the format choice above):
 
 ```
-_build_plan/
+_build_plan_{slug}/
   prd.html         # HTML or Both
   prd.md           # Markdown or Both
   milestones/
@@ -28,12 +36,12 @@ _build_plan/
 
 `{milestone-slug}` is a short kebab-case name derived from the milestone (e.g., `core-crud`, `integrations-layer`, `public-docs`).
 
-After writing the `_build_plan/` files, also add a short note about the `_build_plan/` folder to the project's agent instructions file — see "Agent instructions note" below.
+After writing the `{BUILD_PLAN_DIR}/` files, also add a short note about `_build_plan*/` folders to the project's agent instructions file — see "Agent instructions note" below.
 
 After writing, briefly tell the user the files are ready and how to use them. Tailor the message to what was written:
 
-- If `prd.html` was written: tell them to open it in a browser (`open _build_plan/prd.html`) to review the plan visually, then open the milestone-1 `prompt.md` and ask the agent to start there.
-- If only `prd.md` was written: tell them to open `_build_plan/prd.md` to review, then open the milestone-1 `prompt.md` and ask the agent to start there.
+- If `prd.html` was written: tell them to open it in a browser (`open {BUILD_PLAN_DIR}/prd.html`) to review the plan visually, then open the milestone-1 `prompt.md` and ask the agent to start there.
+- If only `prd.md` was written: tell them to open `{BUILD_PLAN_DIR}/prd.md` to review, then open the milestone-1 `prompt.md` and ask the agent to start there.
 - Either way, mention that after each milestone the agent will write a `milestone-log.md` in that milestone's folder to record what was done.
 
 ## File templates
@@ -49,7 +57,7 @@ Mirror the structure of a high-quality real PRD. Use these sections in order:
 ```markdown
 # {App name}
 
-> **About these build-plan files:** Everything in `_build_plan/` (this PRD and the per-milestone folders) is a **temporary documentation and guidance artifact** for the initial build-out of this codebase. These files are not functional — no code, configuration, runtime logic, tests, or deployment process should import, read, reference, or depend on anything in `_build_plan/`. Once the initial milestones are built and shipped, the entire `_build_plan/` folder is expected to be deleted from the codebase. Do not treat it as long-living documentation.
+> **About these build-plan files:** Everything in `{BUILD_PLAN_DIR}/` (this PRD and the per-milestone folders) is a **temporary documentation and guidance artifact** for the build-out of this feature. These files are not functional — no code, configuration, runtime logic, tests, or deployment process should import, read, reference, or depend on anything in `{BUILD_PLAN_DIR}/`. The codebase may hold sibling `_build_plan_*/` folders for other builds; they are separate and unrelated. Once these milestones are built and shipped, this folder is expected to be deleted from the codebase. Do not treat it as long-living documentation.
 
 ## What we're building
 
@@ -108,8 +116,8 @@ Keep this lean. The prompt.md is a thin trigger file — it does NOT re-summariz
 
 In the template below, substitute `{PRD_PATH}`:
 
-- If the user picked **HTML** only → `_build_plan/prd.html`
-- If the user picked **Markdown** only or **Both** → `_build_plan/prd.md` (markdown is easier for the agent to parse; if both formats exist, prefer the markdown one for the agent's context)
+- If the user picked **HTML** only → `{BUILD_PLAN_DIR}/prd.html`
+- If the user picked **Markdown** only or **Both** → `{BUILD_PLAN_DIR}/prd.md` (markdown is easier for the agent to parse; if both formats exist, prefer the markdown one for the agent's context)
 
 ```markdown
 # Milestone {N} — {Name}
@@ -119,14 +127,14 @@ You are entering plan mode to plan and then build milestone {N} of this project.
 ## Context
 
 - Read `@{PRD_PATH}` for the full project context, scope, data model, and tech stack.
-- Read previous milestone folders (`@_build_plan/milestones/1-*/milestone-log.md`, etc.) to understand what has already been built. If you are working on milestone 1, there is no prior milestone to read.
+- Read previous milestone folders (`@{BUILD_PLAN_DIR}/milestones/1-*/milestone-log.md`, etc.) to understand what has already been built. If you are working on milestone 1, there is no prior milestone to read.
 
 ## Your task
 
 1. Plan the implementation for **only** milestone {N} as defined in the PRD. Do not plan or build anything from later milestones.
 2. After the user confirms the plan, build only what is in milestone {N}'s scope.
 3. Verify your work against the "Done when" criteria for milestone {N} in the PRD.
-4. When complete, write a `milestone-log.md` in this folder (`_build_plan/milestones/{N}-{slug}/milestone-log.md`). Structure it as follows:
+4. When complete, write a `milestone-log.md` in this folder (`{BUILD_PLAN_DIR}/milestones/{N}-{slug}/milestone-log.md`). Structure it as follows:
    - **Start with a `## What's new in the app` section at the very top.** This is a concise, human-readable, bulleted list of the main user-facing features or functionality that were added in this milestone — written so a non-technical reviewer can see at a glance what new things to expect in the app now that this milestone is done. Frame each bullet as a capability the user will now see or be able to do, not as a technical artifact. Keep it short and scannable.
    - Then include the implementation detail sections below for the next milestone's agent to reference:
      - What was built (files created, models added, routes added, etc.)
@@ -139,18 +147,20 @@ Ask me any clarifying questions using AskUserQuestion tool to lock in the implem
 
 ## Agent instructions note
 
-After writing the `_build_plan/` files, append a short note to the project's agent instructions file so future agent sessions understand the role of `_build_plan/`.
+After writing the `{BUILD_PLAN_DIR}/` files, append a short note to the project's agent instructions file so future agent sessions understand the role of the `_build_plan*/` folders. The note covers the whole family, not just this build's folder, so it stays correct when a later PRD adds a sibling.
 
 1. Check the codebase root for an existing `CLAUDE.md` or `AGENTS.md`. Use whichever exists.
 2. If neither exists, create `AGENTS.md` at the codebase root.
-3. Append the section below at the **bottom** of the file (after any existing content). If a `## _build_plan/` section already exists, update it in place rather than duplicating.
+3. Append the section below at the **bottom** of the file (after any existing content). If this section already exists from an earlier run of this skill (under either the `_build_plan*/` or the older `_build_plan/` heading), update it in place rather than duplicating.
 
 ```markdown
-## `_build_plan/`
+## `_build_plan*/`
 
-The `_build_plan/` folder contains the initial PRD and per-milestone prompts used to scaffold this codebase during its initial build-out phase. These files are **temporary** — they exist for documentation and guidance only. They are **not** functional: no code, configuration, or runtime logic in this codebase should import, reference, or depend on anything inside `_build_plan/`.
+Each `_build_plan_<slug>/` folder contains the PRD and per-milestone prompts used to scaffold one feature during its build-out phase. There may be several at once. They are siblings covering different, unrelated in-flight builds, kept separate so no build's spec overwrites another. The same rules apply to all of them.
 
-Do not treat `_build_plan/` as long-living documentation for the codebase. The codebase will evolve past the assumptions and decisions captured here. Once the initial milestones are complete, this folder is expected to be deleted.
+These files are **temporary** — they exist for documentation and guidance only. They are **not** functional: no code, configuration, or runtime logic in this codebase should import, reference, or depend on anything inside a `_build_plan*/` folder.
+
+Do not treat them as long-living documentation for the codebase. The codebase will evolve past the assumptions and decisions captured here. Once a build's milestones are complete, its folder is expected to be deleted.
 ```
 
 ## Style notes for the PRD output
