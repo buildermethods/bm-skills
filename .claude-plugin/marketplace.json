@@ -5,44 +5,22 @@
     "email": "brian@buildermethods.com"
   },
   "metadata": {
-    "description": "A collection of public open-source tools for builders, by Brian Casel @ Builder Methods (buildermethods.com)."
+    "description": "Free, open-source skills for AI builders by Brian Casel @ Builder Methods (buildermethods.com).",
+    "version": "2026.8.10",
+    "repository": "https://github.com/buildermethods/bm-skills"
   },
   "plugins": [
     {
-      "name": "bm-prd-creator",
-      "source": "./plugins/bm-prd-creator",
-      "description": "Guides you through creating a Product Requirements Document (PRD) for a new app or feature.",
+      "name": "bm-skills",
+      "description": "All Builder Methods skills: PRD Creator, Design System, and Favicon Creator.",
+      "source": "./",
       "author": {
         "name": "Brian Casel",
         "email": "brian@buildermethods.com"
       },
       "homepage": "https://buildermethods.com",
-      "category": "planning",
-      "tags": ["prd", "planning", "product"]
-    },
-    {
-      "name": "bm-design-system",
-      "source": "./plugins/bm-design-system",
-      "description": "Guides you through creating a design system for a new app or feature.",
-      "author": {
-        "name": "Brian Casel",
-        "email": "brian@buildermethods.com"
-      },
-      "homepage": "https://buildermethods.com",
-      "category": "design",
-      "tags": ["design", "design-system", "ui"]
-    },
-    {
-      "name": "bm-favicon-creator",
-      "source": "./plugins/bm-favicon-creator",
-      "description": "Generate a complete favicon set from a Lucide icon (or another source SVG) and wire the meta tags into your codebase.",
-      "author": {
-        "name": "Brian Casel",
-        "email": "brian@buildermethods.com"
-      },
-      "homepage": "https://buildermethods.com",
-      "category": "design",
-      "tags": ["favicon", "design", "branding"]
+      "category": "productivity",
+      "tags": ["prd", "design-system", "favicon", "planning", "design"]
     }
   ]
 }
