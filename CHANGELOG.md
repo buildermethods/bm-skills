@@ -2,6 +2,12 @@
 
 All notable changes to this marketplace are tracked here. Versions follow a date-based scheme: `YYYY.MM.DD`.
 
+## 2026.8.13
+
+Added the **bm-skill-builder** skill.
+
+- Turns a repeatable process into a well-built agent skill: interviews you to design it (description, name, inputs, its own per-run questions, realistic examples, and the step plan), builds it against a conventions checklist, asks where it should live, then verifies it with a real run. Also restructures existing skills that have outgrown a single SKILL.md.
+
 ## 2026.8.10
 
 Restructured to the open Agent Skills standard layout.

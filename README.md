@@ -39,6 +39,7 @@ Install the skills from github.com/buildermethods/bm-skills into my skills folde
 ## Skills
 
 - [**PRD Creator**](#prd-creator) — Turn a raw idea into a structured PRD plus milestone prompts for a coding agent.
+- [**Skill Builder**](#skill-builder) — Turn any repeatable process into a well-built agent skill, guided by an interview.
 - [**Design System**](#design-system) — Scaffold a React + Tailwind v4 design system with a live reference page and agent guardrails.
 - [**Favicon Creator**](#favicon-creator) — Generate a full favicon set from a Lucide icon or SVG and wire it into your layout.
 
@@ -49,6 +50,14 @@ Install the skills from github.com/buildermethods/bm-skills into my skills folde
 Guides you through turning a raw idea into a structured Product Requirements Document. Produces a complete `prd.md` plus a sequence of milestone prompt files you can hand to a coding agent to drive implementation.
 
 [Documentation for PRD Creator](https://buildermethods.com/prd-creator)
+
+### Skill Builder
+
+`skills/bm-skill-builder`
+
+Turns a repeatable process into a well-built agent skill — plain markdown and folders, portable across any agent harness. Interviews you to design the skill (description, name, inputs, its own per-run questions, and the step plan), builds it against a conventions checklist, then verifies it with a real run. Works for brand-new skills and for restructuring existing ones that have outgrown a single SKILL.md.
+
+[Documentation for Skill Builder](https://buildermethods.com/skill-builder)
 
 ### Design System
 
