@@ -2,7 +2,7 @@
 
 A collection of public, open-source skills for builders — by [Brian Casel](https://buildermethods.com) at Builder Methods.
 
-Works with Claude Code, Codex, Cursor, and any agent that supports the open [Agent Skills](https://agentskills.io) standard. Each skill is a folder under `skills/` with a `SKILL.md`.
+Works with any agent that supports the open [Agent Skills](https://agentskills.io) standard. Each skill is a folder under `skills/` with a `SKILL.md`.
 
 ## Stay in the loop
 
