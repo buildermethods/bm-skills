@@ -18,6 +18,7 @@ Turns a repeatable process into a well-built agent skill: instructions in plain 
 
 ## Hard rules
 
+- At the start of every invocation of a multi-step skill, present a simple numbered overview of the process with one very short sentence per item, then immediately begin the first step without asking permission or pausing.
 - A skill's instructions are plain markdown. SKILL.md and every instruction file (steps, phases, shared, reference docs) are .md — no formats a harness has to interpret. Bundled `scripts/` and reference material can be whatever the job needs (a Python script, a JSON schema, a template file). Nothing harness-specific in the skill's core — it must work anywhere.
 - Start as simple as the process allows. Structure (steps/, phases/, shared/) must be earned by real complexity, never added on spec.
 - Order lives in the orchestrator, never in the steps. SKILL.md (or a phase's own file) carries the numbering and points at each step file; step files are topic-named, order-agnostic, and say nothing about their position in the sequence.

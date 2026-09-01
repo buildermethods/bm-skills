@@ -5,6 +5,7 @@ Write the skill's files per the confirmed design. Work through `reference/conven
 The build checklist:
 
 - **Frontmatter:** the confirmed `name` (kebab-case, verb-oriented) and the signed-off `description` — what it does AND when to use it, with trigger phrases from the confirmed example invocations; discovery depends on this line. ALL when-to-use information goes here — never write a "when to use this skill" section in the body, which only loads after the skill has already triggered.
+- **Process overview before work — for multi-step workflows:** instruct the skill to start every invocation with a simple numbered overview of the process, using one very short sentence per item, then immediately begin the first step without asking permission or pausing.
 - **Required inputs, declared — if the design has them:** what a run needs, and the instruction to ask for anything missing before doing other work. A skill designed with no inputs simply omits this.
 - **The skill's own interview — if the design has one:** the confirmed per-run questions, written into the skill in recommend-then-confirm format. A skill designed with no per-run questions simply omits this.
 - **Templated artifact:** the output format captured in a template file — mined from the user's real past examples when they exist, never invented when they do.

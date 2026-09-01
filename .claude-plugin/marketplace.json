@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Free, open-source skills for AI builders by Brian Casel @ Builder Methods (buildermethods.com).",
-    "version": "2026.8.13",
+    "version": "2026.9.1",
     "repository": "https://github.com/buildermethods/bm-skills"
   },
   "plugins": [
