@@ -17,5 +17,6 @@ The build checklist:
 - **Only what a run needs:** no README, CHANGELOG, installation guide, or notes about how the skill was made — the folder contains only files the executing agent uses.
 - **Imperative voice:** write all skill prose in imperative/infinitive form — "Extract the text", not "You should extract the text."
 - **Order in the orchestrator only:** if the skill has a `steps/` folder, SKILL.md (or the phase file) carries the numbered list and points at each step file. Step files get topic names with no number prefix (`interview.md`, not `02-interview.md`), a topic-only heading (`# Interview the user`, not `# Step 2 — ...`), and no language about being step N, what came before, or what comes next. Cross-reference other steps by name when you must, never by position.
+- **Current state only:** when restructuring an existing skill, delete removed or reversed material and every reference to it — no "don't do X" replacements, change notes, or legacy fallbacks.
 
 Write every file completely — a skill with stub files is worse than a simpler skill that's whole.

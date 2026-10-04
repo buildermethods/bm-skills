@@ -2,6 +2,10 @@
 
 All notable changes to this marketplace are tracked here. Versions follow a date-based scheme: `YYYY.MM.DD`.
 
+## 2026.10.4
+
+- Updated **bm-skill-builder** so skills describe only their current state: removing or reversing something deletes it and every reference to it, with no "don't do X" replacements, change notes, or legacy fallbacks.
+
 ## 2026.9.1
 
 - Updated **bm-skill-builder** so multi-step skills begin every invocation with a short numbered process overview, then immediately start the first step.

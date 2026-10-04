@@ -33,3 +33,4 @@
 15. **Imperative voice.** Write skill prose in imperative/infinitive form — "Extract the text", not "You should extract the text" or "The agent will extract the text."
 16. **Harness-agnostic core, markdown instructions.** SKILL.md and all instruction files (steps, phases, shared, reference docs) are plain markdown in plain folders; nothing harness-specific in the skill's core. Bundled files that aren't instructions — `scripts/`, schemas, templates, assets — take whatever format the job needs.
 17. **Improve in place.** After real runs, friction gets fixed by editing the skill — expect the shape to evolve with usage.
+18. **Current state only.** A skill describes only what it does now. When something is removed or reversed, delete it and every reference to it, as if it never existed: no "don't do X" replacement instructions, notes about what changed, deprecated alternatives, compatibility fallbacks, or tests and examples for the removed behavior.
