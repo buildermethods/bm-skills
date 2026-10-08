@@ -34,7 +34,7 @@ Install the skills from github.com/buildermethods/bm-skills into my skills folde
 /plugin install bm-skills
 ```
 
-> **Upgrading from the original per-plugin installs?** The old plugins (`bm-prd-creator`, `bm-design-system`, `bm-favicon-creator`) were consolidated into a single `bm-skills` plugin containing all three skills. Uninstall the old ones, then `/plugin install bm-skills`.
+> **Upgrading from the original per-plugin installs?** The old plugins (`bm-prd-creator`, `bm-design-system`, `bm-favicon-creator`) were consolidated into the single `bm-skills` plugin, which contains all four skills. Uninstall the old ones, then `/plugin install bm-skills`.
 
 ## Skills
 
@@ -114,6 +114,10 @@ The skills run inside your agent and read and write files in your project. They 
 - **Writes:** `favicon.ico`, `icon.svg`, `favicon.svg`, `icon.png`, `icon-192.png`, and `apple-touch-icon.png` to `public/` (and the icon files to `app/` in a Next.js app-router project), plus temporary files in `/tmp`. Edits the favicon and `theme-color` tags in your layout `<head>`.
 - **Fetches:** the icon's SVG from `lucide.dev` (default), or from the official source of another icon library you name.
 - **Installs:** nothing. It runs `rsvg-convert` and ImageMagick's `magick` on your machine; if either is missing, it stops and asks you to install them.
+
+## Support
+
+For questions, problems, or security vulnerability reports, open an issue at [github.com/buildermethods/bm-skills/issues](https://github.com/buildermethods/bm-skills/issues) or email [brian@buildermethods.com](mailto:brian@buildermethods.com).
 
 ## License
 
