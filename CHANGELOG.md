@@ -2,6 +2,11 @@
 
 All notable changes to this marketplace are tracked here. Versions follow a date-based scheme: `YYYY.MM.DD`.
 
+## 2026.10.8
+
+- Licensed the repo under MIT: added a `LICENSE` file and `"license": "MIT"` to the plugin manifests.
+- Moved the marketplace's `repository` field from `metadata` to the plugin entry (and added it to `plugin.json`), so `claude plugin validate --strict` passes.
+
 ## 2026.10.4
 
 - Updated **bm-skill-builder** so skills describe only their current state: removing or reversing something deletes it and every reference to it, with no "don't do X" replacements, change notes, or legacy fallbacks.

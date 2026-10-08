@@ -1,10 +1,12 @@
 {
   "name": "bm-skills",
   "description": "All Builder Methods skills: PRD Creator, Skill Builder, Design System, and Favicon Creator.",
-  "version": "2026.10.4",
+  "version": "2026.10.8",
   "author": {
     "name": "Brian Casel",
     "email": "brian@buildermethods.com"
   },
-  "homepage": "https://buildermethods.com"
+  "homepage": "https://buildermethods.com",
+  "repository": "https://github.com/buildermethods/bm-skills",
+  "license": "MIT"
 }
