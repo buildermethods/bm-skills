@@ -1,7 +1,9 @@
 {
   "name": "bm-skills",
+  "displayName": "Builder Methods Skills",
   "description": "All Builder Methods skills: PRD Creator, Skill Builder, Design System, and Favicon Creator.",
-  "version": "2026.10.8",
+  "icon": "./.claude-plugin/icon.png",
+  "version": "2026.10.8.1",
   "author": {
     "name": "Brian Casel",
     "email": "brian@buildermethods.com"

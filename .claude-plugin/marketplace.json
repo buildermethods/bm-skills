@@ -6,11 +6,12 @@
   },
   "metadata": {
     "description": "Free, open-source skills for AI builders by Brian Casel @ Builder Methods (buildermethods.com).",
-    "version": "2026.10.8"
+    "version": "2026.10.8.1"
   },
   "plugins": [
     {
       "name": "bm-skills",
+      "displayName": "Builder Methods Skills",
       "description": "All Builder Methods skills: PRD Creator, Skill Builder, Design System, and Favicon Creator.",
       "source": "./",
       "author": {
