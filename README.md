@@ -4,11 +4,6 @@ A collection of public, open-source skills for builders — by [Brian Casel](htt
 
 Works with any agent that supports the open [Agent Skills](https://agentskills.io) standard. Each skill is a folder under `skills/` with a `SKILL.md`.
 
-## Stay in the loop
-
-- [**Builder Methods Pro**](https://buildermethods.com/pro?utm_source=bm-skills&utm_medium=plugin) — Training, community, and direct support from Brian and fellow builders.
-- [**Builder Briefing**](https://buildermethods.com?utm_source=bm-skills&utm_medium=plugin) — Brian's free weekly newsletter with updates and notes on building with AI.
-
 ## Installation
 
 **Option 1 — Copy into your skills folder** (works with every tool):
@@ -114,6 +109,11 @@ The skills run inside your agent and read and write files in your project. They 
 - **Writes:** `favicon.ico`, `icon.svg`, `favicon.svg`, `icon.png`, `icon-192.png`, and `apple-touch-icon.png` to `public/` (and the icon files to `app/` in a Next.js app-router project), plus temporary files in `/tmp`. Edits the favicon and `theme-color` tags in your layout `<head>`.
 - **Fetches:** the icon's SVG from `lucide.dev` (default), or from the official source of another icon library you name.
 - **Installs:** nothing. It runs `rsvg-convert` and ImageMagick's `magick` on your machine; if either is missing, it stops and asks you to install them.
+
+## Stay in the loop
+
+- [**Builder Methods Pro**](https://buildermethods.com/pro?utm_source=bm-skills&utm_medium=plugin) — Training, community, and direct support from Brian and fellow builders.
+- [**Builder Briefing**](https://buildermethods.com?utm_source=bm-skills&utm_medium=plugin) — Brian's free weekly newsletter with updates and notes on building with AI.
 
 ## Support
 
