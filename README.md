@@ -117,7 +117,9 @@ The skills run inside your agent and read and write files in your project. They 
 
 ## Support
 
-For questions, problems, or security vulnerability reports, open an issue at [github.com/buildermethods/bm-skills/issues](https://github.com/buildermethods/bm-skills/issues) or email [brian@buildermethods.com](mailto:brian@buildermethods.com).
+For questions and problems, open an issue at [github.com/buildermethods/bm-skills/issues](https://github.com/buildermethods/bm-skills/issues) or email [brian@buildermethods.com](mailto:brian@buildermethods.com).
+
+Report security vulnerabilities privately by email to [brian@buildermethods.com](mailto:brian@buildermethods.com), not in a public issue.
 
 ## License
 
