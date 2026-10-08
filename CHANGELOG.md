@@ -2,6 +2,11 @@
 
 All notable changes to this marketplace are tracked here. Versions follow a date-based scheme: `YYYY.MM.DD`.
 
+## 2026.10.8.1
+
+- The plugin shows as **Builder Methods Skills**: `displayName` is set in `plugin.json` and the marketplace entry. The plugin `name` is `bm-skills`, and each skill is named `bm-*`.
+- Added the Builder Methods icon at `.claude-plugin/icon.png`, referenced by `"icon"` in `plugin.json` for the plugin's directory listing.
+
 ## 2026.10.8
 
 - Licensed the repo under MIT: added a `LICENSE` file and `"license": "MIT"` to the plugin manifests.

@@ -1,4 +1,4 @@
-# BM Skills
+# Builder Methods Skills
 
 A collection of public, open-source skills for builders — by [Brian Casel](https://buildermethods.com?utm_source=bm-skills&utm_medium=plugin) at Builder Methods.
 
