@@ -6,8 +6,7 @@
   },
   "metadata": {
     "description": "Free, open-source skills for AI builders by Brian Casel @ Builder Methods (buildermethods.com).",
-    "version": "2026.10.4",
-    "repository": "https://github.com/buildermethods/bm-skills"
+    "version": "2026.10.8"
   },
   "plugins": [
     {
@@ -19,6 +18,8 @@
         "email": "brian@buildermethods.com"
       },
       "homepage": "https://buildermethods.com",
+      "repository": "https://github.com/buildermethods/bm-skills",
+      "license": "MIT",
       "category": "productivity",
       "tags": [
         "prd",
