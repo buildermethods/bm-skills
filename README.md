@@ -49,6 +49,8 @@ Install the skills from github.com/buildermethods/bm-skills into my skills folde
 
 Guides you through turning a raw idea into a structured Product Requirements Document. Produces a complete `prd.md` plus a sequence of milestone prompt files you can hand to a coding agent to drive implementation.
 
+Example prompt: "Use bm-prd-creator to turn my idea for a client-portal app into a PRD."
+
 [Documentation for PRD Creator](https://buildermethods.com/prd-creator?utm_source=bm-skills&utm_medium=plugin)
 
 ### Skill Builder
@@ -56,6 +58,8 @@ Guides you through turning a raw idea into a structured Product Requirements Doc
 `skills/bm-skill-builder`
 
 Turns a repeatable process into a well-built agent skill — plain markdown and folders, portable across any agent harness. Interviews you to design the skill (description, name, inputs, its own per-run questions, and the step plan), builds it against a conventions checklist, then verifies it with a real run. Works for brand-new skills and for restructuring existing ones that have outgrown a single SKILL.md.
+
+Example prompt: "Use bm-skill-builder to turn my client proposal process into a skill."
 
 [Documentation for Skill Builder](https://buildermethods.com/skill-builder?utm_source=bm-skills&utm_medium=plugin)
 
@@ -65,6 +69,8 @@ Turns a repeatable process into a well-built agent skill — plain markdown and 
 
 Scaffolds a complete design system into a React + Tailwind v4 codebase: a single-page reference at `/admin/design-system` that previews and documents every primitive, plus reusable shadcn-style components and managed instructions in `AGENTS.md`/`CLAUDE.md` so future agents always defer to the system instead of drifting.
 
+Example prompt: "Use bm-design-system to set up a design system in my React + Tailwind v4 app."
+
 [Documentation for Design System](https://buildermethods.com/ai-design-system?utm_source=bm-skills&utm_medium=plugin)
 
 ### Favicon Creator
@@ -72,6 +78,8 @@ Scaffolds a complete design system into a React + Tailwind v4 codebase: a single
 `skills/bm-favicon-creator`
 
 Generates a complete favicon set from a Lucide icon (or another source SVG you point to) — a rounded square with your chosen background and icon colors — then writes `favicon.ico`, `icon.svg`, `icon.png`, and `apple-touch-icon.png` to `public/` and wires the favicon meta tags into your layout.
+
+Example prompt: "Use bm-favicon-creator to make a favicon from the Lucide rocket icon."
 
 [Documentation for Favicon Creator](https://buildermethods.com/favicon-creator?utm_source=bm-skills&utm_medium=plugin)
 
