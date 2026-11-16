@@ -3,7 +3,7 @@
   "displayName": "Builder Methods Skills",
   "description": "All Builder Methods skills: PRD Creator, Skill Builder, Design System, and Favicon Creator.",
   "icon": "./.claude-plugin/icon.png",
-  "version": "2026.10.8.1",
+  "version": "2026.11.16",
   "author": {
     "name": "Brian Casel",
     "email": "brian@buildermethods.com"

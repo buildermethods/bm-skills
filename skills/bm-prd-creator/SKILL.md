@@ -1,7 +1,6 @@
 ---
 name: bm-prd-creator
 description: Use when the user wants to create a Product Requirements Document (PRD) for a new app, feature, or project. Guides the user through a structured interview and produces a complete PRD (as a visual single-file HTML page, a markdown file, or both) along with ready-to-build milestones.
-user_invocable: true
 ---
 
 # PRD Creator

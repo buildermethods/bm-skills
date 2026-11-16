@@ -162,7 +162,7 @@ Per-framework overrides:
 (See also Phase 4e for the theme boot script.)
 
 
-For each template under `references/`, write to its mapped target. Substitute these tokens (string-replace) at write time:
+For each template under `references/`, write to its mapped target. Each template is a Markdown file named after the file it produces (`page/palette.ts.md` produces `palette.ts`) and holds that file's source in a single code block; write the code block's contents, without the fence lines. Substitute these tokens (string-replace) at write time:
 
 | Token in template                  | Replacement                                                       |
 |------------------------------------|-------------------------------------------------------------------|
@@ -175,14 +175,14 @@ For each template under `references/`, write to its mapped target. Substitute th
 
 Files to write (sources under `references/`, plus their substitution behavior):
 
-- `page/DesignSystem.tsx` → `components/design-system/DesignSystem.tsx` (Next.js app-router clients also need a `"use client"` directive)
-- `page/{SidebarNav,SectionShell,CodeBlock,ColorSwatch}.tsx` → `components/design-system/`
-- `page/palette.ts` → `components/design-system/palette.ts` — **substitute color + font tokens** here
-- `page/sections/**/*.tsx` → `components/design-system/sections/`. Note: all 14 base-styles sub-sections live in a single `BaseStylesSection.tsx` (returns a fragment of 14 anchored `SectionShell`s); the canonical section list maps to anchors, not files.
-- `components-ui/{button,button-dropdown,input,badge,dialog,checkbox,radio,select,rich-text-field,dropdown-menu,theme-toggle}.tsx` → `components/ui/` (skip a file if it already exists and the existing one already comes from this skill — check for a `bm-design-system` marker comment; otherwise ask the user before overwriting). Note: `rich-text-field.tsx` imports `@milkdown/crepe` and `dropdown-menu.tsx` imports `@radix-ui/react-dropdown-menu` — make sure the deps in 4f are installed before the user navigates to those sections, or the page will fail to render.
-- `styles/design-system.css` → target stylesheet path; **substitute color + font tokens** here
-- `lib/utils.ts` → `lib/utils.ts` only if missing
-- `lib/theme.ts` → `lib/theme.ts` (the `useTheme` hook + helpers backing `<ThemeToggle>`)
+- `page/DesignSystem.tsx.md` → `components/design-system/DesignSystem.tsx` (Next.js app-router clients also need a `"use client"` directive)
+- `page/{SidebarNav,SectionShell,CodeBlock,ColorSwatch}.tsx.md` → `components/design-system/`
+- `page/palette.ts.md` → `components/design-system/palette.ts` — **substitute color + font tokens** here
+- `page/sections/**/*.tsx.md` → `components/design-system/sections/`. Note: all 14 base-styles sub-sections live in a single `BaseStylesSection.tsx` (returns a fragment of 14 anchored `SectionShell`s); the canonical section list maps to anchors, not files.
+- `components-ui/{button,button-dropdown,input,badge,dialog,checkbox,radio,select,rich-text-field,dropdown-menu,theme-toggle}.tsx.md` → `components/ui/` (skip a file if it already exists and the existing one already comes from this skill — check for a `bm-design-system` marker comment; otherwise ask the user before overwriting). Note: `rich-text-field.tsx` imports `@milkdown/crepe` and `dropdown-menu.tsx` imports `@radix-ui/react-dropdown-menu` — make sure the deps in 4f are installed before the user navigates to those sections, or the page will fail to render.
+- `styles/design-system.css.md` → target stylesheet path; **substitute color + font tokens** here
+- `lib/utils.ts.md` → `lib/utils.ts` only if missing
+- `lib/theme.ts.md` → `lib/theme.ts` (the `useTheme` hook + helpers backing `<ThemeToggle>`)
 - A small route-page entry file at the framework's location (e.g. `src/admin/design-system/page.tsx` for Vite) that imports and renders `DesignSystem`
 
 ### 4c. Wire the stylesheet
@@ -225,13 +225,13 @@ Two snippets need to land inside the app's HTML layout `<head>`, before any `<sc
 
 The `@theme` block defines `--font-display: "Plus Jakarta Sans", …` and `--font-sans: "DM Sans", …`, but those CSS variables only resolve to the right typeface if the font files are actually loaded. Don't load fonts via `@import url(...)` inside `design-system.css` — bundlers inline that file mid-bundle, after Tailwind's rules. CSS spec says `@import` must come before any other rules, so browsers silently drop those imports and the page renders in the system fallback (`ui-sans-serif`).
 
-Install the link-tag snippet from `references/styles/font-link-tags.html` into the layout's `<head>`. Substitute `__HEADLINE_FONT_URL__` and `__BODY_FONT_URL__` with the URLs picked in Phase 2. When both fonts are Google Fonts, prefer collapsing them into a single `&family=…` stylesheet for one fewer request.
+Install the link-tag snippet from `references/styles/font-link-tags.html.md` into the layout's `<head>`. Substitute `__HEADLINE_FONT_URL__` and `__BODY_FONT_URL__` with the URLs picked in Phase 2. When both fonts are Google Fonts, prefer collapsing them into a single `&family=…` stylesheet for one fewer request.
 
 #### 4e-ii. Theme boot script
 
 The `<ThemeToggle>` primitive persists the user's choice to `localStorage["bm-ds-theme"]`, but the React hook that reads it (`useTheme` in `lib/theme.ts`) only fires when a component using it actually mounts. In real apps the toggle commonly lives inside a portal-rendered dropdown that doesn't mount until the user opens it — so without a boot-time script, every full page load renders in light mode regardless of the saved preference.
 
-Install the inline script from `references/styles/theme-boot-script.html` into the same `<head>`. It reads the same storage key and resolution rules as `lib/theme.ts`, then adds (or omits) the `.dark` class on `<html>` synchronously before paint.
+Install the inline script from `references/styles/theme-boot-script.html.md` into the same `<head>`. It reads the same storage key and resolution rules as `lib/theme.ts`, then adds (or omits) the `.dark` class on `<html>` synchronously before paint.
 
 #### Per-framework target for both snippets
 

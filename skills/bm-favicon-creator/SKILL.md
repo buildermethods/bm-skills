@@ -1,7 +1,6 @@
 ---
 name: bm-favicon-creator
 description: Generate a complete favicon set (SVG, PNGs, multi-resolution .ico, Apple touch icon) from a Lucide icon (default) or another source SVG, then wire the favicon meta tags into the codebase. Use when the user wants to set up a favicon, replace a placeholder favicon, or brand the app icon.
-user_invocable: true
 ---
 
 # Favicon Creator

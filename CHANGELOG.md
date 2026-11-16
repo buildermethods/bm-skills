@@ -2,6 +2,11 @@
 
 All notable changes to this marketplace are tracked here. Versions follow a date-based scheme: `YYYY.MM.DD`.
 
+## 2026.11.16
+
+- **bm-design-system** code templates are Markdown files: each file under `references/` that held TSX, TypeScript, CSS or HTML now holds the same source in a single code block, named after the file it produces (`page/palette.ts.md` produces `palette.ts`). The skill writes the same files into your project as before. This keeps the plugin to text, Markdown, JSON and image files for Claude's plugin directory.
+- Removed the `user_invocable` key from the **bm-prd-creator** and **bm-favicon-creator** skill frontmatter, so every skill uses only standard keys. Both skills stay available as slash commands.
+
 ## 2026.10.8.1
 
 - The plugin shows as **Builder Methods Skills**: `displayName` is set in `plugin.json` and the marketplace entry. The plugin `name` is `bm-skills`, and each skill is named `bm-*`.
